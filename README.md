@@ -4,4 +4,4 @@
 
 Lisätään ensimmäisen viikon tehtäviä ja harjoitellaan __markdown__:ia
 
-\nKokeillaan myös _italic tekstiä_
+Kokeillaan myös _italic tekstiä_
