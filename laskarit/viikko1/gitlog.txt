@@ -1,0 +1,85 @@
+commit 5cb40ca1a217da34baa6eca94c5b9700497932e3
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:51:50 2021 +0100
+
+    luodaan tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 6a4240bff7301cf47bc1b10d7c94c71d208dbd99
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:44:47 2021 +0100
+
+    uudelleen nimetään tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0e7f792eda6f6536ac03d5754362fffddb8d3a3a
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:43:42 2021 +0100
+
+    poistetaan tiedosto2
+
+ tiedosto2.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 8c0235469458e1fdb89fc5916996ac86269bbc54
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:41:12 2021 +0100
+
+    poistetaan osa tekstistä ja lisätään uutta
+
+ tiedosto.txt | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
+
+commit 3707fc9fab9c159c8483fa4df5321cd4497b9cdd
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:39:15 2021 +0100
+
+    lisätään paljon tekstiä tiedostoon
+
+ tiedosto.txt | 122 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
+
+commit 25fb7b4ff61576bfe66e3029426475f1dec62749
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:35:24 2021 +0100
+
+    muutoksia ja uusi tidosto
+
+ kolmas.txt     | 1 +
+ stuff/uusi.txt | 0
+ tiedosto2.txt  | 1 +
+ 3 files changed, 2 insertions(+)
+
+commit 220dd85ec2d0561dcf13be50fd105472c7f79486
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:33:23 2021 +0100
+
+    luodaan kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit dcf7d955f7f919182896b54f1ea7833c40d4b607
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:03:17 2021 +0100
+
+    muutos ja lisäys
+
+ tiedosto.txt  | 1 +
+ tiedosto2.txt | 0
+ 2 files changed, 1 insertion(+)
+
+commit 629ffe59dde74d567b59f07a9a480dbc6db74ea3
+Author: juhana-peltomaa <juhana.peltomaa@helsinki.fi>
+Date:   Fri Mar 19 14:01:54 2021 +0100
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
