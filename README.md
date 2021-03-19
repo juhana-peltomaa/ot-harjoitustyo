@@ -3,4 +3,5 @@
 ### Viikko 1
 
 Lisätään ensimmäisen viikon tehtäviä ja harjoitellaan __markdown__:ia
-Kokeillaan myös _italic tekstiä_
+
+\nKokeillaan myös _italic tekstiä_
