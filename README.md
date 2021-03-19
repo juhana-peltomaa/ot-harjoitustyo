@@ -8,3 +8,6 @@
 
 [komentorivi.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
+#### Viikko 2
+[maksukortti](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/maksukortti)
+[unicafe](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/unicafe)
