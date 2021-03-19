@@ -8,4 +8,3 @@
 
 [komentorivi.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
-harjoitellaan conflictia
