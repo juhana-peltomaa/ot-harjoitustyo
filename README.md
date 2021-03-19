@@ -1,7 +1,8 @@
 # Ohjelmistotekniikka 2021 - Harjoitustyö
 
-### Viikko 1
+### Tehtävät
 
-Lisätään ensimmäisen viikon tehtäviä ja harjoitellaan __markdown__:ia
+#### Viikko 1
 
-Kokeillaan myös _italic tekstiä_
+[gitlog.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+[komentorivi.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
