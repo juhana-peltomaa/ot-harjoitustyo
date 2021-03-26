@@ -4,4 +4,5 @@
 | :----:|:-----| :-----|
 | 26.3. | 1    | tutustuminen kurssin suorittamiseen/ohjeisiin |
 |       | 1    | vaatimusmäärittelyn luominen |
-| yht   | 2   | | 
+|       | 1    | tkinter harjoittelua + login-näkymän rakentelua |
+| yht   | 3   | | 
