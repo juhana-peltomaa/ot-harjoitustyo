@@ -17,7 +17,7 @@ class LoginView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
-# Heading label, joka kertoo mitä tällä sivulla tehdään
+        # Heading label, joka kertoo mitä tällä sivulla tehdään
         heading_label = ttk.Label(master=self._root, text="Login")
 
         # Testataan käyttäjänimen kirjaamista UI:hin
