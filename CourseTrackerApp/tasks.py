@@ -1,5 +1,11 @@
 from invoke import task
 
+
+# Run the application with command "poetry run invoke start"
+@task
+def start(ctx):
+   ctx.run("python3 src/index.py")
+
 # Run coverage and generate html report with command "poetry run invoke coverage-report"
 @task
 def coverage(ctx):

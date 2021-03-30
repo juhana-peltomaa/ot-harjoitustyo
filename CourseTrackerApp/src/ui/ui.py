@@ -1,4 +1,5 @@
 from tkinter import ttk, constants
+from ui.login_view import LoginView
 
 # Harjoitellaan vielä UI:n rakentamista - tod.näk erotetaan kaikki näkymät omiksi luokikseen,
 # joita UI käyttää lopulta.
@@ -8,39 +9,10 @@ class UI:
 
     def __init__(self, root):
         self._root = root
+        self._current_view = None
 
     def start(self):
+        self._show_login_view()  # erotetiin LoginView omaksi olioksi!
 
-        # Heading label, joka kertoo mitä tällä sivulla tehdään
-        heading_label = ttk.Label(master=self._root, text="Login")
-
-        # Testataan käyttäjänimen kirjaamista UI:hin
-        username = ttk.Label(master=self._root, text="Username")
-        username_entry = ttk.Entry(master=self._root)
-
-        # Testataan salasanan kirjaamista UI:hin
-        password = ttk.Label(master=self._root, text="Password")
-        password_entry = ttk.Entry(master=self._root)
-
-        # Testataan kirjautumispainikkeen lisäämistä
-        login_button = ttk.Button(master=self._root, text="Login")
-
-        # Harjoitellaan gridin luomista näkymään
-        heading_label.grid(row=0, column=0, columnspan=2,
-                           sticky=(constants.W), padx=5, pady=5)
-
-        # nämä parametrit voidaan poistaa tarvittaessa
-        username.grid(row=1, column=0, padx=5, pady=5)
-        username_entry.grid(row=1, column=1, sticky=(
-            constants.E, constants.W), padx=5, pady=5)
-
-        password.grid(row=2, column=0, padx=5, pady=5)
-        password_entry.grid(row=2, column=1, sticky=(
-            constants.E, constants.W), padx=5, pady=5)
-
-        login_button.grid(row=3, column=0, columnspan=2,
-                          sticky=(constants.E, constants.W), padx=5, pady=5)
-
-        # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
-        # yhdessä elementtien sticky-parametrien kanssa
-        self._root.grid_columnconfigure(1, weight=1, minsize=300)
+    def _show_login_view(self):
+        self._current_view = LoginView(self._root)
