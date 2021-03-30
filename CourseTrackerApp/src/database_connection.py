@@ -1,12 +1,16 @@
-import os
 import sqlite3
+from config import DATABASE_FILE_PATH
 
 dirname = os.path.dirname(__file__)
 
-# nämä on vielä kova koodattu, muista vaihtaa!
+# Alla kova koodattu versio, muista vaihtaa!
+# import os
 # connection = sqlite3.connect(os.path.join(
 #   __dirname, "..", "data", "database.sqlite"))
-connection = sqlite3.connect("practice.db")
+
+# DATABASE_FILE_PATH on määritelty .env tiedostossa
+
+connection = sqlite3.connect(DATABASE_FILE_PATH)
 connection.row_factory = sqlite3.Row
 
 

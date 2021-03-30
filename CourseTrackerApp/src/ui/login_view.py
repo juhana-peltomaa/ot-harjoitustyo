@@ -31,6 +31,8 @@ class LoginView:
         # Testataan kirjautumispainikkeen lisäämistä
         login_button = ttk.Button(master=self._root, text="Login")
 
+        create_user_button = ttk.Button(master=self._root, text="Create User")
+
         # Harjoitellaan gridin luomista näkymään
         heading_label.grid(row=0, column=0, columnspan=2,
                            sticky=(constants.W), padx=5, pady=5)
@@ -44,8 +46,12 @@ class LoginView:
         password_entry.grid(row=2, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
-        login_button.grid(row=3, column=0, columnspan=2,
-                          sticky=(constants.E, constants.W), padx=5, pady=5)
+        login_button.grid(row=3, column=0, columnspan=1,
+                          sticky=constants.EW,  padx=5, pady=5)
+
+        # Jää oudosti login-painikkeen viereen, korjaa myöhemmin!!!
+        create_user_button.grid(
+            row=3, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa
