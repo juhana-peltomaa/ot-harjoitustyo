@@ -3,10 +3,12 @@ from entities.user import User
 from entities.course import Course
 from ui.ui import UI
 
+from initialize_database import initialize_database
+
 
 def main():
-    kayttaja_1 = User("Juhana", "salasana")
-    kurssi_1 = Course("Ohjelmistotekniikka", 5)
+    # alustetaan database tässä - tod.näk vaihdetaan vielä pois ja eriytetään sovelluslogiikkaan
+    initialize_database()
 
     window = Tk()
     window.title("Course Tracker practicing")

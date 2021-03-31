@@ -52,7 +52,6 @@ class LoginView:
         login_button.grid(row=3, column=1, columnspan=2,
                           sticky=(constants.E, constants.W),  padx=5, pady=5)
 
-        # Jää oudosti login-painikkeen viereen, korjaa myöhemmin!!
         create_user_button.grid(
             row=4, column=1, columnspan=2, sticky=(constants.E, constants.W), padx=5, pady=5)
 

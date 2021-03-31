@@ -1,7 +1,7 @@
 import sqlite3
 from config import DATABASE_FILE_PATH
 
-dirname = os.path.dirname(__file__)
+#dirname = os.path.dirname(__file__)
 
 # Alla kova koodattu versio, muista vaihtaa!
 # import os
