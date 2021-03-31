@@ -2,13 +2,15 @@ from database_connection import get_database_connection
 
 # huomio, että nyt luodaan ainoastaan user TABLE! Lisää myöhemmin tulevat tähän1
 
+CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT);"
+
+DROP_USER_TABLE = "DROP TABLE IF EXISTS users"
+
 
 def drop_tables(connection):
     cursor = connection.cursor()
 
-    cursor.execute('''
-        drop table if exists users;
-    ''')
+    cursor.execute(DROP_USER_TABLE)
 
     connection.commit()
 
@@ -16,12 +18,7 @@ def drop_tables(connection):
 def create_tables(connection):
     cursor = connection.cursor()
 
-    cursor.execute('''
-        create table users (
-            username text primary key,
-            password text
-        );
-    ''')
+    cursor.execute(CREATE_USER_TABLE)
 
     connection.commit()
 

@@ -1,5 +1,6 @@
 from tkinter import ttk, constants
 from ui.login_view import LoginView
+from ui.create_user_view import CreateView
 
 # Harjoitellaan vielä UI:n rakentamista - tod.näk erotetaan kaikki näkymät omiksi luokikseen,
 # joita UI käyttää lopulta.
@@ -14,5 +15,22 @@ class UI:
     def start(self):
         self._show_login_view()  # erotetiin LoginView omaksi olioksi!
 
+    def _hide_current_view(self):
+        if self._current_view:
+            self._current_view.destroy()
+
+        self._current_view = None
+
     def _show_login_view(self):
-        self._current_view = LoginView(self._root)
+        self._hide_current_view()  # kutsuu hide-metodin kautta yksittäisiä destroy metodeja
+
+        self._current_view = LoginView(self._root, self._show_create_user_view)
+
+        self._current_view.pack()
+
+    def _show_create_user_view(self):
+        self._hide_current_view()
+
+        self._current_view = CreateView(self._root, self._show_login_view)
+
+        self._current_view.pack()
