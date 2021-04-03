@@ -12,3 +12,6 @@
 [maksukortti](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/maksukortti)
 
 [unicafe](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/unicafe)
+
+#### Viikko 3
+[tehtävät](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko3/)
