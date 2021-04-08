@@ -1,12 +1,19 @@
 from tkinter import ttk, constants
+from repositories.user_repo import UserRepo
+
+# väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
+from database_connection import get_database_connection
 
 
 class LoginView:
-    def __init__(self, root, show_create_user_view):
+    def __init__(self, root, show_course_view, show_create_user_view):
         self._root = root
-        self._frame = None
-
         self._show_create_user_view = show_create_user_view
+        self._show_course_view = show_course_view  # lisätään kurssi-näkymään pääsy
+
+        self._frame = None
+        self._username_entry = None
+        self._password_entry = None
 
         self._initialize()
 
@@ -16,6 +23,25 @@ class LoginView:
     def destroy(self):
         self._frame.destroy()
 
+    # Sovelluslogiikkaa ei ole vielä eritelty omaksi luokaksi - joten kirjautuminen hoidettu vielä täällä
+
+    def _login_user(self):
+        username = self._username_entry.get()
+        password = self._password_entry.get()
+
+        # muista, että nämä on vielä importattu
+        database = UserRepo(get_database_connection())
+
+        # palauttaa käyttäjän ja salasanan, jos ne löytyvät, muuten None, None
+        username_check, password_check = database.find_user(username, password)
+
+        if username_check == username and password_check == password:
+            self._show_course_view()
+        else:
+            # erotetaan viestit omaksi näkymäksi jossain välissä
+            print("Some error happend in login")
+
+    # Näkymän alustaminen
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
@@ -24,14 +50,15 @@ class LoginView:
 
         # Testataan käyttäjänimen kirjaamista UI:hin
         username = ttk.Label(master=self._frame, text="Username")
-        username_entry = ttk.Entry(master=self._frame)
+        self._username_entry = ttk.Entry(master=self._frame)
 
         # Testataan salasanan kirjaamista UI:hin
         password = ttk.Label(master=self._frame, text="Password")
-        password_entry = ttk.Entry(master=self._frame)
+        self._password_entry = ttk.Entry(master=self._frame)
 
         # Testataan kirjautumispainikkeen lisäämistä
-        login_button = ttk.Button(master=self._frame, text="Login")
+        login_button = ttk.Button(
+            master=self._frame, text="Login", command=self._login_user)
 
         create_user_button = ttk.Button(
             master=self._frame, text="Create User", command=self._show_create_user_view)
@@ -42,11 +69,11 @@ class LoginView:
 
         # nämä parametrit voidaan poistaa tarvittaessa
         username.grid(row=1, column=0, padx=5, pady=5)
-        username_entry.grid(row=1, column=1, sticky=(
+        self._username_entry.grid(row=1, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
         password.grid(row=2, column=0, padx=5, pady=5)
-        password_entry.grid(row=2, column=1, sticky=(
+        self._password_entry.grid(row=2, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
         login_button.grid(row=3, column=1, columnspan=2,

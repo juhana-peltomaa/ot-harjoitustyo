@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
 from ui.login_view import LoginView
 from ui.create_user_view import CreateView
+from ui.course_view import CourseView
 
 
 class UI:
@@ -22,13 +23,22 @@ class UI:
     def _show_login_view(self):    # login-näkymän näyttäminen
         self._hide_current_view()  # kutsuu hide-metodin kautta yksittäisiä destroy metodeja
 
-        self._current_view = LoginView(self._root, self._show_create_user_view)
+        self._current_view = LoginView(
+            self._root, self._show_course_view, self._show_create_user_view)
 
         self._current_view.pack()
 
-    def _show_create_user_view(self):   # create user-näkymän näyttäminen
+    # create user-näkymän näyttäminen/kutsuminen
+    def _show_create_user_view(self):
         self._hide_current_view()
 
         self._current_view = CreateView(self._root, self._show_login_view)
+
+        self._current_view.pack()
+
+    def _show_course_view(self):  # courses-näkymän näyttäminen/kutsuminen
+        self._hide_current_view()
+
+        self._current_view = CourseView(self._root, self._show_login_view)
 
         self._current_view.pack()

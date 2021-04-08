@@ -7,3 +7,5 @@ laskarit/viikko2/unicafe/src/tests/.coverage
 laskarit/viikko2/unicafe/src/tests/htmlcov/
 *.pyc
 CourseTrackerApp/src/ui/__pycache__/ui.cpython-39.pyc
+CourseTrackerApp/data/database.sqlite
+CourseTrackerApp/data/database.sqlite-journal
