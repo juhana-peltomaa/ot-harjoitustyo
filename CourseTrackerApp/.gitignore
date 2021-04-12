@@ -8,5 +8,5 @@ __pycache__
 *.py[cod]
 *$py.class
 
-/data/database.sqlite
-/data/database.sqlite-journal
+data/database.sqlite
+data/database.sqlite-journal
