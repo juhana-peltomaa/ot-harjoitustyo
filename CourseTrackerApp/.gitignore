@@ -11,4 +11,4 @@ __pycache__
 data/database.sqlite
 data/database.sqlite-journal
 data/test-database.sqlite
-../laskarit/
+laskarit/**
