@@ -14,9 +14,6 @@ def drop_tables(connection):
 
     connection.commit()
     
-    cursor.close()
-    connection.close()
-
 
 def create_tables(connection):
     cursor = connection.cursor()
@@ -24,9 +21,6 @@ def create_tables(connection):
     cursor.execute(CREATE_USER_TABLE)
 
     connection.commit()
-    
-    cursor.close()
-    connection.close()
 
 
 def initialize_database():
