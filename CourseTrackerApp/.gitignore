@@ -8,8 +8,14 @@ __pycache__
 *.py[cod]
 *$py.class
 
+<<<<<<< HEAD
 data/database.sqlite
 data/database.sqlite-journal
 data/test-database.sqlite
 **/laskarit/
 
+=======
+CourseTrackerApp/src/ui/__pycache__/ui.cpython-39.pyc
+CourseTrackerApp/data/database.sqlite
+CourseTrackerApp/data/database.sqlite-journal
+>>>>>>> parent of d5b4ea8... Lisätään .gitignoreen tiedostoja
