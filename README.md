@@ -10,7 +10,7 @@
 
 1. Asenna riippuvuudet komennolla:
 
-```poetry install```
+    poetry install
 
 2. Alusta suoritusympäristö komennolla:
 
