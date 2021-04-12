@@ -10,15 +10,15 @@
 
 1. Asenna riippuvuudet komennolla:
 
-```python poetry install```
+```poetry install```
 
 2. Alusta suoritusympäristö komennolla:
 
-```python poetry run invoke build```
+```poetry run invoke build```
 
 3. Käynnistä sovellus komennolla:
 
-```python poetry sun invoke start```
+```poetry sun invoke start```
 
 ## Komentorivitoiminnot
 
@@ -26,16 +26,16 @@
 
 Suorita ohjelma komennolla:
 
-```python poetry run invoke start```
+```poetry run invoke start```
 
 ### Testaus
 Suorita testit komennolla:
 
-```python poetry run invoke test```
+```poetry run invoke test```
 
 ### Testikattavuus
 Generoi testikattavuusraportti komennolla:
 
-```python poetry run invoke coverage-report```
+```poetry run invoke coverage-report```
 
 Generoitu raportti löytyy htmlcov-hakemistosta
