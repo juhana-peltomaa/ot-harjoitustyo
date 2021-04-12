@@ -2,8 +2,6 @@ from entities.user import User
 from database_connection import get_database_connection
 
 
-# nyt mahdollista ainoastaan luoda uusi käyttäjä - lisätään ominaisuuksia myöhemmin
-
 CREATE_USER = "INSERT INTO users (username, password) VALUES (?, ?);"
 
 FIND_USER = "SELECT * FROM users WHERE username = ? AND password = ?;"

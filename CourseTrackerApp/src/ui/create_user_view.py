@@ -24,7 +24,7 @@ class CreateView:
         self._frame.destroy()
 
     # testataan toimiiko tietojen tallentaminen tietokantaan - ei vielä lisättynä ehtoja / virhetietoja
-    # sovelluslogiikkaa ei myöskään ole vielä eritelty vaan haetaan tietokannan kautta metodit
+    # sovelluslogiikkaa ei ole vielä eritelty vaan haetaan tietokannan kautta metodit
     def _create_new_user(self):
         username = self._new_username_entry.get()
         password = self._new_password_entry.get()

@@ -23,7 +23,7 @@ class LoginView:
     def destroy(self):
         self._frame.destroy()
 
-    # Sovelluslogiikkaa ei ole vielä eritelty omaksi luokaksi - joten kirjautuminen hoidettu vielä täällä
+    # Sovelluslogiikkaa ei ole vielä eritelty - joten kirjautuminen hoidettu vielä täällä
 
     def _login_user(self):
         username = self._username_entry.get()

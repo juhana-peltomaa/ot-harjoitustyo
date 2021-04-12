@@ -37,7 +37,7 @@ class CourseView:
 
         # Heading label, joka kertoo mitä tällä sivulla tehdään
         heading_label = ttk.Label(
-            master=self._frame, text="Tämä on kurssinäkymä")
+            master=self._frame, text="Soon you will be able to add new courses in this view!")
 
         # Testataan käyttäjänimen kirjaamista UI:hin
         course_name_label = ttk.Label(
