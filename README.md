@@ -16,7 +16,7 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 2. Asenna riippuvuudet komennolla:
 
-```poetry install```
+```poetry install``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry install```
 
 3. Käynnistä sovellus komennolla:
 
