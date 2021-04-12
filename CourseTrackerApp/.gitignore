@@ -8,6 +8,5 @@ __pycache__
 *.py[cod]
 *$py.class
 
-CourseTrackerApp/src/ui/__pycache__/ui.cpython-39.pyc
-CourseTrackerApp/data/database.sqlite
-CourseTrackerApp/data/database.sqlite-journal
+/data/database.sqlite
+/data/database.sqlite-journal
