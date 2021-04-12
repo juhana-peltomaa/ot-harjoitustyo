@@ -11,7 +11,7 @@ def main():
     initialize_database()
 
     window = Tk()
-    window.title("Course Tracker practicing")
+    window.title("Course Tracker Application")
 
     ui = UI(window)
     ui.start()
