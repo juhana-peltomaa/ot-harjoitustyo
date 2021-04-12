@@ -38,4 +38,4 @@ Generoi testikattavuusraportti komennolla:
 
 ```poetry run invoke coverage-report```
 
-Generoitu raportti löytyy htmlcov-hakemistosta
+Generoitu raportti löytyy _htmlcov_-hakemistosta
