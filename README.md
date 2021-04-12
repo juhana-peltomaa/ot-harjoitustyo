@@ -10,17 +10,20 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 ## Asennus
 
-1. Asenna riippuvuudet komennolla:
+1. Siirry hakemistoon CourseTrackerApp komennolla:
+```cd CourseTrackerApp```
+
+2. Asenna riippuvuudet komennolla:
 
 ```poetry install```
 
-2. Alusta suoritusympäristö komennolla:
+3. Alusta suoritusympäristö komennolla:
 
 ```poetry run invoke build```
 
-3. Käynnistä sovellus komennolla:
+4. Käynnistä sovellus komennolla:
 
-```poetry sun invoke start```
+```poetry run invoke start```
 
 ## Komentorivitoiminnot
 
