@@ -18,11 +18,7 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 ```poetry install```
 
-3. Alusta suoritusympäristö komennolla:
-
-```poetry run invoke build```
-
-4. Käynnistä sovellus komennolla:
+3. Käynnistä sovellus komennolla:
 
 ```poetry run invoke start```
 
