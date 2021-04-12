@@ -20,7 +20,7 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 3. Käynnistä sovellus komennolla:
 
-```poetry run invoke start```
+```poetry run invoke start``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke start```
 
 ## Komentorivitoiminnot
 
@@ -28,16 +28,16 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 Suorita ohjelma komennolla:
 
-```poetry run invoke start```
+```poetry run invoke start``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke start```
 
 ### Testaus
 Suorita testit komennolla:
 
-```poetry run invoke test```
+```poetry run invoke test``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke test```
 
 ### Testikattavuus
 Generoi testikattavuusraportti komennolla:
 
-```poetry run invoke coverage-report```
+```poetry run invoke coverage-report``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke coverage-report```
 
 Generoitu raportti löytyy _htmlcov_-hakemistosta
