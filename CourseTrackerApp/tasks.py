@@ -5,11 +5,6 @@ from invoke import task
 @task
 def start(ctx):
    ctx.run("python3 src/index.py")
-   
-# Run the application tests
-@task
-def test(ctx):
-    ctx.run("pytest src")
 
 # Run coverage and generate html report with command "poetry run invoke coverage-report"
 @task
