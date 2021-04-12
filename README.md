@@ -11,6 +11,7 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 ## Asennus
 
 1. Siirry hakemistoon CourseTrackerApp komennolla:
+
 ```cd CourseTrackerApp```
 
 2. Asenna riippuvuudet komennolla:
