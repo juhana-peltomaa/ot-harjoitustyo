@@ -1,17 +1,41 @@
-# Ohjelmistotekniikka 2021 - Harjoitustyö
+#Course Tracker App
 
-### Tehtävät
+### Dokumentaatio
 
-#### Viikko 1
+[Vaatimusmäärittely](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[gitlog.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+[Työaikakirjanpito](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
-[komentorivi.txt](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+### Asennus
 
-#### Viikko 2
-[maksukortti](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/maksukortti)
+1. Asenna riippuvuudet komennolla:
 
-[unicafe](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko2/unicafe)
+```python poetry install```
 
-#### Viikko 3
-[tehtävät](https://github.com/juhana-peltomaa/ot-harjoitustyo/tree/master/laskarit/viikko3/)
+2. Alusta suoritusympäristö komennolla:
+
+```python poetry run invoke build```
+
+3. Käynnistä sovellus komennolla:
+
+```python poetry sun invoke start```
+
+### Komentorivitoiminnot
+
+#### Ohjelman suorittaminen
+
+Suorita ohjelma komennolla:
+
+```python poetry run invoke start```
+
+#### Testaus
+Suorita testit komennolla:
+
+```python poetry run invoke test```
+
+#### Testikattavuus
+Generoi testikattavuusraportti komennolla:
+
+```python poetry run invoke coverage-report```
+
+Generoitu raportti löytyy htmlcov-hakemistosta
