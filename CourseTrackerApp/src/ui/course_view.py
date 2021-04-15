@@ -1,5 +1,7 @@
 from tkinter import ttk, constants
-from repositories.user_repo import UserRepo
+from repositories.course_repo import CourseRepo
+from ui.login_view import LoginView
+from entities.course import Course
 
 # väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
 from database_connection import get_database_connection
@@ -15,6 +17,7 @@ class CourseView:
 
         self._show_login_view = show_login_view
 
+        self._user = None
         self._initialize()
 
     def pack(self):
@@ -23,14 +26,15 @@ class CourseView:
     def destroy(self):
         self._frame.destroy()
 
-    # testataan toimiiko tietojen tallentaminen tietokantaan - ei vielä lisättynä ehtoja / virhetietoja
-    # sovelluslogiikkaa ei myöskään ole vielä eritelty vaan haetaan tietokannan kautta metodit
+    # kurssien lisääminen onnistuu nyt! Huomaa, että sovelluslogiikkaa ei ole vielä eritelty! 
     def _create_new_course(self):
         course_name = self._course_name_entry.get()
-        course_credits = self._course_credit_entry.get()
+        course_credit = self._course_credit_entry.get()
 
-        # Add CourseRepo here -> database = UserRepo(get_database_connection())
-        # Add method to create course here -> kayttaja = database.create_user(username, password)
+        database = CourseRepo(get_database_connection())
+        new_course = Course(course_name, course_credit, user=self._user)
+
+        database.create_course(new_course)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)

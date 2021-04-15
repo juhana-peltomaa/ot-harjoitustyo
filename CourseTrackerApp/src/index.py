@@ -9,6 +9,7 @@ from initialize_database import initialize_database
 def main():
     # alustetaan database tässä - tod.näk vaihdetaan vielä pois ja eriytetään sovelluslogiikkaan
     initialize_database()
+    
 
     window = Tk()
     window.title("Course Tracker Application")

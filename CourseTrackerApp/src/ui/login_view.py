@@ -15,6 +15,8 @@ class LoginView:
         self._username_entry = None
         self._password_entry = None
 
+        self._user = None  # pidetään kirjaa käyttäjästä - kömpelö toteutus vielä, mutta testataan
+
         self._initialize()
 
     def pack(self):
@@ -33,10 +35,12 @@ class LoginView:
         database = UserRepo(get_database_connection())
 
         # palauttaa käyttäjän ja salasanan, jos ne löytyvät, muuten None, None
-        username_check, password_check = database.find_user(username, password)
+        username_check, password_check, User = database.find_user(
+            username, password)
 
         if username_check == username and password_check == password:
             self._show_course_view()
+            self._user = User  # tämä pitää vielä miettiä
         else:
             # erotetaan viestit omaksi näkymäksi jossain välissä
             print("Some error happend in login")

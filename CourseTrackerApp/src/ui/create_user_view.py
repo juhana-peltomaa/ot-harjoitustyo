@@ -1,5 +1,6 @@
 from tkinter import ttk, constants
 from repositories.user_repo import UserRepo
+from entities.user import User
 
 # väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
 from database_connection import get_database_connection
@@ -30,7 +31,8 @@ class CreateView:
         password = self._new_password_entry.get()
 
         database = UserRepo(get_database_connection())
-        kayttaja = database.create_user(username, password)
+        user = User(username, password)
+        kayttaja = database.create_user(user)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)

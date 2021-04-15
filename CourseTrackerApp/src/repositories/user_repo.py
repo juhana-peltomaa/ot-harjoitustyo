@@ -15,10 +15,10 @@ class UserRepo:
     def __init__(self, connection):
         self._connection = connection
 
-    def create_user(self, username, password):
+    def create_user(self, user):
         cursor = self._connection.cursor()
 
-        user = cursor.execute(CREATE_USER, (username, password))
+        user = cursor.execute(CREATE_USER, (user.username, user.password))
 
         self._connection.commit()
 
@@ -37,7 +37,8 @@ class UserRepo:
             username_check = user_info["username"]
             password_check = user_info["password"]
 
-            return username_check, password_check
+            # testataan palauttaako user-olion
+            return username_check, password_check, User(username_check, password_check)
         else:
             return None, None
 
