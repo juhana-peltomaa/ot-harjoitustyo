@@ -9,4 +9,5 @@
 | 31.3  | 4    | sqlite säätöä, + create user-näkymän erottaminen + käyttäjän tallentuminen tietokantaan |
 | 8.4   | 3    | kirjautuminen nyt mahdollista + course-näkymä luotu - vielä ei pidetä kirjaa käyttäjien sessioista / tai kursseista |
 | 12.4  | 4    | ensimmäisten testien lisääminen ja siivoamista + deadline valmisteluja |
-| yht   | 16   | | 
+| 15.4  | 2    | kurssi-olion lisääminen tietokantaan onnistuu Course-näkymässä kirjautumisen jälkeen |
+| yht   | 18   | | 
