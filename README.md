@@ -4,9 +4,9 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/CourseTrackerApp/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/CourseTrackerApp/dokumentaatio/tuntikirjanpito.md)
 
 ## Asennus
 
