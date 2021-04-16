@@ -10,4 +10,5 @@
 | 8.4   | 3    | kirjautuminen nyt mahdollista + course-näkymä luotu - vielä ei pidetä kirjaa käyttäjien sessioista / tai kursseista |
 | 12.4  | 4    | ensimmäisten testien lisääminen ja siivoamista + deadline valmisteluja |
 | 15.4  | 2    | kurssi-olion lisääminen tietokantaan onnistuu Course-näkymässä kirjautumisen jälkeen |
-| yht   | 18   | | 
+| 16.4  | 4    | sovelluslogiikan erottamista, käyttäjän tallentaminen ja virhe viestin esittäminen |
+| yht   | 22   | | 
