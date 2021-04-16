@@ -1,8 +1,6 @@
 from tkinter import ttk, constants
 from repositories.user_repo import UserRepo
-
-# väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
-from database_connection import get_database_connection
+from services.course_service import course_service
 
 
 class LoginView:
@@ -15,8 +13,6 @@ class LoginView:
         self._username_entry = None
         self._password_entry = None
 
-        self._user = None  # pidetään kirjaa käyttäjästä - kömpelö toteutus vielä, mutta testataan
-
         self._initialize()
 
     def pack(self):
@@ -25,27 +21,20 @@ class LoginView:
     def destroy(self):
         self._frame.destroy()
 
-    # Sovelluslogiikkaa ei ole vielä eritelty - joten kirjautuminen hoidettu vielä täällä
+    # Sovelluslogiikkan erottaminen aloitettu kirjautumisesta
 
     def _login_user(self):
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        # muista, että nämä on vielä importattu
-        database = UserRepo(get_database_connection())
-
-        # palauttaa käyttäjän ja salasanan, jos ne löytyvät, muuten None, None
-        username_check, password_check, User = database.find_user(
-            username, password)
-
-        if username_check == username and password_check == password:
+        try:
+            course_service.login_user(username, password)
             self._show_course_view()
-            self._user = User  # tämä pitää vielä miettiä
-        else:
-            # erotetaan viestit omaksi näkymäksi jossain välissä
-            print("Some error happend in login")
+        except Exception:
+            print("Jokin virhe kirjautumisessa!")
 
     # Näkymän alustaminen
+
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 

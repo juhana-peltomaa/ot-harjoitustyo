@@ -1,6 +1,5 @@
 from database_connection import get_database_connection
 
-# huomio, että nyt luodaan ainoastaan user TABLE! Lisää myöhemmin tulevat tähän1
 
 CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT);"
 
