@@ -5,6 +5,14 @@ from repositories.course_repo import course_repository as c_repo
 from repositories.user_repo import user_repository as u_repo
 
 
+class ExistingUsernameError(Exception):
+    pass
+
+
+class LoginError(Exception):
+    pass
+
+
 class CourseService:
 
     def __init__(self, course_repository=c_repo, user_repository=u_repo):
@@ -15,18 +23,33 @@ class CourseService:
     def login_user(self, username, password):
 
         # palauttaa nimen, salasanan ja käyttäjä Olion jos ne löytyvät, muuten None
-        username_check, password_check, User = self._u_repo.find_user(
-            username, password)
+        user = self._u_repo.find_user(username, password)
 
-        if username_check == username and password_check == password:
-            self._user = User  # tämä pitää vielä miettiä
-            return self._user
-        else:
-            # erotetaan viestit omaksi näkymäksi jossain välissä
-            print("Some error happend in login")
+        if user:
+            username_check = user["username"]
+            password_check = user["password"]
+
+            if str(username_check) != str(username) or str(password_check) != str(password):
+                raise LoginError("Login failed! Invalid username or password.")
+            else:
+                self._user = user
+                return user
+
+        raise LoginError("Login failed! Invalid username or password.")
+
+    def create_new_user(self, username, password):
+
+        exists = self._u_repo.find_username(username)
+
+        if exists:
+            raise ExistingUsernameError(
+                f"Username {username} is already in-use!")
+
+        new_user = self._u_repo.create_user(User(username, password))
+        return new_user
 
     def current_user(self):
-        return self._user
+        return self._user["username"]
 
     def logout_user(self):
         self._user = None

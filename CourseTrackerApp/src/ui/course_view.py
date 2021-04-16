@@ -2,9 +2,7 @@ from tkinter import ttk, constants
 from repositories.course_repo import CourseRepo
 from ui.login_view import LoginView
 from entities.course import Course
-
-# väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
-from database_connection import get_database_connection
+from services.course_service import course_service
 
 
 class CourseView:
@@ -17,7 +15,7 @@ class CourseView:
 
         self._show_login_view = show_login_view
 
-        self._user = None
+        self._user = course_service.current_user()
         self._initialize()
 
     def pack(self):
@@ -26,7 +24,7 @@ class CourseView:
     def destroy(self):
         self._frame.destroy()
 
-    # kurssien lisääminen onnistuu nyt! Huomaa, että sovelluslogiikkaa ei ole vielä eritelty! 
+    # kurssien lisääminen onnistuu nyt! Huomaa, että sovelluslogiikkaa ei ole vielä eritelty!
     def _create_new_course(self):
         course_name = self._course_name_entry.get()
         course_credit = self._course_credit_entry.get()
@@ -42,6 +40,9 @@ class CourseView:
         # Heading label, joka kertoo mitä tällä sivulla tehdään
         heading_label = ttk.Label(
             master=self._frame, text="Soon you will be able to add new courses in this view!")
+
+        current_user_label = ttk.Label(
+            master=self._frame, text=f"Logged in as: {self._user}")
 
         # Testataan käyttäjänimen kirjaamista UI:hin
         course_name_label = ttk.Label(
@@ -65,18 +66,21 @@ class CourseView:
         heading_label.grid(row=0, column=0, columnspan=2,
                            sticky=(constants.W), padx=5, pady=5)
 
+        current_user_label.grid(row=1, column=0, columnspan=2,
+                                sticky=(constants.W), padx=5, pady=5)
+
         # nämä parametrit voidaan poistaa tarvittaessa
-        course_name_label.grid(row=1, column=0, padx=5, pady=5)
-        self._course_name_entry.grid(row=1, column=1, sticky=(
+        course_name_label.grid(row=2, column=0, padx=5, pady=5)
+        self._course_name_entry.grid(row=2, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
-        course_credit_label.grid(row=2, column=0, padx=5, pady=5)
-        self._course_credit_entry.grid(row=2, column=1, sticky=(
+        course_credit_label.grid(row=3, column=0, padx=5, pady=5)
+        self._course_credit_entry.grid(row=3, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
         # Jää oudosti login-painikkeen viereen, korjaa myöhemmin!!
         create_new_course_button.grid(
-            row=3, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=4, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         back_to_login_view_button.grid(
             row=4, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)

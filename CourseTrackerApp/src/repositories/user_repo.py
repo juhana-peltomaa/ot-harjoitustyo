@@ -6,6 +6,8 @@ CREATE_USER = "INSERT INTO users (username, password) VALUES (?, ?);"
 
 FIND_USER = "SELECT * FROM users WHERE username = ? AND password = ?;"
 
+FIND_USERNAME = "SELECT * FROM users WHERE username = ?;"
+
 DELETE_ALL = "DELETE FROM users;"
 
 FIND_ALL_USERS = "SELECT * FROM users;"
@@ -33,14 +35,23 @@ class UserRepo:
 
         user_info = cursor.fetchone()
 
+        return user_info
+
+    def find_username(self, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute(FIND_USERNAME, (username,))
+
+        self._connection.commit()
+
+        user_info = cursor.fetchone()
+
         if user_info:
             username_check = user_info["username"]
-            password_check = user_info["password"]
-
-            # testataan palauttaako user-olion
-            return username_check, password_check, User(username_check, password_check)
+            # palauttaa käyttäjän nimen jos löytyy
+            return True
         else:
-            return None, None
+            return None
 
     def find_all_users(self):
         cursor = self._connection.cursor()

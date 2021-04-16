@@ -1,6 +1,6 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, messagebox
 from repositories.user_repo import UserRepo
-from services.course_service import course_service
+from services.course_service import course_service, LoginError
 
 
 class LoginView:
@@ -27,11 +27,17 @@ class LoginView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        try:
-            course_service.login_user(username, password)
-            self._show_course_view()
-        except Exception:
-            print("Jokin virhe kirjautumisessa!")
+        if len(username) > 0 and len(password) > 0:
+            try:
+                if course_service.login_user(username, password):
+                    self._show_course_view()
+            except LoginError:
+                messagebox.showinfo(
+                    "Login", "Login failed! Invalid username and/or password.")
+
+        else:
+            messagebox.showinfo(
+                "Login", "Enter both the username and password to login!")
 
     # Näkymän alustaminen
 

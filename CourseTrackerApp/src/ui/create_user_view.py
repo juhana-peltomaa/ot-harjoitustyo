@@ -1,9 +1,8 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, messagebox
 from repositories.user_repo import UserRepo
 from entities.user import User
 
-# väliaikaisesti täällä ennenkuin sovelluslogiikka on eritelty - huomaa _create_new_user kommentit
-from database_connection import get_database_connection
+from services.course_service import course_service, ExistingUsernameError
 
 
 class CreateView:
@@ -24,15 +23,22 @@ class CreateView:
     def destroy(self):
         self._frame.destroy()
 
-    # testataan toimiiko tietojen tallentaminen tietokantaan - ei vielä lisättynä ehtoja / virhetietoja
-    # sovelluslogiikkaa ei ole vielä eritelty vaan haetaan tietokannan kautta metodit
+    # Erotellaan käyttäjän luomisen logiikkaa omaan luokkaan
     def _create_new_user(self):
         username = self._new_username_entry.get()
         password = self._new_password_entry.get()
 
-        database = UserRepo(get_database_connection())
-        user = User(username, password)
-        kayttaja = database.create_user(user)
+        if len(username) > 3 and len(password) > 3:
+            try:
+                course_service.create_new_user(username, password)
+                messagebox.showinfo(
+                    "Regisration", f"Successfully registered user: {username}!")
+            except ExistingUsernameError:
+                messagebox.showinfo(
+                    "Regisration", f"Username {username} is already in-use!")
+        else:
+            messagebox.showinfo(
+                "Regisration", "Both username and password must be over three characters long!")
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
