@@ -1,5 +1,12 @@
 from invoke import task
 
+# Initialize the database with command "poetry run invoke build"
+
+
+@task
+def build(ctx):
+    ctx.run("python3 src/build.py")
+
 
 # Run the application with command "poetry run invoke start"
 @task
