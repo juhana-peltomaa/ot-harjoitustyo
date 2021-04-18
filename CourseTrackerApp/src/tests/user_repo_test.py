@@ -9,7 +9,7 @@ class TestUserRepositio(unittest.TestCase):
         self.user_testi1 = User('testi1', 'testi123')
         self.user_testi2 = User('testi2', 'testi234')
 
-    def test_create(self):
+    def test_create_user(self):
         user_repository.create_user(self.user_testi1)
 
         user_info = user_repository.find_user(
@@ -25,6 +25,6 @@ class TestUserRepositio(unittest.TestCase):
 
         users = user_repository.find_all_users()
 
-        self.assertAlmostEqual(len(users), 2)
+        self.assertEqual(len(users), 2)
         self.assertEqual(users[0]["username"], self.user_testi1.username)
         self.assertEqual(users[1]["username"], self.user_testi2.username)
