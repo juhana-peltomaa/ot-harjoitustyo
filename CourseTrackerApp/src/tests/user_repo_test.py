@@ -10,21 +10,18 @@ class TestUserRepositio(unittest.TestCase):
         self.user_testi2 = User('testi2', 'testi234')
 
     def test_create(self):
-        user_repository.create_user(
+        user_repository.create_user(self.user_testi1)
+
+        user_info = user_repository.find_user(
             self.user_testi1.username, self.user_testi1.password)
 
-        users = user_repository.find_user(
-            self.user_testi1.username, self.user_testi1.password)
-
-        self.assertEqual(users[0], self.user_testi1.username)
-        self.assertEqual(users[1], self.user_testi1.password)
+        self.assertEqual(user_info[0], self.user_testi1.username)
+        self.assertEqual(user_info[1], self.user_testi1.password)
 
     def test_find_all_users(self):
-        user_repository.create_user(
-            self.user_testi1.username, self.user_testi1.password)
+        user_repository.create_user(self.user_testi1)
 
-        user_repository.create_user(
-            self.user_testi2.username, self.user_testi2.password)
+        user_repository.create_user(self.user_testi2)
 
         users = user_repository.find_all_users()
 
