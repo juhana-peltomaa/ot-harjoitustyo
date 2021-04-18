@@ -37,7 +37,7 @@ class CourseRepo:
         if course_info:
             coursename_check = course_info["name"]
 
-            return coursename_check
+            return True
         else:
             return None
 

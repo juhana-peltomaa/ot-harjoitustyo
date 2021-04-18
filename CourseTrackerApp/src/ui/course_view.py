@@ -1,8 +1,8 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, messagebox
 from repositories.course_repo import CourseRepo
 from ui.login_view import LoginView
 from entities.course import Course
-from services.course_service import course_service
+from services.course_service import course_service, ExistingCourseError
 
 
 class CourseView:
@@ -29,10 +29,20 @@ class CourseView:
         course_name = self._course_name_entry.get()
         course_credit = self._course_credit_entry.get()
 
-        database = CourseRepo(get_database_connection())
-        new_course = Course(course_name, course_credit, user=self._user)
+        try:
+            new_course = course_service.create_new_course(
+                course_name, course_credit)
 
-        database.create_course(new_course)
+            if new_course:
+                messagebox.showinfo("Course registration",
+                                    f"Course {course_name} successfully added!")
+            else:
+                messagebox.showinfo("Course registration",
+                                    f"Something went wrong in adding course {course_name}!")
+
+        except ExistingCourseError:
+            messagebox.showinfo("Course registration",
+                                f"Course {course_name} has already been added!")
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)

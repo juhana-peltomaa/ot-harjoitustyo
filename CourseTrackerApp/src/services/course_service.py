@@ -13,6 +13,10 @@ class LoginError(Exception):
     pass
 
 
+class ExistingCourseError(Exception):
+    pass
+
+
 class CourseService:
 
     def __init__(self, course_repository=c_repo, user_repository=u_repo):
@@ -53,6 +57,17 @@ class CourseService:
 
     def logout_user(self):
         self._user = None
+
+    def create_new_course(self, name, credit):
+
+        exists = self._c_repo.find_course(name)
+
+        if exists:
+            raise ExistingCourseError()
+
+        course = Course(name, credit, user=self.current_user())
+        course = self._c_repo.create_course(course)
+        return course
 
 
 course_service = CourseService()
