@@ -30,7 +30,7 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 ### Ohjelman suorittaminen
 
-Alusta tietokanta sovelluksen käyttöä varten
+Alusta tietokanta sovelluksen käyttöä varten:
 
 ```poetry run invoke build``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke build```
 
