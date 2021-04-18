@@ -17,6 +17,10 @@ class ExistingCourseError(Exception):
     pass
 
 
+class CourseEntryError(Exception):
+    pass
+
+
 class CourseService:
 
     def __init__(self, course_repository=c_repo, user_repository=u_repo):
@@ -26,7 +30,7 @@ class CourseService:
 
     def login_user(self, username, password):
 
-        # palauttaa nimen, salasanan ja käyttäjä Olion jos ne löytyvät, muuten None
+        # palauttaa User:in tietokannasta, jos löytyy
         user = self._u_repo.find_user(username, password)
 
         if user:
@@ -62,12 +66,35 @@ class CourseService:
 
         exists = self._c_repo.find_course(name)
 
-        if exists:
+        if exists and exists["user"] == self._user:
             raise ExistingCourseError()
+
+        if len(name) <= 0 or len(credit) <= 0:
+            raise CourseEntryError()
 
         course = Course(name, credit, user=self.current_user())
         course = self._c_repo.create_course(course)
         return course
+
+    def display_all_courses(self):
+        course_list = []
+        courses = self._c_repo.find_all_courses()
+
+        if courses:
+            for row in courses:
+                name = row["name"]
+                credit = row["credit"]
+                grade = row["grade"]
+                status = row["status"]
+                user = row["user"]
+
+                if user == self.current_user():
+                    course_list.append([name, credit, grade, status, user])
+
+            return course_list
+
+        else:
+            return None
 
 
 course_service = CourseService()

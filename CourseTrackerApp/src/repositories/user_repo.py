@@ -45,7 +45,7 @@ class UserRepo:
 
         user_info = cursor.fetchone()
 
-        if user_info and username_check == user_info["username"]:
+        if user_info:
             return True
 
         return None

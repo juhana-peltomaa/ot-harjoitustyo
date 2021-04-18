@@ -2,13 +2,15 @@ from tkinter import ttk, constants, messagebox
 from repositories.course_repo import CourseRepo
 from ui.login_view import LoginView
 from entities.course import Course
-from services.course_service import course_service, ExistingCourseError
+from services.course_service import course_service, ExistingCourseError, CourseEntryError
 
 
 class CourseView:
     def __init__(self, root, show_login_view):
         self._root = root
         self._frame = None
+
+        self._current_courses = None
 
         self._course_name_entry = None
         self._course_credit_entry = None
@@ -17,6 +19,7 @@ class CourseView:
 
         self._user = course_service.current_user()
         self._initialize()
+        self._display_all_courses()
 
     def pack(self):
         self._frame.pack(fill=constants.BOTH, expand=True)
@@ -24,7 +27,6 @@ class CourseView:
     def destroy(self):
         self._frame.destroy()
 
-    # kurssien lisääminen onnistuu nyt! Huomaa, että sovelluslogiikkaa ei ole vielä eritelty!
     def _create_new_course(self):
         course_name = self._course_name_entry.get()
         course_credit = self._course_credit_entry.get()
@@ -34,8 +36,9 @@ class CourseView:
                 course_name, course_credit)
 
             if new_course:
-                messagebox.showinfo("Course registration",
-                                    f"Course {course_name} successfully added!")
+                if self._display_all_courses() is not None:
+                    messagebox.showinfo("Course registration",
+                                        f"Course {course_name} successfully added!")
             else:
                 messagebox.showinfo("Course registration",
                                     f"Something went wrong in adding course {course_name}!")
@@ -44,15 +47,62 @@ class CourseView:
             messagebox.showinfo("Course registration",
                                 f"Course {course_name} has already been added!")
 
+        except CourseEntryError:
+            messagebox.showinfo("Course registration",
+                                "Course registration failed. Enter both course name and credits!")
+
+    def _display_all_courses(self):
+        # tyhjennetään treeview ennen kurssien näyttämistä
+        for course in self._current_courses.get_children():
+            self._current_courses.delete(course)
+
+        courses = course_service.display_all_courses()
+
+        if courses is not None:
+            for row in courses:
+                self._current_courses.insert(parent="", index="end", text="", values=(
+                    row[0], row[1], row[2], row[3], row[4]))
+        return None
+
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
         # Heading label, joka kertoo mitä tällä sivulla tehdään
         heading_label = ttk.Label(
-            master=self._frame, text="Soon you will be able to add new courses in this view!")
+            master=self._frame, text="Add new courses and view all of your existing courses!")
 
         current_user_label = ttk.Label(
             master=self._frame, text=f"Logged in as: {self._user}")
+
+        # Kurssit lisätään treeview-näkymään
+        current_courses_tree = ttk.Treeview(master=self._frame)
+        self._current_courses = current_courses_tree
+
+        # Treeview:n muotoilua
+        current_courses_tree["columns"] = (
+            "Course Name", "Credits", "Grade", "Status", "Owner")
+        current_courses_tree.column("#0", width=0, stretch=constants.NO)
+        current_courses_tree.column("Course Name", width=140)
+        current_courses_tree.column(
+            "Credits", anchor=constants.CENTER, width=70)
+        current_courses_tree.column(
+            "Grade", anchor=constants.CENTER, width=70)
+        current_courses_tree.column(
+            "Status", anchor=constants.CENTER, width=100)
+        current_courses_tree.column(
+            "Owner", anchor=constants.CENTER, width=100)
+
+        current_courses_tree.heading("#0", text="")
+        current_courses_tree.heading(
+            "Course Name", text="Course Name")
+        current_courses_tree.heading(
+            "Credits", text="Credits", anchor=constants.CENTER)
+        current_courses_tree.heading(
+            "Grade", text="Grade", anchor=constants.CENTER)
+        current_courses_tree.heading(
+            "Status", text="Status", anchor=constants.CENTER)
+        current_courses_tree.heading(
+            "Owner", text="Owner", anchor=constants.CENTER)
 
         # Testataan käyttäjänimen kirjaamista UI:hin
         course_name_label = ttk.Label(
@@ -79,21 +129,23 @@ class CourseView:
         current_user_label.grid(row=1, column=0, columnspan=2,
                                 sticky=(constants.W), padx=5, pady=5)
 
+        current_courses_tree.grid(row=2, column=0, columnspan=2,
+                                  sticky=(constants.EW), padx=5, pady=5)
+
         # nämä parametrit voidaan poistaa tarvittaessa
-        course_name_label.grid(row=2, column=0, padx=5, pady=5)
-        self._course_name_entry.grid(row=2, column=1, sticky=(
+        course_name_label.grid(row=3, column=0, padx=5, pady=5)
+        self._course_name_entry.grid(row=3, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
-        course_credit_label.grid(row=3, column=0, padx=5, pady=5)
-        self._course_credit_entry.grid(row=3, column=1, sticky=(
+        course_credit_label.grid(row=4, column=0, padx=5, pady=5)
+        self._course_credit_entry.grid(row=4, column=1, sticky=(
             constants.E, constants.W), padx=5, pady=5)
 
-        # Jää oudosti login-painikkeen viereen, korjaa myöhemmin!!
         create_new_course_button.grid(
-            row=4, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=5, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         back_to_login_view_button.grid(
-            row=5, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=6, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa

@@ -2,7 +2,7 @@ from entities.course import Course
 from database_connection import get_database_connection
 
 
-CREATE_COURSE = "INSERT INTO courses (name, credit, grade, status, user) VALUES (?, ?, ?, ?, ?);"
+CREATE_COURSE = "INSERT OR IGNORE INTO courses (name, credit, grade, status, user) VALUES (?, ?, ?, ?, ?);"
 
 FIND_COURSE = "SELECT * FROM courses WHERE name = ?;"
 
@@ -35,9 +35,7 @@ class CourseRepo:
         course_info = cursor.fetchone()
 
         if course_info:
-            coursename_check = course_info["name"]
-
-            return True
+            return course_info
         else:
             return None
 
@@ -48,7 +46,7 @@ class CourseRepo:
 
         self._connection.commit()
 
-        course_info = cursor.fetchone()
+        course_info = cursor.fetchall()
 
         return course_info
 
