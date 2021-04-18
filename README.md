@@ -18,13 +18,21 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä ja 
 
 ```poetry install``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry install```
 
-3. Käynnistä sovellus komennolla:
+3. Alusta tietokanta sovelluksen käyttöä varten:
+
+```poetry run invoke build``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke build```
+
+4. Käynnistä sovellus komennolla:
 
 ```poetry run invoke start``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke start```
 
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
+
+Alusta tietokanta sovelluksen käyttöä varten
+
+```poetry run invoke build``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke build```
 
 Suorita ohjelma komennolla:
 
