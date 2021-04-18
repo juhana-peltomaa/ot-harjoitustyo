@@ -1,5 +1,4 @@
 from tkinter import ttk, constants, messagebox
-from repositories.user_repo import UserRepo
 from services.course_service import course_service, LoginError
 
 

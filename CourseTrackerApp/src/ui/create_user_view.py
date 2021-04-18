@@ -1,6 +1,4 @@
 from tkinter import ttk, constants, messagebox
-from repositories.user_repo import UserRepo
-from entities.user import User
 
 from services.course_service import course_service, ExistingUsernameError
 

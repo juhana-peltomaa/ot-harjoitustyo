@@ -83,7 +83,7 @@ class CourseView:
             row=4, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         back_to_login_view_button.grid(
-            row=4, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=5, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa

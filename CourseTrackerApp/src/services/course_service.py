@@ -31,9 +31,9 @@ class CourseService:
 
             if str(username_check) != str(username) or str(password_check) != str(password):
                 raise LoginError("Login failed! Invalid username or password.")
-            else:
-                self._user = user
-                return user
+
+            self._user = user
+            return user
 
         raise LoginError("Login failed! Invalid username or password.")
 

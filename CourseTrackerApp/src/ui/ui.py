@@ -1,4 +1,3 @@
-from tkinter import ttk, constants
 from ui.login_view import LoginView
 from ui.create_user_view import CreateView
 from ui.course_view import CourseView

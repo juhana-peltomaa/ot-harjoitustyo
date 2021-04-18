@@ -1,4 +1,3 @@
-from entities.user import User
 from database_connection import get_database_connection
 
 
@@ -46,12 +45,10 @@ class UserRepo:
 
         user_info = cursor.fetchone()
 
-        if user_info:
-            username_check = user_info["username"]
-            # palauttaa käyttäjän nimen jos löytyy
+        if user_info and username_check == user_info["username"]:
             return True
-        else:
-            return None
+
+        return None
 
     def find_all_users(self):
         cursor = self._connection.cursor()
@@ -67,7 +64,7 @@ class UserRepo:
     def delete_all(self):
         cursor = self._connection.cursor()
 
-        user = cursor.execute(DELETE_ALL)
+        cursor.execute(DELETE_ALL)
 
         self._connection.commit()
 
