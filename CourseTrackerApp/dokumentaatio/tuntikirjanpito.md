@@ -11,4 +11,6 @@
 | 12.4  | 4    | ensimmäisten testien lisääminen ja siivoamista + deadline valmisteluja |
 | 15.4  | 2    | kurssi-olion lisääminen tietokantaan onnistuu Course-näkymässä kirjautumisen jälkeen |
 | 16.4  | 4    | sovelluslogiikan erottamista, käyttäjän tallentaminen ja virhe viestin esittäminen |
-| yht   | 22   | | 
+| 18.4  | 4    | kirjautunut käyttäjä voi lisätä tietokantaan uusia kursseja, kirjautuneen käyttäjän kurssien listaus |
+| 19.4  | 1    | testien korjaaminen ja lisääminen courses-repoon |
+| yht   | 27   | | 
