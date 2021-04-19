@@ -18,9 +18,9 @@ _TBA_
 ### Ennen kirjautumista
 
 - käyttäjä voi luoda järjestelmään tilin:
-  * uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan - [x] 
-  * käyttäjätunnuksen tulee olla 5-15 merkkiä - [ ]
-  * salasanan tulee olla vähintään 5 merkkiä - [ ]
+  - [x] uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan 
+  - [ ] käyttäjätunnuksen tulee olla 5-15 merkkiä
+  - [ ] salasanan tulee olla vähintään 5 merkkiä 
 
 - käyttäjä voi kirjautua järjestelmään kirjautumislomakkeella, jos:
   * lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta - [x]
