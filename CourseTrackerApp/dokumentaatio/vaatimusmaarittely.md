@@ -19,7 +19,6 @@ _TBA_
 
 - käyttäjä voi luoda järjestelmään tilin:
   * uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan [x] 
-  * salasanan ja käyttäjätunnuksen minimivaatimukset [ ] 
   * käyttäjätunnuksen tulee olla 5-15 merkkiä [ ]
   * salasanan tulee olla vähintään 5 merkkiä [ ]
 
@@ -31,9 +30,9 @@ _TBA_
 
 - käyttäjä näkee omat kurssinsa [x]
 
-- käyttäjä voi luoda uuden kurssin, josta voi lisätä
-  * nimi ja opintopistemäärä [x]
-  * arvosana ja suoritusstatus [ ]
+- käyttäjä voi luoda uuden kurssin, josta voi lisätä:
+  * nimen ja opintopistemäärän [x]
+  * arvosanan ja suoritusstatuksen [ ]
 
 - käyttäjä voi muokata kurssin yllä mainittuja tietoja [ ]
   
