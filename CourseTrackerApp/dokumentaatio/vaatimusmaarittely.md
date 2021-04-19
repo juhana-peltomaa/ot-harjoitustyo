@@ -28,7 +28,7 @@ _TBA_
 
 ### Kirjautumisen jälkeen
 
-- [x] käyttäjä näkee omat kurssinsa 
+- [x] kirjautunut käyttäjä näkee ainoastaan omat kurssinsa 
 
 - käyttäjä voi luoda uuden kurssin, josta voi lisätä:
   - [x] nimen ja opintopistemäärän 
