@@ -30,7 +30,7 @@ _TBA_
 
 - [x] kirjautunut käyttäjä näkee ainoastaan omat kurssinsa 
 
-- käyttäjä voi luoda uuden kurssin, josta voi lisätä:
+- kirjautunut voi luoda uuden kurssin lisäämällä:
   - [x] nimen ja opintopistemäärän 
   - [ ] arvosanan ja suoritusstatuksen 
 
