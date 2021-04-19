@@ -28,17 +28,17 @@ _TBA_
 
 ### Kirjautumisen jälkeen
 
-- käyttäjä näkee omat kurssinsa - [x]
+- [x] käyttäjä näkee omat kurssinsa 
 
 - käyttäjä voi luoda uuden kurssin, josta voi lisätä:
-  * nimen ja opintopistemäärän - [x]
-  * arvosanan ja suoritusstatuksen - [ ]
+  - [x] nimen ja opintopistemäärän 
+  - [ ] arvosanan ja suoritusstatuksen 
 
-- käyttäjä voi muokata kurssin yllä mainittuja tietoja - [ ]
+- [ ] käyttäjä voi muokata kurssin yllä mainittuja tietoja 
   
-- käyttäjä voi poistaa olemassa olevia kursseja - [ ]
+- [ ] käyttäjä voi poistaa olemassa olevia kursseja 
 
-- käyttäjä voi kirjautua ulos järjestelmästä - [x]
+- [x] käyttäjä voi kirjautua ulos järjestelmästä 
 
 ## Jatkokehitysideoita
 
