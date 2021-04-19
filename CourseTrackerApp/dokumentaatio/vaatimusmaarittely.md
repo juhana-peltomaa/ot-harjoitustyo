@@ -23,8 +23,8 @@ _TBA_
   - [ ] salasanan tulee olla vähintään 5 merkkiä 
 
 - käyttäjä voi kirjautua järjestelmään kirjautumislomakkeella, jos:
-  * lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta - [x]
-  * jos kirjautuminen epäonnistuu, järjestelmä ilmoittaa tästä käyttäjälle - [x]
+  - [x] lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta 
+  - [x] jos kirjautuminen epäonnistuu, järjestelmä ilmoittaa tästä käyttäjälle 
 
 ### Kirjautumisen jälkeen
 
