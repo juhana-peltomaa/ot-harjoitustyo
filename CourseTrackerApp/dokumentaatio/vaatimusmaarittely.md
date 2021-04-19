@@ -17,26 +17,29 @@ _TBA_
 
 ### Ennen kirjautumista
 
-- käyttäjä voi luoda järjestelmään tilin, jolle asetetaan
-  - käyttäjätunnus: täytyy olla uniikki, pituudeltaan vähintään 3 ja enintään 10 merkkiä
-  - salasana: täytyy olla 5-15 merkkiä 
+- käyttäjä voi luoda järjestelmään tilin:
+  * uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan [x] 
+  * salasanan ja käyttäjätunnuksen minimivaatimukset [ ] 
+    ** käyttäjätunnuksen tulee olla 5-15 merkkiä [ ]
+    ** salasanan tulee olla vähintään 5 merkkiä [ ]
 
 - käyttäjä voi kirjautua järjestelmään kirjautumislomakkeella, jos:
-  - lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta
-  - jos kirjautuminen epäonnistuu, järjestelmä ilmoittaa tästä käyttäjälle
+  * lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta [x]
+  * jos kirjautuminen epäonnistuu, järjestelmä ilmoittaa tästä käyttäjälle [x]
 
 ### Kirjautumisen jälkeen
 
-- käyttäjä näkee omat kurssinsa
+- käyttäjä näkee omat kurssinsa [x]
 
-- käyttäjä voi luoda uuden kurssin:
-  - kurssista lisätään nimi, opintopistemäärä, arvosana ja suoritusstatus
+- käyttäjä voi luoda uuden kurssin, josta voi lisätä
+  * nimi ja opintopistemäärä [x]
+  * arvosana ja suoritusstatus [ ]
 
-- käyttäjä voi muokata kurssin yllä mainittuja tietoja
+- käyttäjä voi muokata kurssin yllä mainittuja tietoja [ ]
   
-- käyttäjä voi poistaa olemassa olevia kursseja
+- käyttäjä voi poistaa olemassa olevia kursseja [ ]
 
-- käyttäjä voi kirjautua ulos järjestelmästä
+- käyttäjä voi kirjautua ulos järjestelmästä [x]
 
 ## Jatkokehitysideoita
 
