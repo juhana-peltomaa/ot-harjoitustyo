@@ -20,8 +20,8 @@ _TBA_
 - käyttäjä voi luoda järjestelmään tilin:
   * uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan [x] 
   * salasanan ja käyttäjätunnuksen minimivaatimukset [ ] 
-    ** käyttäjätunnuksen tulee olla 5-15 merkkiä [ ]
-    ** salasanan tulee olla vähintään 5 merkkiä [ ]
+  * käyttäjätunnuksen tulee olla 5-15 merkkiä [ ]
+  * salasanan tulee olla vähintään 5 merkkiä [ ]
 
 - käyttäjä voi kirjautua järjestelmään kirjautumislomakkeella, jos:
   * lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta [x]
