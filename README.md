@@ -50,4 +50,8 @@ Generoi testikattavuusraportti komennolla:
 
 ```poetry run invoke coverage-report``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke coverage-report```
 
-Generoitu raportti löytyy _htmlcov_-hakemistosta
+Generoitu raportti löytyy _htmlcov_-hakemistosta.
+
+### Pylint
+Tiedoston .pylintrc määrittelemät tarkistukset voi suorittaa komennolla:
+```poetry run invoke lint``` tai vaihtoehtoisesti, jos edellinen ei toimi kokeile: ```python3 -m poetry run invoke lint```
