@@ -7,6 +7,7 @@ htmlcov
 __pycache__
 *.py[cod]
 *$py.class
+*.pyc
 
 data/database.sqlite
 data/database.sqlite-journal
