@@ -4,13 +4,15 @@ from database_connection import get_database_connection
 
 CREATE_COURSE = "INSERT OR IGNORE INTO courses (name, credit, grade, status, user) VALUES (?, ?, ?, ?, ?);"
 
-FIND_COURSE = "SELECT * FROM courses WHERE name = ?;"
+FIND_COURSE = "SELECT * FROM courses WHERE name = ? and user = ?;"
 
 DELETE_ALL_COURSES = "DELETE FROM courses WHERE user = ?;"
 
 DELETE_ONE_COURSE = "DELETE FROM courses WHERE name = ? AND user = ?;"
 
 FIND_ALL_COURSES = "SELECT * FROM courses;"
+
+UPDATE_COURSE_INFO = "UPDATE courses SET name = ?, credit = ?, grade = ?, status = ? WHERE id = ? AND user = ?;"
 
 
 class CourseRepo:
@@ -27,10 +29,10 @@ class CourseRepo:
 
         return course
 
-    def find_course(self, name):
+    def find_course(self, name, user):
         cursor = self._connection.cursor()
 
-        cursor.execute(FIND_COURSE, (name, ))
+        cursor.execute(FIND_COURSE, (name, user))
 
         self._connection.commit()
 
@@ -63,6 +65,14 @@ class CourseRepo:
         cursor = self._connection.cursor()
 
         course = cursor.execute(DELETE_ONE_COURSE, (name, user))
+
+        self._connection.commit()
+
+    def update_course_info(self, id, name, credit, grade, status, user):
+        cursor = self._connection.cursor()
+
+        course = cursor.execute(
+            UPDATE_COURSE_INFO, (name, credit, grade, status, id, user))
 
         self._connection.commit()
 

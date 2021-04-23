@@ -1,8 +1,10 @@
-from tkinter import ttk, constants, messagebox
+from tkinter import ttk, constants, messagebox, StringVar
 from repositories.course_repo import CourseRepo
 from ui.login_view import LoginView
 from entities.course import Course
-from services.course_service import course_service, ExistingCourseError, CourseEntryError
+from services.course_service import course_service, ExistingCourseError, CourseEntryError, CourseUpdateError, CourseValueError
+
+OPTIONS = ["          ", "Registered", "On-going", "Completed"]
 
 
 class CourseView:
@@ -15,10 +17,14 @@ class CourseView:
 
         self._current_courses = None
 
+        self._course_id_entry = None
         self._course_name_entry = None
-        self._course_credit_entry = None
-        self._course_grade_entry = None
+        self._course_credit_entry = " "
+        self._course_grade_entry = " "
         self._course_status_entry = None
+
+        self._course_status = StringVar()
+        self._course_id = StringVar()
 
         self._show_login_view = show_login_view
 
@@ -35,10 +41,13 @@ class CourseView:
     def _create_new_course(self):
         course_name = self._course_name_entry.get()
         course_credit = self._course_credit_entry.get()
+        course_grade = self._course_grade_entry.get()
+        course_status = self._course_status.get()
+        self._course_id.set(OPTIONS[0])
 
         try:
             new_course = course_service.create_new_course(
-                course_name, course_credit)
+                course_name, course_credit, course_grade, course_status)
 
             if new_course:
                 self._display_all_courses()
@@ -54,25 +63,48 @@ class CourseView:
             messagebox.showinfo("Course registration",
                                 "Course registration failed.\nEnter both course name and credits!")
 
+        except CourseValueError:
+            messagebox.showinfo("Course registration",
+                                "Course registration failed.\nEnter valid input for credits and grade!")
+
     def _update_course_info(self):
-        pass
+        course_name = self._course_name_entry.get()
+        course_credit = self._course_credit_entry.get()
+        course_grade = self._course_grade_entry.get()
+        course_status = self._course_status.get()
+
+        course_id = self._course_id_entry.get()
+
+        try:
+            if course_service.update_course_info(course_id, course_name, course_credit, course_grade, course_status) is True:
+                self._display_all_courses()
+        except CourseUpdateError:
+            messagebox.showinfo("Course registration",
+                                "Course update failed.\nMake sure all inputs have correct values!")
 
     def _remove_one_course(self):
         course_name = self._course_name_entry.get()
 
         if course_service.remove_one_course(course_name) is True:
+            self._course_id.set(OPTIONS[0])
             self._display_all_courses()
 
     def _remove_all_courses(self):
         if course_service.remove_all_courses() is True:
+            self._course_id.set(OPTIONS[0])
             self._display_all_courses()
+
+    def callback(self, selection):
+        self._course_status.set(selection)
+        return selection
 
     def _select_course(self, e):
         # tyhjennetään entry-laatikot
+        self._course_id.set(OPTIONS[0])
         self._course_name_entry.delete(0, constants.END)
         self._course_credit_entry.delete(0, constants.END)
         self._course_grade_entry.delete(0, constants.END)
-        self._course_status_entry.delete(0, constants.END)
+        self._course_status.set(OPTIONS[0])
 
         # haetaan valitun rivin arvot
         select = self._current_courses.focus()
@@ -80,16 +112,20 @@ class CourseView:
         values = self._current_courses.item(select, "values")
 
         # sisällytetään valitun rivin arvot
-        self._course_name_entry.insert(0, values[0])
-        self._course_credit_entry.insert(0, values[1])
-        self._course_grade_entry.insert(0, values[2])
-        self._course_status_entry.insert(0, values[3])
+        self._course_id.set(values[0])
+        self._course_name_entry.insert(0, values[1])
+        self._course_credit_entry.insert(0, values[2])
+        self._course_grade_entry.insert(0, values[3])
+        self._course_status.set(values[4])
 
     def _clear_entry_input(self):
+        self._course_id.set(OPTIONS[0])
         self._course_name_entry.delete(0, constants.END)
         self._course_credit_entry.delete(0, constants.END)
         self._course_grade_entry.delete(0, constants.END)
-        self._course_status_entry.delete(0, constants.END)
+        self._course_status.set(OPTIONS[0])
+
+        self._course_grade_entry.insert(0, " ")
 
     def _display_all_courses(self):
         # tyhjennetään treeview ennen kurssien näyttämistä
@@ -101,7 +137,7 @@ class CourseView:
         if courses is not None:
             for row in courses:
                 self._current_courses.insert(parent="", index="end", text="", values=(
-                    row[0], row[1], row[2], row[3], row[4]))
+                    row[0], row[1], row[2], row[3], row[4], row[5]))
         return None
 
     def _initialize(self):
@@ -120,8 +156,9 @@ class CourseView:
 
         # Treeview:n muotoilua
         current_courses_tree["columns"] = (
-            "Course Name", "Credits", "Grade", "Status", "Owner")
+            "ID", "Course Name", "Credits", "Grade", "Status", "Owner")
         current_courses_tree.column("#0", width=0, stretch=constants.NO)
+        current_courses_tree.column("ID", width=10, stretch=constants.YES)
         current_courses_tree.column(
             "Course Name", width=50, stretch=constants.YES)
         current_courses_tree.column(
@@ -134,6 +171,7 @@ class CourseView:
             "Owner", anchor=constants.CENTER, width=50, stretch=constants.YES)
 
         current_courses_tree.heading("#0", text="")
+        current_courses_tree.heading("ID", text="ID", anchor=constants.CENTER)
         current_courses_tree.heading(
             "Course Name", text="Course Name")
         current_courses_tree.heading(
@@ -149,21 +187,29 @@ class CourseView:
         self._course_info_labels = ttk.LabelFrame(
             master=self._frame, text="Course information")
 
+        course_id_label = ttk.Label(
+            master=self._course_info_labels, text="ID")
+        self._course_id_entry = ttk.Entry(
+            master=self._course_info_labels, state=constants.DISABLED, textvariable=self._course_id)
+
         course_name_label = ttk.Label(
             master=self._course_info_labels, text="Name")
         self._course_name_entry = ttk.Entry(master=self._course_info_labels)
 
         course_credit_label = ttk.Label(
-            master=self._course_info_labels, text="Credits")
+            master=self._course_info_labels, text="Credits (0-10)")
         self._course_credit_entry = ttk.Entry(master=self._course_info_labels)
 
         course_grade_label = ttk.Label(
-            master=self._course_info_labels, text="Grade")
+            master=self._course_info_labels, text="Grade (0-5)")
         self._course_grade_entry = ttk.Entry(master=self._course_info_labels)
+
+        self._course_status.set(OPTIONS[0])
 
         course_status_label = ttk.Label(
             master=self._course_info_labels, text="Status")
-        self._course_status_entry = ttk.Entry(master=self._course_info_labels)
+        self._course_status_entry = ttk.OptionMenu(
+            self._course_info_labels, self._course_status, *OPTIONS, command=self.callback)
 
         # Kurssien ja näkymän muokkamispainikkeet
 
@@ -200,32 +246,34 @@ class CourseView:
         current_courses_tree.grid(row=2, column=0, columnspan=4,
                                   sticky=(constants.EW), padx=5, pady=5)
 
-        self._course_info_labels.grid(row=3, column=0, columnspan=4,
+        self._course_info_labels.grid(row=3, column=0, columnspan=5,
                                       sticky=(constants.EW), padx=5, pady=5)
 
         self._update_course_buttons.grid(row=4, column=0, columnspan=4,
                                          sticky=(constants.EW), padx=5, pady=5)
 
         # Course info -labels
+        course_id_label.grid(row=0, column=0, padx=5, pady=2)
         course_name_label.grid(
-            row=0, column=0, padx=5, pady=2)
-        course_credit_label.grid(
             row=0, column=1, padx=5, pady=2)
-        course_grade_label.grid(
+        course_credit_label.grid(
             row=0, column=2, padx=5, pady=2)
-        course_status_label.grid(
+        course_grade_label.grid(
             row=0, column=3, padx=5, pady=2)
+        course_status_label.grid(
+            row=0, column=4, padx=5, pady=2)
 
         # Course info -entries
+        self._course_id_entry.grid(row=1, column=0, padx=5, pady=2)
         self._course_name_entry.grid(
-            row=1, column=0, sticky=(constants.W), padx=5, pady=2)
+            row=1, column=1, sticky=(constants.W), padx=5, pady=2)
         self._course_credit_entry.grid(
-            row=1, column=1, sticky=(constants.EW), padx=5, pady=2)
+            row=1, column=2, sticky=(constants.EW), padx=5, pady=2)
 
         self._course_grade_entry.grid(
-            row=1, column=2, sticky=(constants.EW), padx=5, pady=2)
+            row=1, column=3, sticky=(constants.EW), padx=5, pady=2)
         self._course_status_entry.grid(
-            row=1, column=3, sticky=(constants.E), padx=5, pady=2)
+            row=1, column=4, sticky=(constants.E), padx=5, pady=2)
 
         # Course update -buttons
         update_course_button.grid(

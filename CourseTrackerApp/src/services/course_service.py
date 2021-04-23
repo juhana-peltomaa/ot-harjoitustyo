@@ -3,6 +3,7 @@ from entities.user import User
 
 from repositories.course_repo import course_repository as c_repo
 from repositories.user_repo import user_repository as u_repo
+import re
 
 
 class ExistingUsernameError(Exception):
@@ -18,6 +19,14 @@ class ExistingCourseError(Exception):
 
 
 class CourseEntryError(Exception):
+    pass
+
+
+class CourseUpdateError(Exception):
+    pass
+
+
+class CourseValueError(Exception):
     pass
 
 
@@ -62,20 +71,43 @@ class CourseService:
     def logout_user(self):
         self._user = None
 
-    def create_new_course(self, name, credit):
+    def create_new_course(self, name, credit, grade, status):
 
-        exists = self._c_repo.find_course(name)
+        exists = self._c_repo.find_course(name, self.current_user())
 
         if len(name) <= 0 or len(credit) <= 0:
             raise CourseEntryError()
 
-        if exists and self._user["username"] == exists["user"]:
+        if exists:
             raise ExistingCourseError()
 
-        else:
-            course = Course(name, credit, user=self.current_user())
-            course = self._c_repo.create_course(course)
-            return course
+        if self.validate_credit(str(credit)) is not True:
+            raise CourseValueError()
+
+        if self.validate_grade(str(grade)) is not True:
+            raise CourseValueError()
+
+        course = Course(name, credit, grade, str(
+            status), user=self.current_user())
+        course = self._c_repo.create_course(course)
+        return course
+
+    def validate_credit(self, credit):
+        accepted = re.compile(r'^([0-9]|1[0]|\s)$')
+        if accepted.match(credit):
+            return True
+        return False
+
+    def validate_grade(self, grade):
+        # hyväksytään tyhjä syöte
+        if len(grade) == 0:
+            grade = " "
+
+        accepted = re.compile(r'([0-5]|\s)$')
+
+        if accepted.match(grade):
+            return True
+        return False
 
     def display_all_courses(self):
         course_list = []
@@ -83,6 +115,7 @@ class CourseService:
 
         if courses:
             for row in courses:
+                id = row["id"]
                 name = row["name"]
                 credit = row["credit"]
                 grade = row["grade"]
@@ -90,7 +123,7 @@ class CourseService:
                 user = row["user"]
 
                 if user == self.current_user():
-                    course_list.append([name, credit, grade, status, user])
+                    course_list.append([id, name, credit, grade, status, user])
 
             return course_list
 
@@ -98,20 +131,32 @@ class CourseService:
             return None
 
     def remove_all_courses(self):
+
         try:
             self._c_repo.delete_all(self._user["username"])
             return True
         except Exception:
-            print("Error in deleting all courses!")
-            return False
+            raise CourseUpdateError()
 
     def remove_one_course(self, name):
         try:
-            self._c_repo.delete_one_course(name, self._user["username"])
+            self._c_repo.delete_one_course(name, self.current_user())
             return True
         except Exception:
             print("Error in deleting selected course!")
             return False
+
+    def update_course_info(self, id, name, credit, grade, status):
+        try:
+            if self.validate_credit(str(credit)) is not True:
+                raise CourseValueError()
+            if self.validate_grade(str(grade)) is not True:
+                raise CourseValueError()
+            self._c_repo.update_course_info(
+                id, name, credit, grade, str(status), self.current_user())
+            return True
+        except Exception:
+            raise CourseUpdateError()
 
 
 course_service = CourseService()
