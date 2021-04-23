@@ -38,7 +38,6 @@ class CourseService:
         self._u_repo = user_repository
 
     def login_user(self, username, password):
-
         # palauttaa User:in tietokannasta, jos löytyy
         user = self._u_repo.find_user(username, password)
 
@@ -54,6 +53,7 @@ class CourseService:
 
         raise LoginError("Login failed! Invalid username or password.")
 
+    # Luo uuden käyttäjän, jos käyttäjän nimi ei ole käytössä
     def create_new_user(self, username, password):
 
         exists = self._u_repo.find_username(username)
@@ -71,10 +71,13 @@ class CourseService:
     def logout_user(self):
         self._user = None
 
+    # Luo uuden kurssin annetuilla syötteillä, jos käyttäjällä ei ole jo samannimistä kurssia
     def create_new_course(self, name, credit, grade, status):
 
+        # Tarkistaa, onko käyttäjälle jo tallennettu sama kurssi tietokantaan
         exists = self._c_repo.find_course(name, self.current_user())
 
+        # Nimi ja opintopiste tulee antaa kurssia luotaessa
         if len(name) <= 0 or len(credit) <= 0:
             raise CourseEntryError()
 
@@ -87,19 +90,22 @@ class CourseService:
         if self.validate_grade(str(grade)) is not True:
             raise CourseValueError()
 
+        # Luo uuden kurssin ja tallentaa sen tietokantaan, jos syötteet ovat valideja
         course = Course(name, credit, grade, str(
             status), user=self.current_user())
         course = self._c_repo.create_course(course)
         return course
 
+    # Tarkistetaan, että opintopiste on " " tai 0-10.
     def validate_credit(self, credit):
         accepted = re.compile(r'^([0-9]|1[0]|\s)$')
         if accepted.match(credit):
             return True
         return False
 
+    # Tarkistetaan, että arvosana on " " tai 0-5.
     def validate_grade(self, grade):
-        # hyväksytään tyhjä syöte
+        # jos arvosana on tyhjä, sijoitetaan " ".
         if len(grade) == 0:
             grade = " "
 
@@ -109,6 +115,7 @@ class CourseService:
             return True
         return False
 
+    # Hakee tietokannasta kaikki kurssit ja listaa käyttäjälle kuuluvat kurssit
     def display_all_courses(self):
         course_list = []
         courses = self._c_repo.find_all_courses()
@@ -130,31 +137,34 @@ class CourseService:
         else:
             return None
 
+    # Poistaa tietokannasta kaikki käyttäjälle kuuluvat kurssit
     def remove_all_courses(self):
-
         try:
             self._c_repo.delete_all(self._user["username"])
             return True
         except Exception:
             raise CourseUpdateError()
 
+    # Poistaa tietokannasta valitun käyttäjälle kuuluvan kurssin
     def remove_one_course(self, name):
         try:
             self._c_repo.delete_one_course(name, self.current_user())
             return True
         except Exception:
-            print("Error in deleting selected course!")
-            return False
+            raise CourseUpdateError()
 
+    # Päivittää valitun kurssien tiedot ja tarkistaa syötteiden oikeellisuuden
     def update_course_info(self, id, name, credit, grade, status):
         try:
             if self.validate_credit(str(credit)) is not True:
                 raise CourseValueError()
             if self.validate_grade(str(grade)) is not True:
                 raise CourseValueError()
+
             self._c_repo.update_course_info(
                 id, name, credit, grade, str(status), self.current_user())
             return True
+
         except Exception:
             raise CourseUpdateError()
 
