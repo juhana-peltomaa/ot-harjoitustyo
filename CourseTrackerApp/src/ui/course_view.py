@@ -10,10 +10,15 @@ class CourseView:
         self._root = root
         self._frame = None
 
+        self._course_info_labels = None
+        self._update_course_buttons = None
+
         self._current_courses = None
 
         self._course_name_entry = None
         self._course_credit_entry = None
+        self._course_grade_entry = None
+        self._course_status_entry = None
 
         self._show_login_view = show_login_view
 
@@ -36,32 +41,55 @@ class CourseView:
                 course_name, course_credit)
 
             if new_course:
-                if self._display_all_courses() is not None:
-                    messagebox.showinfo("Course registration",
-                                        f"Course {course_name} successfully added!")
+                self._display_all_courses()
             else:
                 messagebox.showinfo("Course registration",
                                     f"Something went wrong in adding course {course_name}!")
 
         except ExistingCourseError:
             messagebox.showinfo("Course registration",
-                                f"Course {course_name} has already been added!")
+                                f"Course registration failed.\nCourse {course_name} has already been added!")
 
         except CourseEntryError:
             messagebox.showinfo("Course registration",
-                                "Course registration failed. Enter both course name and credits!")
+                                "Course registration failed.\nEnter both course name and credits!")
 
-    def _update_course_name(self):
+    def _update_course_info(self):
         pass
 
-    def _update_course_credits(self):
-        pass
+    def _remove_one_course(self):
+        course_name = self._course_name_entry.get()
 
-    def _update_course_grade(self):
-        pass
+        if course_service.remove_one_course(course_name) is True:
+            self._display_all_courses()
 
-    def _update_course_status(self):
-        pass
+    def _remove_all_courses(self):
+        if course_service.remove_all_courses() is True:
+            self._display_all_courses()
+
+    def _select_course(self, e):
+        # tyhjennetään entry-laatikot
+        self._course_name_entry.delete(0, constants.END)
+        self._course_credit_entry.delete(0, constants.END)
+        self._course_grade_entry.delete(0, constants.END)
+        self._course_status_entry.delete(0, constants.END)
+
+        # haetaan valitun rivin arvot
+        select = self._current_courses.focus()
+
+        values = self._current_courses.item(select, "values")
+
+        # sisällytetään valitun rivin arvot
+        self._course_name_entry.insert(0, values[0])
+        self._course_credit_entry.insert(0, values[1])
+        self._course_grade_entry.insert(0, values[2])
+        self._course_status_entry.insert(0, values[3])
+
+    def _clear_entry_input(self):
+        self._course_name_entry.delete(0, constants.END)
+        self._course_credit_entry.delete(0, constants.END)
+        self._course_grade_entry.delete(0, constants.END)
+        self._course_status_entry.delete(0, constants.END)
 
     def _display_all_courses(self):
         # tyhjennetään treeview ennen kurssien näyttämistä
@@ -94,15 +122,16 @@ class CourseView:
         current_courses_tree["columns"] = (
             "Course Name", "Credits", "Grade", "Status", "Owner")
         current_courses_tree.column("#0", width=0, stretch=constants.NO)
-        current_courses_tree.column("Course Name", width=140)
         current_courses_tree.column(
-            "Credits", anchor=constants.CENTER, width=70)
+            "Course Name", width=50, stretch=constants.YES)
         current_courses_tree.column(
-            "Grade", anchor=constants.CENTER, width=70)
+            "Credits", anchor=constants.CENTER, width=50, stretch=constants.YES)
         current_courses_tree.column(
-            "Status", anchor=constants.CENTER, width=100)
+            "Grade", anchor=constants.CENTER, width=50, stretch=constants.YES)
         current_courses_tree.column(
-            "Owner", anchor=constants.CENTER, width=100)
+            "Status", anchor=constants.CENTER, width=50, stretch=constants.YES)
+        current_courses_tree.column(
+            "Owner", anchor=constants.CENTER, width=50, stretch=constants.YES)
 
         current_courses_tree.heading("#0", text="")
         current_courses_tree.heading(
@@ -116,105 +145,110 @@ class CourseView:
         current_courses_tree.heading(
             "Owner", text="Owner", anchor=constants.CENTER)
 
-        # Testataan käyttäjänimen kirjaamista UI:hin
-        course_name_label = ttk.Label(
-            master=self._frame, text="Name")
-        self._course_name_entry = ttk.Entry(master=self._frame)
+        # Kurssi tiedoille oma LabelFrame
+        self._course_info_labels = ttk.LabelFrame(
+            master=self._frame, text="Course information")
 
-        # Testataan salasanan kirjaamista UI:hin
+        course_name_label = ttk.Label(
+            master=self._course_info_labels, text="Name")
+        self._course_name_entry = ttk.Entry(master=self._course_info_labels)
+
         course_credit_label = ttk.Label(
-            master=self._frame, text="Credits")
-        self._course_credit_entry = ttk.Entry(master=self._frame)
+            master=self._course_info_labels, text="Credits")
+        self._course_credit_entry = ttk.Entry(master=self._course_info_labels)
 
         course_grade_label = ttk.Label(
-            master=self._frame, text="Grade")
-        course_grade_entry = ttk.Entry(master=self._frame)
+            master=self._course_info_labels, text="Grade")
+        self._course_grade_entry = ttk.Entry(master=self._course_info_labels)
 
         course_status_label = ttk.Label(
-            master=self._frame, text="Status")
-        course_status_entry = ttk.Entry(master=self._frame)
+            master=self._course_info_labels, text="Status")
+        self._course_status_entry = ttk.Entry(master=self._course_info_labels)
 
-        # Kurssitietojen päivittämistä
+        # Kurssien ja näkymän muokkamispainikkeet
 
-        # update_course_name_label = ttk.Label(
-        #     master=self._frame, text=" ")
-        # update_course_name_entry = ttk.Entry(master=self._frame)
+        self._update_course_buttons = ttk.LabelFrame(
+            master=self._frame, text="Commands")
 
-        # update_course_credits_label = ttk.Label(
-        #     master=self._frame, text=" ")
-        # update_course_credits_entry = ttk.Entry(master=self._frame)
+        update_course_button = ttk.Button(
+            master=self._update_course_buttons, text="Update course", command=self._update_course_info)
 
-        # update_course_grade_label = ttk.Label(
-        #     master=self._frame, text=" ")
-        # update_course_grade_entry = ttk.Entry(master=self._frame)
-
-        # update_course_status_label = ttk.Label(
-        #     master=self._frame, text=" ")
-        # update_course_status_entry = ttk.Entry(master=self._frame)
-
-        # update_course_name_button = ttk.Button(
-        #     master=self._frame, text="Update course name", command=self._update_course_name)
-        # update_course_credits_button = ttk.Button(
-        #     master=self._frame, text="Update course credits", command=self._update_course_credits)
-        # update_course_grade = ttk.Button(
-        #     master=self._frame, text="Update course grade", command=self._update_course_grade)
-        # update_course_status = ttk.Button(
-        #     master=self._frame, text="Update course status", command=self._update_course_status)
-
-        # Uuden kurssin lisääminen
         create_new_course_button = ttk.Button(
-            master=self._frame, text="Add new course", command=self._create_new_course)
+            master=self._update_course_buttons, text="Add new course", command=self._create_new_course)
+
+        remove_one_course_button = ttk.Button(
+            master=self._update_course_buttons, text="Remove course", command=self._remove_one_course)
+
+        remove_all_courses_button = ttk.Button(
+            master=self._update_course_buttons, text="Remove all courses", command=self._remove_all_courses)
+
+        clear_entry_button = ttk.Button(
+            master=self._update_course_buttons, text="Clear entry inputs", command=self._clear_entry_input)
 
         # Takaisin Login-näkymään
         back_to_login_view_button = ttk.Button(
             master=self._frame, text="Back to Login", command=self._show_login_view)
 
-        # Harjoitellaan gridin luomista näkymään
+        # Gridin luominen
+
         heading_label.grid(row=0, column=0, columnspan=2,
                            sticky=(constants.W), padx=5, pady=5)
 
         current_user_label.grid(row=1, column=0, columnspan=2,
                                 sticky=(constants.W), padx=5, pady=5)
 
-        current_courses_tree.grid(row=2, column=0, columnspan=2,
+        current_courses_tree.grid(row=2, column=0, columnspan=4,
                                   sticky=(constants.EW), padx=5, pady=5)
 
-        # Kurssin lisäämisen painikkeet
-        course_name_label.grid(row=3, column=0, padx=5, pady=5)
-        course_credit_label.grid(row=3, column=1, padx=5, pady=5)
-        course_grade_label.grid(row=3, column=2, padx=5, pady=5)
-        course_status_label.grid(row=3, column=3, padx=5, pady=5)
+        self._course_info_labels.grid(row=3, column=0, columnspan=4,
+                                      sticky=(constants.EW), padx=5, pady=5)
 
-        self._course_name_entry.grid(row=4, column=0, padx=5, pady=5)
-        self._course_credit_entry.grid(row=4, column=1, padx=5, pady=5)
-        course_grade_entry.grid(row=4, column=2, padx=5, pady=5)
-        course_status_entry.grid(row=4, column=3, padx=5, pady=5)
+        self._update_course_buttons.grid(row=4, column=0, columnspan=4,
+                                         sticky=(constants.EW), padx=5, pady=5)
+
+        # Course info -labels
+        course_name_label.grid(
+            row=0, column=0, padx=5, pady=2)
+        course_credit_label.grid(
+            row=0, column=1, padx=5, pady=2)
+        course_grade_label.grid(
+            row=0, column=2, padx=5, pady=2)
+        course_status_label.grid(
+            row=0, column=3, padx=5, pady=2)
+
+        # Course info -entries
+        self._course_name_entry.grid(
+            row=1, column=0, sticky=(constants.W), padx=5, pady=2)
+        self._course_credit_entry.grid(
+            row=1, column=1, sticky=(constants.EW), padx=5, pady=2)
+
+        self._course_grade_entry.grid(
+            row=1, column=2, sticky=(constants.EW), padx=5, pady=2)
+        self._course_status_entry.grid(
+            row=1, column=3, sticky=(constants.E), padx=5, pady=2)
+
+        # Course update -buttons
+        update_course_button.grid(
+            row=0, column=0, sticky=(constants.EW), padx=5, pady=5)
 
         create_new_course_button.grid(
-            row=5, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=0, column=1, sticky=(constants.EW), padx=5, pady=5)
 
-        # Kurssitietojen muokkaamisen painikkeet
+        remove_one_course_button.grid(
+            row=0, column=2, sticky=(constants.EW), padx=5, pady=5)
 
-        # update_course_name_label.grid(row=5, column=0, padx=5, pady=5)
-        # update_course_name_entry.grid(row=5, column=1, sticky=(
-        #     constants.E, constants.W), padx=5, pady=5)
+        remove_all_courses_button.grid(
+            row=0, column=3, sticky=(constants.EW), padx=5, pady=5)
 
-        # update_course_credits_label.grid(row=6, column=0, padx=5, pady=5)
-        # update_course_credits_entry.grid(row=6, column=1, sticky=(
-        #     constants.E, constants.W), padx=5, pady=5)
-
-        # update_course_grade_label.grid(row=7, column=0, padx=5, pady=5)
-        # update_course_grade_entry.grid(row=7, column=1, sticky=(
-        #     constants.E, constants.W), padx=5, pady=5)
-
-        # update_course_status_label.grid(row=8, column=0, padx=5, pady=5)
-        # update_course_status_entry.grid(row=8, column=1, sticky=(
-        #     constants.E, constants.W), padx=5, pady=5)
+        clear_entry_button.grid(
+            row=0, column=4, sticky=(constants.EW), padx=5, pady=5)
 
         # Uloskirjautuminen
         back_to_login_view_button.grid(
-            row=9, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=5, column=0, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa
         self._frame.columnconfigure(1, weight=1, minsize=400)
+
+        self._current_courses.bind("<ButtonRelease-1>", self._select_course)

@@ -6,7 +6,9 @@ CREATE_COURSE = "INSERT OR IGNORE INTO courses (name, credit, grade, status, use
 
 FIND_COURSE = "SELECT * FROM courses WHERE name = ?;"
 
-DELETE_ALL_COURSES = "DELETE FROM courses;"
+DELETE_ALL_COURSES = "DELETE FROM courses WHERE user = ?;"
+
+DELETE_ONE_COURSE = "DELETE FROM courses WHERE name = ? AND user = ?;"
 
 FIND_ALL_COURSES = "SELECT * FROM courses;"
 
@@ -50,10 +52,17 @@ class CourseRepo:
 
         return course_info
 
-    def delete_all(self):
+    def delete_all(self, user):
         cursor = self._connection.cursor()
 
-        course = cursor.execute(DELETE_ALL_COURSES)
+        course = cursor.execute(DELETE_ALL_COURSES, (user, ))
+
+        self._connection.commit()
+
+    def delete_one_course(self, name, user):
+        cursor = self._connection.cursor()
+
+        course = cursor.execute(DELETE_ONE_COURSE, (name, user))
 
         self._connection.commit()
 

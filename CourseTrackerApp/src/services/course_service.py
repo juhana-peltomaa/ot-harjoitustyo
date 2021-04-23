@@ -66,15 +66,16 @@ class CourseService:
 
         exists = self._c_repo.find_course(name)
 
-        if exists and exists["user"] == self._user:
-            raise ExistingCourseError()
-
         if len(name) <= 0 or len(credit) <= 0:
             raise CourseEntryError()
 
-        course = Course(name, credit, user=self.current_user())
-        course = self._c_repo.create_course(course)
-        return course
+        if exists and self._user["username"] == exists["user"]:
+            raise ExistingCourseError()
+
+        else:
+            course = Course(name, credit, user=self.current_user())
+            course = self._c_repo.create_course(course)
+            return course
 
     def display_all_courses(self):
         course_list = []
@@ -95,6 +96,22 @@ class CourseService:
 
         else:
             return None
+
+    def remove_all_courses(self):
+        try:
+            self._c_repo.delete_all(self._user["username"])
+            return True
+        except Exception:
+            print("Error in deleting all courses!")
+            return False
+
+    def remove_one_course(self, name):
+        try:
+            self._c_repo.delete_one_course(name, self._user["username"])
+            return True
+        except Exception:
+            print("Error in deleting selected course!")
+            return False
 
 
 course_service = CourseService()
