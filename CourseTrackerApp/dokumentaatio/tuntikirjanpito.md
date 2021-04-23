@@ -13,4 +13,5 @@
 | 16.4  | 4    | sovelluslogiikan erottamista, käyttäjän tallentaminen ja virhe viestin esittäminen |
 | 18.4  | 4    | kirjautunut käyttäjä voi lisätä tietokantaan uusia kursseja, kirjautuneen käyttäjän kurssien listaus |
 | 19.4  | 1    | testien korjaaminen ja lisääminen courses-repoon |
-| yht   | 27   | | 
+| 23.4  | 5    | kurssien lisäykseen ja muokkaukseen lisättyjä toiminnallisuuksia CourseView-näkymässä |
+| yht   | 32   | | 
