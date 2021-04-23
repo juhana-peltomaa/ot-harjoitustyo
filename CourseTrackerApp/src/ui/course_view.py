@@ -51,6 +51,18 @@ class CourseView:
             messagebox.showinfo("Course registration",
                                 "Course registration failed. Enter both course name and credits!")
 
+    def _update_course_name(self):
+        pass
+
+    def _update_course_credits(self):
+        pass
+
+    def _update_course_grade(self):
+        pass
+
+    def _update_course_status(self):
+        pass
+
     def _display_all_courses(self):
         # tyhjennetään treeview ennen kurssien näyttämistä
         for course in self._current_courses.get_children():
@@ -106,15 +118,50 @@ class CourseView:
 
         # Testataan käyttäjänimen kirjaamista UI:hin
         course_name_label = ttk.Label(
-            master=self._frame, text="Name of new course")
+            master=self._frame, text="Name")
         self._course_name_entry = ttk.Entry(master=self._frame)
 
         # Testataan salasanan kirjaamista UI:hin
         course_credit_label = ttk.Label(
-            master=self._frame, text="Credits of new course")
+            master=self._frame, text="Credits")
         self._course_credit_entry = ttk.Entry(master=self._frame)
 
-        # Testataan kirjautumispainikkeen lisäämistä
+        course_grade_label = ttk.Label(
+            master=self._frame, text="Grade")
+        course_grade_entry = ttk.Entry(master=self._frame)
+
+        course_status_label = ttk.Label(
+            master=self._frame, text="Status")
+        course_status_entry = ttk.Entry(master=self._frame)
+
+        # Kurssitietojen päivittämistä
+
+        # update_course_name_label = ttk.Label(
+        #     master=self._frame, text=" ")
+        # update_course_name_entry = ttk.Entry(master=self._frame)
+
+        # update_course_credits_label = ttk.Label(
+        #     master=self._frame, text=" ")
+        # update_course_credits_entry = ttk.Entry(master=self._frame)
+
+        # update_course_grade_label = ttk.Label(
+        #     master=self._frame, text=" ")
+        # update_course_grade_entry = ttk.Entry(master=self._frame)
+
+        # update_course_status_label = ttk.Label(
+        #     master=self._frame, text=" ")
+        # update_course_status_entry = ttk.Entry(master=self._frame)
+
+        # update_course_name_button = ttk.Button(
+        #     master=self._frame, text="Update course name", command=self._update_course_name)
+        # update_course_credits_button = ttk.Button(
+        #     master=self._frame, text="Update course credits", command=self._update_course_credits)
+        # update_course_grade = ttk.Button(
+        #     master=self._frame, text="Update course grade", command=self._update_course_grade)
+        # update_course_status = ttk.Button(
+        #     master=self._frame, text="Update course status", command=self._update_course_status)
+
+        # Uuden kurssin lisääminen
         create_new_course_button = ttk.Button(
             master=self._frame, text="Add new course", command=self._create_new_course)
 
@@ -132,20 +179,41 @@ class CourseView:
         current_courses_tree.grid(row=2, column=0, columnspan=2,
                                   sticky=(constants.EW), padx=5, pady=5)
 
-        # nämä parametrit voidaan poistaa tarvittaessa
+        # Kurssin lisäämisen painikkeet
         course_name_label.grid(row=3, column=0, padx=5, pady=5)
-        self._course_name_entry.grid(row=3, column=1, sticky=(
-            constants.E, constants.W), padx=5, pady=5)
+        course_credit_label.grid(row=3, column=1, padx=5, pady=5)
+        course_grade_label.grid(row=3, column=2, padx=5, pady=5)
+        course_status_label.grid(row=3, column=3, padx=5, pady=5)
 
-        course_credit_label.grid(row=4, column=0, padx=5, pady=5)
-        self._course_credit_entry.grid(row=4, column=1, sticky=(
-            constants.E, constants.W), padx=5, pady=5)
+        self._course_name_entry.grid(row=4, column=0, padx=5, pady=5)
+        self._course_credit_entry.grid(row=4, column=1, padx=5, pady=5)
+        course_grade_entry.grid(row=4, column=2, padx=5, pady=5)
+        course_status_entry.grid(row=4, column=3, padx=5, pady=5)
 
         create_new_course_button.grid(
             row=5, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
+        # Kurssitietojen muokkaamisen painikkeet
+
+        # update_course_name_label.grid(row=5, column=0, padx=5, pady=5)
+        # update_course_name_entry.grid(row=5, column=1, sticky=(
+        #     constants.E, constants.W), padx=5, pady=5)
+
+        # update_course_credits_label.grid(row=6, column=0, padx=5, pady=5)
+        # update_course_credits_entry.grid(row=6, column=1, sticky=(
+        #     constants.E, constants.W), padx=5, pady=5)
+
+        # update_course_grade_label.grid(row=7, column=0, padx=5, pady=5)
+        # update_course_grade_entry.grid(row=7, column=1, sticky=(
+        #     constants.E, constants.W), padx=5, pady=5)
+
+        # update_course_status_label.grid(row=8, column=0, padx=5, pady=5)
+        # update_course_status_entry.grid(row=8, column=1, sticky=(
+        #     constants.E, constants.W), padx=5, pady=5)
+
+        # Uloskirjautuminen
         back_to_login_view_button.grid(
-            row=6, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=9, column=1, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa
