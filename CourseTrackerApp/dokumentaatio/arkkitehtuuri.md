@@ -33,4 +33,15 @@ _"Login"_ -painike hakee syötekenttien sisällön ja käyttää niitä parametr
 Jos käyttäjä on olemassa, palauttaa metodi käyttäjän tiedot, jonka jälkeen sovelluslogiikka tarkistaa vastaavatko ne paramentreinä annettuja salasanaa ja käyttäjätunnusta. Jos täsmää, metodi asettaa käyttäjän nykykäyttäjäksi ja kutsuu _show_courses_view_-metodia, jolloin näkymäksi asetetaan _CourseView_-näkymä. 
 
 ### Uuden kurssin lisääminen sovellukseen
+
+Kirjauduttua sisään, käyttäjä voi luoda uuden kurssin näkymäänsä painamalla _"Add new Course"_ -painiketta, jolloin sovelluksen toiminnallisuus etenee seuraavasti:
+
 ![Uuden kurssin luominen ](https://user-images.githubusercontent.com/55188494/116088299-085a9900-a6a2-11eb-8c99-36132471bfa7.png)
+
+Kurssia luotaessa käyttäjä voi syöttää parametreinä kurssin nimen, opintopistemäärän, arvosanana ja suoritusstatuksen niille osotetuissa kentissä. Minimissään käyttäjän tulee syöttää kurssin nimi sekä opintopistemäärän, jotka annettuaan sekä painiketta _"Add new Course"_ painettuaan kutsutaan _CourseServices_ metodia _create_new_course_. 
+
+Vastaavasti _CourseServices_ tarkistaa, onko käyttäjä jo tallentanut kyseisen kurssin käyttäen hyväksi metodia _find_course_, joka sijaitsee _CourseRepo_ -luokassa. Ennen metodin suorittamista, _CourseServices_ tarkistaa sen hetkisen käyttäjän ja antaa sen parametrinä _find_course_ -metodille yhdessä kurssin nimen kanssa. 
+
+Jos kurssia ei löydy, palauttaa metodi arvon _None_, jonka jälkeen tarkistetaan syötettyjen opintopistemäärän ja arvosanan oikeellisuus kutsumalla _validate_credit_ ja _validate_grade_ -metodeja. 
+
+Tarkistuksien läpäistyä, _CourseService_ luo _Course_ -olion annetuilla parametreillä ja tallentaa sen _CourseRepo_:oon metodilla _create_course_. Kurssien luomisen ja tallentamisen onnistuessa _CourseView_ kutsuu metodia _display_all_courses_, joka hakee kaikki käyttäjän kurssit kutsumalla _CourseService_:in metodin _display_all_courses_ kautta _CourseRepo_:n _find_all_courses()_ -metodia. Tällöin käyttäjän näkymässä on nähtävillä myös juuri luotu uusi kurssi. 
