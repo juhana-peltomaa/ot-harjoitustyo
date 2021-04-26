@@ -38,7 +38,7 @@ class CourseService:
         self._u_repo = user_repository
 
     def login_user(self, username, password):
-        # palauttaa User:in tietokannasta, jos löytyy
+        # palauttaa User-olion tietokannasta, jos se löytyy
         user = self._u_repo.find_user(username, password)
 
         if user:
@@ -77,13 +77,14 @@ class CourseService:
         # Tarkistaa, onko käyttäjälle jo tallennettu sama kurssi tietokantaan
         exists = self._c_repo.find_course(name, self.current_user())
 
-        # Nimi ja opintopiste tulee antaa kurssia luotaessa
+        # Nimi ja opintopiste määrä tulee antaa kurssia luodessa
         if len(name) <= 0 or len(credit) <= 0:
             raise CourseEntryError()
 
         if exists:
             raise ExistingCourseError()
 
+        # Tarkistaa opintopiste ja arvosanan syötteen oikeellisuuden
         if self.validate_credit(str(credit)) is not True:
             raise CourseValueError()
 
@@ -115,7 +116,7 @@ class CourseService:
             return True
         return False
 
-    # Hakee tietokannasta kaikki kurssit ja listaa käyttäjälle kuuluvat kurssit
+    # Hakee tietokannasta kaikki kurssit ja palauttaa listassa käyttäjälle kuuluvat kurssit
     def display_all_courses(self):
         course_list = []
         courses = self._c_repo.find_all_courses()
