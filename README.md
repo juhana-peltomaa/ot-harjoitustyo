@@ -1,6 +1,6 @@
 # Course Tracker App
 
-Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, kirjautua sovellukseen ja hallinnoida omia kurssejaan mm. lisäämällä, muokkaamalla ja poistamalla niitä.
+Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, kirjautua sovellukseen ja hallinnoida omia kurssejaan mm. lisäämällä, muokkaamalla ja poistamalla niitä. Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan omat kurssinsa.
 
 ## Uusin release
 
