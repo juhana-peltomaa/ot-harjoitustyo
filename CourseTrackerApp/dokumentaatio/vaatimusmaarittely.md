@@ -32,11 +32,11 @@ _TBA_
 
 - kirjautunut voi luoda uuden kurssin lisäämällä:
   - [x] nimen ja opintopistemäärän 
-  - [ ] arvosanan ja suoritusstatuksen 
+  - [x] arvosanan ja suoritusstatuksen 
 
-- [ ] käyttäjä voi muokata kurssin yllä mainittuja tietoja 
+- [x] käyttäjä voi muokata kurssin yllä mainittuja tietoja 
   
-- [ ] käyttäjä voi poistaa olemassa olevia kursseja 
+- [x] käyttäjä voi poistaa olemassa olevia kursseja 
 
 - [x] käyttäjä voi kirjautua ulos järjestelmästä 
 
