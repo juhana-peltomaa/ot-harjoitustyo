@@ -24,11 +24,13 @@ Alla kuvatuu sovelluksen olleellisia toimintalogiikan osia sekvenssikaavioiden a
 
 ### Sisäänkirjatuminen sovellukseen
 
-Sovelluksen käynnistäminen avaa _LoginView_-näkymän käyttäjälle. Käyttäjän painaessa _"Login"_-painiketta, ensin täytettyään näkymän syötekenttiin käyttäjätunnuksen ja salasanan, toteutuu toiminnallisuus seuraavasti:
+Sovelluksen käynnistäminen asettaa _LoginView_-näkymän käyttäjälle. Käyttäjän painaessa _"Login"_ -painiketta, täytettyään ensin näkymän syötekenttiin käyttäjätunnuksen ja salasanan, sovellusksen toiminnallisuus etenee seuraavasti:
 
 ![Käyttäjän kirjautuminen](https://user-images.githubusercontent.com/55188494/116088508-3809a100-a6a2-11eb-8bdc-18a19c7de7b1.png)
 
-_"Login"_-painike hakee syötekenttien sisällön ja käyttää niitä parametreinä kutsuessaan sovelluslogiikan _CourseServices_ metodia _login_user_. Sovelluslogiikka tarkistaa onko käyttäjätunnus jo käytössä kutsumalla _find_user_ metodia _UserRepo_-luokasta. Jos käyttäjä on olemassa, palautuu arvona käyttäjän tiedot ja sovelluslogiikka tarkistaa täsmääkö paramentreinä annetut salasana ja käyttäjätunnus tallennettuja. Jos täsmää, metodi palauttaa asettaa käyttäjän oletuskäyttäjäksi ja kutsuu _show_courses_view_-metodia, joka vaihtaa näkymäksi _CourseView_-näkymän. 
+_"Login"_ -painike hakee syötekenttien sisällön ja käyttää niitä parametreinä kutsuessaan sovelluslogiikan _CourseServices_ metodia _login_user_. Sovelluslogiikka tarkistaa onko asetettu käyttäjätunnus olemassa kutsumalla _find_user_ -metodia _UserRepo_ -luokasta. 
+
+Jos käyttäjä on olemassa, palauttaa metodi käyttäjän tiedot, jonka jälkeen sovelluslogiikka tarkistaa vastaavatko ne paramentreinä annettuja salasanaa ja käyttäjätunnusta. Jos täsmää, metodi asettaa käyttäjän nykykäyttäjäksi ja kutsuu _show_courses_view_-metodia, jolloin näkymäksi asetetaan _CourseView_-näkymä. 
 
 ### Uuden kurssin lisääminen sovellukseen
 ![Uuden kurssin luominen ](https://user-images.githubusercontent.com/55188494/116088299-085a9900-a6a2-11eb-8c99-36132471bfa7.png)
