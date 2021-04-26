@@ -8,6 +8,8 @@ FIND_COURSE = "SELECT * FROM courses WHERE name = ? and user = ?;"
 
 DELETE_ALL_COURSES = "DELETE FROM courses WHERE user = ?;"
 
+EMPTY_COURSES = "DELETE FROM courses;"  # käytetään testien alustamiseen
+
 DELETE_ONE_COURSE = "DELETE FROM courses WHERE name = ? AND user = ?;"
 
 FIND_ALL_COURSES = "SELECT * FROM courses;"
@@ -73,6 +75,13 @@ class CourseRepo:
 
         course = cursor.execute(
             UPDATE_COURSE_INFO, (name, credit, grade, status, id, user))
+
+        self._connection.commit()
+
+    def empty_courses(self):
+        cursor = self._connection.cursor()
+
+        course = cursor.execute(EMPTY_COURSES)
 
         self._connection.commit()
 

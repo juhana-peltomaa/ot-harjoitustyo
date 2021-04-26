@@ -28,3 +28,15 @@ class TestUserRepositio(unittest.TestCase):
         self.assertEqual(len(users), 2)
         self.assertEqual(users[0]["username"], self.user_testi1.username)
         self.assertEqual(users[1]["username"], self.user_testi2.username)
+
+    def test_find_user_by_name_successful(self):
+        user_repository.create_user(self.user_testi1)
+
+        users = user_repository.find_username("testi1")
+
+        self.assertEqual(users, True)
+
+    def test_find_user_by_name_failed(self):
+        user_repository.create_user(self.user_testi1)
+
+        self.assertIsNone(user_repository.find_username("testi2"))
