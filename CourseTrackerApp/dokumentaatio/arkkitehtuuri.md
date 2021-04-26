@@ -15,7 +15,7 @@ Sovelluksen tietokohteet koostuvat kahdesta luokasta: _User_ ja _Course_. Nämä
 
 ![Viikko 4-pakkauskaavio-6](https://user-images.githubusercontent.com/55188494/115162423-badb9c00-a0a3-11eb-923e-c39171d18a86.png)
 
-Sovelluksen toiminnallisuudet on tallennettu luokkaan _CourseServices_, jonka avulla eri käyttöliittymä näkymien toiminnallisuuksia toteutetaan. Luokan _CourseServices_ käyttää toteutuksessa hyväksi pääsyä tiedon pysyväistallennuksesta vastaaviin luokkiin _UserRepo_ ja _CourseRepo_. 
+Sovelluksen toiminnallisuudet on tallennettu luokkaan _CourseService_, jonka avulla eri käyttöliittymä näkymien toiminnallisuuksia toteutetaan. Luokan _CourseService_ käyttää toteutuksessa hyväksi pääsyä tiedon pysyväistallennuksesta vastaaviin luokkiin _UserRepo_ ja _CourseRepo_. 
 
 
 ## Päätoiminnallisuudet
