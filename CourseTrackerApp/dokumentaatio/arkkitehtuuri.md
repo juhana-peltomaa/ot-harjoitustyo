@@ -38,10 +38,11 @@ Kirjauduttua sisään, käyttäjä voi luoda ja tallentaa uuden kurssin sekä as
 
 ![Uuden kurssin lisääminen](https://user-images.githubusercontent.com/55188494/116094913-393dcc80-a6a8-11eb-94bd-3256acc272ac.png)
 
-Kurssia luotaessa käyttäjä voi syöttää parametreinä kurssin nimen, opintopistemäärän, arvosanana ja suoritusstatuksen niille osotetuissa kentissä. Minimissään käyttäjän tulee syöttää kurssin nimi sekä opintopistemäärän, jotka annettuaan sekä painiketta _"Add new Course"_ painettuaan kutsutaan _CourseServices_ metodia _create_new_course_. 
+Luodessaan kurssia, käyttäjä voi antaa sovellukselle parametreinä kurssin nimen, opintopistemäärän, arvosanan ja suoritusstatuksen niille osoitetuissa kentissä. Käyttäjän tulee kuitenkin minimissään antaa kurssin nimi sekä opintopistemäärän, jotka annettuaan sekä painiketta _"Add new Course"_ painettuaan kutsutaan _CourseServices_ metodia _create_new_course_. 
 
-Vastaavasti _CourseServices_ tarkistaa, onko käyttäjä jo tallentanut kyseisen kurssin käyttäen hyväksi metodia _find_course_, joka sijaitsee _CourseRepo_ -luokassa. Ennen metodin suorittamista, _CourseServices_ tarkistaa sen hetkisen käyttäjän ja antaa sen parametrinä _find_course_ -metodille yhdessä kurssin nimen kanssa. 
+_CourseServices_ tarkistaa onko käyttäjä jo tallentanut kyseisen kurssin, käyttäen hyväksi metodia _find_course_, joka sijaitsee _CourseRepo_ -luokassa. Ennen metodin suorittamista, _CourseServices_ tarkistaa sen hetkisen käyttäjän ja antaa sen parametrinä _find_course_ -metodille yhdessä kurssin nimen kanssa. 
 
-Jos kurssia ei löydy, palauttaa metodi arvon _None_, jonka jälkeen tarkistetaan syötettyjen opintopistemäärän ja arvosanan oikeellisuus kutsumalla _validate_credit_ ja _validate_grade_ -metodeja. 
+Jos käyttäjältä ei löydy annettua kurssia, metodi palauttaa arvon _None_. Tämän jälkeen tarkistetaan syötettyjen opintopistemäärän ja arvosanan oikeellisuus kutsumalla _validate_credit_ ja _validate_grade_ -metodeja. 
 
-Tarkistuksien läpäistyä, _CourseService_ luo _Course_ -olion annetuilla parametreillä ja tallentaa sen _CourseRepo_:oon metodilla _create_course_. Kurssien luomisen ja tallentamisen onnistuessa _CourseView_ kutsuu metodia _display_all_courses_, joka hakee kaikki käyttäjän kurssit kutsumalla _CourseService_:in metodin _display_all_courses_ kautta _CourseRepo_:n _find_all_courses()_ -metodia. Tällöin käyttäjän näkymässä on nähtävillä myös juuri luotu uusi kurssi. 
+Tarkistuksien läpäistyä, _CourseService_ luo _Course_ -olion annetuilla parametreilla ja tallentaa sen _CourseRepo_:oon metodilla _create_course_. Kurssien luomisen ja tallentamisen onnistuessa _CourseView_ kutsuu metodia _display_all_courses_, joka hakee kaikki käyttäjän kurssit kutsumalla _CourseService_:in metodin _display_all_courses_ kautta _CourseRepo_:n metodia _find_all_courses_. Metodi palauttaa kaikki käyttäjän tämän hetkiset kurssit ja asettaa ne näkyville _CourseView_ -näkymään.
+
