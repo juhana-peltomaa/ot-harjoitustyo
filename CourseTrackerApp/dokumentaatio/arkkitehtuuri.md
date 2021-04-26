@@ -36,7 +36,7 @@ Jos käyttäjä on olemassa, palauttaa metodi käyttäjän tiedot, jonka jälkee
 
 Kirjauduttua sisään, käyttäjä voi luoda uuden kurssin näkymäänsä painamalla _"Add new Course"_ -painiketta, jolloin sovelluksen toiminnallisuus etenee seuraavasti:
 
-![Uuden kurssin luominen ](https://user-images.githubusercontent.com/55188494/116088299-085a9900-a6a2-11eb-8c99-36132471bfa7.png)
+![Uuden kurssin lisääminen](https://user-images.githubusercontent.com/55188494/116094913-393dcc80-a6a8-11eb-94bd-3256acc272ac.png)
 
 Kurssia luotaessa käyttäjä voi syöttää parametreinä kurssin nimen, opintopistemäärän, arvosanana ja suoritusstatuksen niille osotetuissa kentissä. Minimissään käyttäjän tulee syöttää kurssin nimi sekä opintopistemäärän, jotka annettuaan sekä painiketta _"Add new Course"_ painettuaan kutsutaan _CourseServices_ metodia _create_new_course_. 
 
