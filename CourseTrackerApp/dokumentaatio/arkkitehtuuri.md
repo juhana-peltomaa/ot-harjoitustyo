@@ -28,13 +28,13 @@ Sovelluksen käynnistäminen asettaa _LoginView_-näkymän käyttäjälle. Käyt
 
 ![Käyttäjän kirjautuminen](https://user-images.githubusercontent.com/55188494/116088508-3809a100-a6a2-11eb-8bdc-18a19c7de7b1.png)
 
-_"Login"_ -painike hakee syötekenttien sisällön ja käyttää niitä parametreinä kutsuessaan sovelluslogiikan _CourseServices_ metodia _login_user_. Sovelluslogiikka tarkistaa onko asetettu käyttäjätunnus olemassa kutsumalla _find_user_ -metodia _UserRepo_ -luokasta. 
+_"Login"_ -painike hakee syötekenttien sisällön ja käyttää niitä parametreinä kutsuessaan sovelluslogiikan _CourseServices_ metodia _login_user_. Sovelluslogiikka tarkistaa, onko asetettu käyttäjätunnus olemassa kutsumalla _find_user_ -metodia _UserRepo_ -luokasta. 
 
 Jos käyttäjä on olemassa, palauttaa metodi käyttäjän tiedot, jonka jälkeen sovelluslogiikka tarkistaa vastaavatko ne paramentreinä annettuja salasanaa ja käyttäjätunnusta. Jos täsmää, metodi asettaa käyttäjän nykykäyttäjäksi ja kutsuu _show_courses_view_-metodia, jolloin näkymäksi asetetaan _CourseView_-näkymä. 
 
 ### Uuden kurssin lisääminen sovellukseen
 
-Kirjauduttua sisään, käyttäjä voi luoda uuden kurssin näkymäänsä painamalla _"Add new Course"_ -painiketta, jolloin sovelluksen toiminnallisuus etenee seuraavasti:
+Kirjauduttua sisään, käyttäjä voi luoda ja tallentaa uuden kurssin sekä asettaa sen näkymäänsä painamalla _"Add new course"_ -painiketta. Tällöin sovelluksen toiminnallisuus etenee seuraavasti:
 
 ![Uuden kurssin lisääminen](https://user-images.githubusercontent.com/55188494/116094913-393dcc80-a6a8-11eb-94bd-3256acc272ac.png)
 
