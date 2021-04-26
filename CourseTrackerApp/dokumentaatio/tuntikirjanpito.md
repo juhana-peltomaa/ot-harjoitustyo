@@ -14,4 +14,5 @@
 | 18.4  | 4    | kirjautunut käyttäjä voi lisätä tietokantaan uusia kursseja, kirjautuneen käyttäjän kurssien listaus |
 | 19.4  | 1    | testien korjaaminen ja lisääminen courses-repoon |
 | 23.4  | 5    | kurssien lisäykseen ja muokkaukseen lisättyjä toiminnallisuuksia CourseView-näkymässä |
-| yht   | 32   | | 
+| 26.4  | 4    | skvenssikaavio toiminnallisuuksista, testikattavuuden laajentamista + deadline valmisteluja |
+| yht   | 36   | | 
