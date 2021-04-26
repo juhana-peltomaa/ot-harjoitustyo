@@ -27,3 +27,4 @@ Alla kuvatuu sovelluksen olleellisia toimintalogiikan osia sekvenssikaavioiden a
 
 
 ### Uuden kurssin lisääminen sovellukseen
+![Uuden kurssin luominen ](https://user-images.githubusercontent.com/55188494/116088299-085a9900-a6a2-11eb-8c99-36132471bfa7.png)
