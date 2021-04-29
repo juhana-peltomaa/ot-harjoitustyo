@@ -30,11 +30,19 @@ _TBA_
 
 - [x] kirjautunut käyttäjä näkee ainoastaan omat kurssinsa 
 
+- kirjautunut käyttäjä näkee statistiikkaa suoritetuista kursseista (eli kursseista, joiden status == _Completed_):
+  - [x] suoritettujen kurssien määrän
+  - [x] suoritettujen opintopisteiden määrän
+  - [x] suoritettujen kurssien painotetun keskiarvon 
+
 - kirjautunut voi luoda uuden kurssin lisäämällä:
-  - [x] nimen ja opintopistemäärän 
+  - [x] nimen ja opintopistemäärän (minimivaatimus uuden kurssin lisäämiselle)
   - [x] arvosanan ja suoritusstatuksen 
+  - [x] kurssiin liittyvän URL-osoitteen 
 
 - [x] käyttäjä voi muokata kurssin yllä mainittuja tietoja 
+
+- [x] käyttäjä voi avata selaimessa lisäämänsä URL-osoitteet tuplaklikkaamalla niitä taulukosta
   
 - [x] käyttäjä voi poistaa olemassa olevia kursseja 
 
