@@ -12,24 +12,30 @@ class CourseView:
 
         self._course_info_labels = None
         self._update_course_buttons = None
+        self._course_statistics_labels = None
 
         self._current_courses = None
 
         self._course_id_entry = None
         self._course_name_entry = None
         self._course_credit_entry = " "
-        self._course_grade_entry = " "
+        self._course_grade_entry = ""
         self._course_status_entry = None
         self._course_url_entry = " "
 
         self._course_status = StringVar()
         self._course_id = StringVar()
 
+        self._completed_courses_label = StringVar()
+        self._completed_credits_label = StringVar()
+        self._average_gpa_label = StringVar()
+
         self._show_login_view = show_login_view
 
         self._user = course_service.current_user()
         self._initialize()
         self._display_all_courses()
+        self._display_statistics()
 
     def pack(self):
         self._frame.pack(fill=constants.BOTH, expand=True)
@@ -51,6 +57,7 @@ class CourseView:
 
             if new_course:
                 self._display_all_courses()
+                self._display_statistics()
             else:
                 messagebox.showinfo("Course registration",
                                     f"Something went wrong in adding course {course_name}!")
@@ -65,7 +72,7 @@ class CourseView:
 
         except CourseValueError:
             messagebox.showinfo("Course registration",
-                                "Course registration failed.\nEnter valid input for credits and grade!")
+                                "Course registration failed.\nEnter valid input for credits and grade!\n\nCourses marked as 'Completed' must have a valid grade!")
 
         except InvalidUrlError:
             messagebox.showinfo(
@@ -83,6 +90,7 @@ class CourseView:
         try:
             if course_service.update_course_info(course_id, course_name, course_credit, course_grade, course_status, course_url) is True:
                 self._display_all_courses()
+                self._display_statistics()
         except CourseUpdateError:
             messagebox.showinfo("Course registration",
                                 "Course update failed.\nMake sure all inputs have correct values!")
@@ -90,17 +98,23 @@ class CourseView:
             messagebox.showinfo("Course registration",
                                 f"Course registration failed.\nURL {course_url} does not exist on the Internet!\n\nAdd the URL in its complete from i.e. 'https://www.google.com'.")
 
+        except CourseValueError:
+            messagebox.showinfo("Course registration",
+                                "Course registration failed.\nEnter valid input for credits and grade!\n\nCourses marked as 'Completed' must have a valid grade!")
+
     def _remove_one_course(self):
         course_name = self._course_name_entry.get()
 
         if course_service.remove_one_course(course_name) is True:
             self._course_id.set(OPTIONS[0])
             self._display_all_courses()
+            self._display_statistics()
 
     def _remove_all_courses(self):
         if course_service.remove_all_courses() is True:
             self._course_id.set(OPTIONS[0])
             self._display_all_courses()
+            self._display_statistics()
 
     def callback(self, selection):
         self._course_status.set(selection)
@@ -128,6 +142,15 @@ class CourseView:
         self._course_status.set(values[4])
         self._course_url_entry.insert(0, values[6])
 
+    def link_tree(self, event):
+        select = self._current_courses.focus()
+        values = self._current_courses.item(select, "values")
+
+        url = values[6]
+
+        import webbrowser
+        webbrowser.open('{}'.format(url))
+
     def _clear_entry_input(self):
         self._course_id.set(OPTIONS[0])
         self._course_name_entry.delete(0, constants.END)
@@ -136,7 +159,7 @@ class CourseView:
         self._course_status.set(OPTIONS[0])
         self._course_url_entry.delete(0, constants.END)
 
-        self._course_grade_entry.insert(0, " ")
+        self._course_grade_entry.insert(0, "")
         self._course_url_entry.insert(0, " ")
 
     def _display_all_courses(self):
@@ -151,6 +174,21 @@ class CourseView:
                 self._current_courses.insert(parent="", index="end", text="", values=(
                     row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
         return None
+
+    def _display_statistics(self):
+        completed_courses, credit_amount, gpa = course_service.statistics()
+
+        if completed_courses == 0:
+            self._completed_courses_label["text"] = "Completed courses: - "
+            self._completed_credits_label["text"] = "Completed credits: - "
+            self._average_gpa_label["text"] = "Weighted GPA: - "
+
+        else:
+            self._completed_courses_label["text"] = "Completed courses: " + str(
+                completed_courses)
+            self._completed_credits_label["text"] = "Completed credits: " + str(
+                credit_amount)
+            self._average_gpa_label["text"] = "Weighted GPA: " + str(gpa)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -257,6 +295,19 @@ class CourseView:
         back_to_login_view_button = ttk.Button(
             master=self._frame, text="Back to Login", command=self._show_login_view)
 
+        # Statistics framein lisääminen
+        self._course_statistics_labels = ttk.LabelFrame(
+            master=self._frame, text="Course Statistics for 'Completed' courses:")
+
+        self._completed_courses_label = ttk.Label(
+            master=self._course_statistics_labels, text="Completed courses: - ", font="bold")
+
+        self._completed_credits_label = ttk.Label(
+            master=self._course_statistics_labels, text="Completed credits: - ", font="bold")
+
+        self._average_gpa_label = ttk.Label(
+            master=self._course_statistics_labels, text="Weighted GPA: - ", font="bold")
+
         # Gridin luominen
 
         heading_label.grid(row=0, column=0, columnspan=2,
@@ -273,6 +324,9 @@ class CourseView:
 
         self._update_course_buttons.grid(row=4, column=0, columnspan=4,
                                          sticky=(constants.EW), padx=5, pady=5)
+
+        self._course_statistics_labels.grid(
+            row=5, column=0, columnspan=3, sticky=(constants.EW), padx=5, pady=5)
 
         # Course info -labels
         course_id_label.grid(row=0, column=0, padx=5, pady=2)
@@ -316,11 +370,21 @@ class CourseView:
             row=0, column=3, sticky=(constants.EW), padx=5, pady=5)
 
         clear_entry_button.grid(
-            row=0, column=4, sticky=(constants.EW), padx=5, pady=5)
+            row=0, column=4, sticky=(constants.E), padx=5, pady=5)
+
+        # Course stats -labels
+        self._completed_courses_label.grid(
+            row=0, column=0, sticky=(constants.EW), padx=5, pady=5)
+
+        self._completed_credits_label.grid(
+            row=0, column=1, sticky=(constants.EW), padx=5, pady=5)
+
+        self._average_gpa_label.grid(
+            row=0, column=2, sticky=(constants.E), padx=5, pady=5)
 
         # Uloskirjautuminen
         back_to_login_view_button.grid(
-            row=5, column=0, columnspan=1, sticky=constants.EW, padx=5, pady=5)
+            row=6, column=0, columnspan=1, sticky=constants.EW, padx=5, pady=5)
 
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa
@@ -328,3 +392,4 @@ class CourseView:
         self._frame.columnconfigure(0, weight=1)
 
         self._current_courses.bind("<ButtonRelease-1>", self._select_course)
+        self._current_courses.bind("<Double-1>", self.link_tree)

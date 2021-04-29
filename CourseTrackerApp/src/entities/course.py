@@ -6,6 +6,7 @@ class Course:
     # User-ilmaisee käyttäjä-olion, joka voidaan linkittää kurssisuorituksiin
 
     def __init__(self, name, credit, grade=None, status=False, user=None, url=None):
+
         self.name = name
         self.credit = credit
         self.grade = grade

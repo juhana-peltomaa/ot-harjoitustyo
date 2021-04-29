@@ -93,7 +93,7 @@ class CourseService:
         if self.validate_credit(str(credit)) is not True:
             raise CourseValueError()
 
-        if self.validate_grade(str(grade)) is not True:
+        if self.validate_grade(str(grade), status) is not True:
             raise CourseValueError()
 
         if self.validate_url(str(url)) is not True:
@@ -114,7 +114,17 @@ class CourseService:
         return False
 
     # Tarkistetaan, että arvosana on " " tai 0-5.
-    def validate_grade(self, grade):
+    def validate_grade(self, grade, status):
+
+        # jos status on "Completed", kurssilla tulee olla arvosana
+        if status == "Completed":
+            accepted = re.compile(r'([0-5])$')
+
+            if accepted.match(grade):
+                return True
+
+            return False
+
         # jos arvosana on tyhjä, sijoitetaan " ".
         if len(grade) == 0:
             grade = " "
@@ -123,6 +133,7 @@ class CourseService:
 
         if accepted.match(grade):
             return True
+
         return False
 
     # Tarkistetaan, että url on olemassa!
@@ -165,7 +176,35 @@ class CourseService:
 
         return None
 
+    def statistics(self):
+        completed_courses = 0
+        completed_credits = 0
+        avg_gpa = 0
+
+        courses = self._c_repo.find_all_courses()
+
+        if courses:
+            for row in courses:
+                id = row["id"]
+                credit = row["credit"]
+                grade = row["grade"]
+                status = row["status"]
+                user = row["user"]
+
+                if user == self.current_user() and status == "Completed":
+                    completed_courses += 1
+                    completed_credits += credit
+                    weighted_grade = credit * grade
+                    avg_gpa += weighted_grade
+
+        if completed_courses > 0:
+            avg_gpa = avg_gpa / completed_credits
+            avg_gpa = round(avg_gpa, 2)
+
+        return completed_courses, completed_credits, avg_gpa
+
     # Poistaa tietokannasta kaikki käyttäjälle kuuluvat kurssit
+
     def remove_all_courses(self):
         try:
             self._c_repo.delete_all(self._user["username"])
@@ -185,7 +224,7 @@ class CourseService:
     def update_course_info(self, id, name, credit, grade, status, url):
         if self.validate_credit(str(credit)) is not True:
             raise CourseValueError()
-        if self.validate_grade(str(grade)) is not True:
+        if self.validate_grade(str(grade), status) is not True:
             raise CourseValueError()
         if self.validate_url(str(url)) is not True:
             raise InvalidUrlError()
