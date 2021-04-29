@@ -5,9 +5,10 @@ class Course:
     # joilla arvosanaa ja statusta voidaan muokata,
     # User-ilmaisee käyttäjä-olion, joka voidaan linkittää kurssisuorituksiin
 
-    def __init__(self, name, credit, grade=None, status=False, user=None):
+    def __init__(self, name, credit, grade=None, status=False, user=None, url=None):
         self.name = name
         self.credit = credit
         self.grade = grade
         self.status = status
         self.user = user
+        self.url = url

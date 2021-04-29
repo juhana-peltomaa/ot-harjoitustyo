@@ -14,11 +14,11 @@ class TestCourseRepositio(unittest.TestCase):
         self.user_test2 = User('testi2', 'testi234')
 
         self.course_test1 = Course(
-            "Ohjelmistotekniikka", 5, " ", " ", self.user_test1.username)
+            "Ohjelmistotekniikka", 5, " ", " ", self.user_test1.username, " ")
         self.course_test2 = Course(
-            "Ohjelmistotuotanto", 6, 5, True, self.user_test1.username)
+            "Ohjelmistotuotanto", 6, 5, True, self.user_test1.username, " ")
         self.course_test3 = Course(
-            "Ohjelmistotuotanto", 6, 4, True, self.user_test2.username)
+            "Ohjelmistotuotanto", 6, 4, True, self.user_test2.username, " ")
 
     def test_create_course(self):
         course_repository.create_course(self.course_test1)
@@ -77,7 +77,7 @@ class TestCourseRepositio(unittest.TestCase):
             self.course_test1.name, self.user_test1.username)
 
         course_repository.update_course_info(
-            course_info[0], self.course_test1.name, self.course_test1.credit, "5", "Registered", self.user_test1.username)
+            course_info[0], self.course_test1.name, self.course_test1.credit, "5", "Registered", self.user_test1.username, " ")
 
         # haetaan päivetty kurssi tietokannasta
         course_info = course_repository.find_course(

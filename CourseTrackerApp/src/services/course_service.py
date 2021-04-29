@@ -2,6 +2,7 @@ from entities.course import Course
 from entities.user import User
 
 import re
+import requests
 from repositories.course_repo import course_repository as c_repo
 from repositories.user_repo import user_repository as u_repo
 
@@ -27,6 +28,10 @@ class CourseUpdateError(Exception):
 
 
 class CourseValueError(Exception):
+    pass
+
+
+class InvalidUrlError(Exception):
     pass
 
 
@@ -72,7 +77,7 @@ class CourseService:
         self._user = None
 
     # Luo uuden kurssin annetuilla syötteillä, jos käyttäjällä ei ole jo samannimistä kurssia
-    def create_new_course(self, name, credit, grade, status):
+    def create_new_course(self, name, credit, grade, status, url):
 
         # Tarkistaa, onko käyttäjälle jo tallennettu sama kurssi tietokantaan
         exists = self._c_repo.find_course(name, self.current_user())
@@ -84,16 +89,20 @@ class CourseService:
         if exists:
             raise ExistingCourseError()
 
-        # Tarkistaa opintopiste ja arvosanan syötteen oikeellisuuden
+        # Tarkistaa opintopiste, arvosana ja url syötteen oikeellisuuden
         if self.validate_credit(str(credit)) is not True:
             raise CourseValueError()
 
         if self.validate_grade(str(grade)) is not True:
             raise CourseValueError()
 
+        if self.validate_url(str(url)) is not True:
+            raise InvalidUrlError()
+
         # Luo uuden kurssin ja tallentaa sen tietokantaan, jos syötteet ovat valideja
+        user = self.current_user()
         course = Course(name, credit, grade, str(
-            status), user=self.current_user())
+            status), user, url)
         course = self._c_repo.create_course(course)
         return course
 
@@ -116,6 +125,23 @@ class CourseService:
             return True
         return False
 
+    # Tarkistetaan, että url on olemassa!
+    def validate_url(self, url):
+        # url-syöte voi olla myös tyhjä tai " ".
+        if len(url) == 0 or url == " ":
+            return True
+
+        # jos url-syöte sisältää tekstiä, tarkistetaan palauttaako url sivuston
+        try:
+            website = requests.get(url, stream=True)
+        except Exception:
+            raise InvalidUrlError()
+
+        if website.status_code == 200:
+            return True
+
+        return False
+
     # Hakee tietokannasta kaikki kurssit ja palauttaa listassa käyttäjälle kuuluvat kurssit
     def display_all_courses(self):
         course_list = []
@@ -129,9 +155,11 @@ class CourseService:
                 grade = row["grade"]
                 status = row["status"]
                 user = row["user"]
+                url = row["url"]
 
                 if user == self.current_user():
-                    course_list.append([id, name, credit, grade, status, user])
+                    course_list.append(
+                        [id, name, credit, grade, status, user, url])
 
             return course_list
 
@@ -154,19 +182,17 @@ class CourseService:
             raise CourseUpdateError()
 
     # Päivittää valitun kurssien tiedot ja tarkistaa syötteiden oikeellisuuden
-    def update_course_info(self, id, name, credit, grade, status):
-        try:
-            if self.validate_credit(str(credit)) is not True:
-                raise CourseValueError()
-            if self.validate_grade(str(grade)) is not True:
-                raise CourseValueError()
+    def update_course_info(self, id, name, credit, grade, status, url):
+        if self.validate_credit(str(credit)) is not True:
+            raise CourseValueError()
+        if self.validate_grade(str(grade)) is not True:
+            raise CourseValueError()
+        if self.validate_url(str(url)) is not True:
+            raise InvalidUrlError()
 
-            self._c_repo.update_course_info(
-                id, name, credit, grade, str(status), self.current_user())
-            return True
-
-        except Exception:
-            raise CourseUpdateError()
+        self._c_repo.update_course_info(
+            id, name, credit, grade, str(status), self.current_user(), url)
+        return True
 
 
 course_service = CourseService()

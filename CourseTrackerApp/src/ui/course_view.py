@@ -1,5 +1,6 @@
 from tkinter import ttk, constants, messagebox, StringVar
-from services.course_service import course_service, ExistingCourseError, CourseEntryError, CourseUpdateError, CourseValueError
+from services.course_service import course_service, ExistingCourseError, CourseEntryError, CourseUpdateError, CourseValueError, InvalidUrlError
+
 
 OPTIONS = ["          ", "Registered", "On-going", "Completed"]
 
@@ -19,6 +20,7 @@ class CourseView:
         self._course_credit_entry = " "
         self._course_grade_entry = " "
         self._course_status_entry = None
+        self._course_url_entry = " "
 
         self._course_status = StringVar()
         self._course_id = StringVar()
@@ -40,11 +42,12 @@ class CourseView:
         course_credit = self._course_credit_entry.get()
         course_grade = self._course_grade_entry.get()
         course_status = self._course_status.get()
+        course_url = self._course_url_entry.get()
         self._course_id.set(OPTIONS[0])
 
         try:
             new_course = course_service.create_new_course(
-                course_name, course_credit, course_grade, course_status)
+                course_name, course_credit, course_grade, course_status, course_url)
 
             if new_course:
                 self._display_all_courses()
@@ -64,20 +67,28 @@ class CourseView:
             messagebox.showinfo("Course registration",
                                 "Course registration failed.\nEnter valid input for credits and grade!")
 
+        except InvalidUrlError:
+            messagebox.showinfo(
+                "Course registration", f"Course registration failed.\nURL {course_url} does not exist on the Internet!\n\nAdd the URL in its complete from i.e. 'https://www.google.com'.")
+
     def _update_course_info(self):
         course_name = self._course_name_entry.get()
         course_credit = self._course_credit_entry.get()
         course_grade = self._course_grade_entry.get()
         course_status = self._course_status.get()
+        course_url = self._course_url_entry.get()
 
         course_id = self._course_id_entry.get()
 
         try:
-            if course_service.update_course_info(course_id, course_name, course_credit, course_grade, course_status) is True:
+            if course_service.update_course_info(course_id, course_name, course_credit, course_grade, course_status, course_url) is True:
                 self._display_all_courses()
         except CourseUpdateError:
             messagebox.showinfo("Course registration",
                                 "Course update failed.\nMake sure all inputs have correct values!")
+        except InvalidUrlError:
+            messagebox.showinfo("Course registration",
+                                f"Course registration failed.\nURL {course_url} does not exist on the Internet!\n\nAdd the URL in its complete from i.e. 'https://www.google.com'.")
 
     def _remove_one_course(self):
         course_name = self._course_name_entry.get()
@@ -102,6 +113,7 @@ class CourseView:
         self._course_credit_entry.delete(0, constants.END)
         self._course_grade_entry.delete(0, constants.END)
         self._course_status.set(OPTIONS[0])
+        self._course_url_entry.delete(0, constants.END)
 
         # haetaan valitun rivin arvot
         select = self._current_courses.focus()
@@ -114,6 +126,7 @@ class CourseView:
         self._course_credit_entry.insert(0, values[2])
         self._course_grade_entry.insert(0, values[3])
         self._course_status.set(values[4])
+        self._course_url_entry.insert(0, values[6])
 
     def _clear_entry_input(self):
         self._course_id.set(OPTIONS[0])
@@ -121,8 +134,10 @@ class CourseView:
         self._course_credit_entry.delete(0, constants.END)
         self._course_grade_entry.delete(0, constants.END)
         self._course_status.set(OPTIONS[0])
+        self._course_url_entry.delete(0, constants.END)
 
         self._course_grade_entry.insert(0, " ")
+        self._course_url_entry.insert(0, " ")
 
     def _display_all_courses(self):
         # tyhjennetään treeview ennen kurssien näyttämistä
@@ -134,7 +149,7 @@ class CourseView:
         if courses is not None:
             for row in courses:
                 self._current_courses.insert(parent="", index="end", text="", values=(
-                    row[0], row[1], row[2], row[3], row[4], row[5]))
+                    row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
         return None
 
     def _initialize(self):
@@ -153,19 +168,21 @@ class CourseView:
 
         # Treeview:n muotoilua
         current_courses_tree["columns"] = (
-            "ID", "Course Name", "Credits", "Grade", "Status", "Owner")
+            "ID", "Course Name", "Credits", "Grade", "Status", "Owner", "URL")
         current_courses_tree.column("#0", width=0, stretch=constants.NO)
-        current_courses_tree.column("ID", width=10, stretch=constants.YES)
+        current_courses_tree.column("ID", width=30, stretch=constants.NO)
         current_courses_tree.column(
             "Course Name", width=50, stretch=constants.YES)
         current_courses_tree.column(
-            "Credits", anchor=constants.CENTER, width=50, stretch=constants.YES)
+            "Credits", anchor=constants.CENTER, width=30, stretch=constants.YES)
         current_courses_tree.column(
-            "Grade", anchor=constants.CENTER, width=50, stretch=constants.YES)
+            "Grade", anchor=constants.CENTER, width=10, stretch=constants.YES)
         current_courses_tree.column(
-            "Status", anchor=constants.CENTER, width=50, stretch=constants.YES)
+            "Status", anchor=constants.CENTER, width=40, stretch=constants.YES)
         current_courses_tree.column(
             "Owner", anchor=constants.CENTER, width=50, stretch=constants.YES)
+        current_courses_tree.column(
+            "URL", anchor=constants.CENTER, minwidth=200, stretch=constants.YES)
 
         current_courses_tree.heading("#0", text="")
         current_courses_tree.heading("ID", text="ID", anchor=constants.CENTER)
@@ -179,6 +196,8 @@ class CourseView:
             "Status", text="Status", anchor=constants.CENTER)
         current_courses_tree.heading(
             "Owner", text="Owner", anchor=constants.CENTER)
+        current_courses_tree.heading(
+            "URL", text="URL", anchor=constants.CENTER)
 
         # Kurssi tiedoille oma LabelFrame
         self._course_info_labels = ttk.LabelFrame(
@@ -205,8 +224,14 @@ class CourseView:
 
         course_status_label = ttk.Label(
             master=self._course_info_labels, text="Status")
+
         self._course_status_entry = ttk.OptionMenu(
             self._course_info_labels, self._course_status, *OPTIONS, command=self.callback)
+
+        course_url_label = ttk.Label(
+            master=self._course_info_labels, text="URL")
+
+        self._course_url_entry = ttk.Entry(master=self._course_info_labels)
 
         # Kurssien ja näkymän muokkamispainikkeet
 
@@ -259,6 +284,8 @@ class CourseView:
             row=0, column=3, padx=5, pady=2)
         course_status_label.grid(
             row=0, column=4, padx=5, pady=2)
+        course_url_label.grid(
+            row=0, column=5, padx=5, pady=2)
 
         # Course info -entries
         self._course_id_entry.grid(row=1, column=0, padx=5, pady=2)
@@ -270,7 +297,10 @@ class CourseView:
         self._course_grade_entry.grid(
             row=1, column=3, sticky=(constants.EW), padx=5, pady=2)
         self._course_status_entry.grid(
-            row=1, column=4, sticky=(constants.E), padx=5, pady=2)
+            row=1, column=4, sticky=(constants.EW), padx=5, pady=2)
+
+        self._course_url_entry.grid(
+            row=1, column=5, sticky=(constants.E), padx=5, pady=2)
 
         # Course update -buttons
         update_course_button.grid(
@@ -295,5 +325,6 @@ class CourseView:
         # Sarakkeet ottavat kaiken jäljelle jäävän tilan, kun ikkunan kokoa muutetaan
         # yhdessä elementtien sticky-parametrien kanssa
         self._frame.columnconfigure(1, weight=1, minsize=400)
+        self._frame.columnconfigure(0, weight=1)
 
         self._current_courses.bind("<ButtonRelease-1>", self._select_course)

@@ -1,7 +1,7 @@
 from database_connection import get_database_connection
 
 
-CREATE_COURSE = "INSERT OR IGNORE INTO courses (name, credit, grade, status, user) VALUES (?, ?, ?, ?, ?);"
+CREATE_COURSE = "INSERT OR IGNORE INTO courses (name, credit, grade, status, user, url) VALUES (?, ?, ?, ?, ?, ?);"
 
 FIND_COURSE = "SELECT * FROM courses WHERE name = ? and user = ?;"
 
@@ -13,7 +13,7 @@ DELETE_ONE_COURSE = "DELETE FROM courses WHERE name = ? AND user = ?;"
 
 FIND_ALL_COURSES = "SELECT * FROM courses;"
 
-UPDATE_COURSE_INFO = "UPDATE courses SET name = ?, credit = ?, grade = ?, status = ? WHERE id = ? AND user = ?;"
+UPDATE_COURSE_INFO = "UPDATE courses SET name = ?, credit = ?, grade = ?, status = ?, url = ? WHERE id = ? AND user = ?;"
 
 
 class CourseRepo:
@@ -24,7 +24,7 @@ class CourseRepo:
         cursor = self._connection.cursor()
 
         course = cursor.execute(
-            CREATE_COURSE, (new_course.name, new_course.credit, new_course.grade, new_course.status, new_course.user))
+            CREATE_COURSE, (new_course.name, new_course.credit, new_course.grade, new_course.status, new_course.user, new_course.url))
 
         self._connection.commit()
 
@@ -69,11 +69,11 @@ class CourseRepo:
 
         self._connection.commit()
 
-    def update_course_info(self, id, name, credit, grade, status, user):
+    def update_course_info(self, id, name, credit, grade, status, user, url):
         cursor = self._connection.cursor()
 
         cursor.execute(
-            UPDATE_COURSE_INFO, (name, credit, grade, status, id, user))
+            UPDATE_COURSE_INFO, (name, credit, grade, status, url, id, user))
 
         self._connection.commit()
 

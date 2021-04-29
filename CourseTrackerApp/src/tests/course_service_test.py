@@ -15,11 +15,11 @@ class TestCourseService(unittest.TestCase):
         self.user_test2 = User('test2', 'test234')
 
         self.course_test1 = Course(
-            "Ohjelmistotekniikka", 5, " ", " ", self.user_test1.username)
+            "Ohjelmistotekniikka", 5, " ", " ", self.user_test1.username, "")
         self.course_test2 = Course(
-            "Ohjelmistotuotanto", 6, 5, True, self.user_test1.username)
+            "Ohjelmistotuotanto", 6, 5, True, self.user_test1.username, "")
         self.course_test3 = Course(
-            "Ohjelmistotuotanto", 6, 4, True, self.user_test2.username)
+            "Ohjelmistotuotanto", 6, 4, True, self.user_test2.username, "")
 
     def test_create_new_user(self):
         course_service.create_new_user("test3", "test123")
