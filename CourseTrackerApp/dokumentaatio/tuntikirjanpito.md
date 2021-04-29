@@ -16,4 +16,5 @@
 | 23.4  | 5    | kurssien lisäykseen ja muokkaukseen lisättyjä toiminnallisuuksia CourseView-näkymässä |
 | 26.4  | 4    | skvenssikaavio toiminnallisuuksista, testikattavuuden laajentamista + deadline valmisteluja |
 | 29.4  | 3    | käyttäjä voi lisätä kurssiin liittyvän URL:in kurssitietoihin + url:in validointi |
-| yht   | 39   | | 
+|       | 2    | url:ia tuplaklikkaamlla sivusto avautuu selaimella + statseja suoritetuista kursseista lisätty |
+| yht   | 41   | | 
