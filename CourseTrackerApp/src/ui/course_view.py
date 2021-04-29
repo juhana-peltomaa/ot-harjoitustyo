@@ -75,17 +75,17 @@ class CourseView:
                                 "Course registration failed.\nEnter valid input for credits and grade!\n\nCourses marked as 'Completed' must have a valid grade!")
 
         except InvalidUrlError:
-            messagebox.showinfo(
-                "Course registration", f"Course registration failed.\nURL {course_url} does not exist on the Internet!\n\nAdd the URL in its complete from i.e. 'https://www.google.com'.")
+            messagebox.showinfo(("Course registration",
+                                f"Something went wrong..\nURL {course_url} is not valid.\n\nMake sure the URL is given in its complete form i.e. 'https://www.google.com'.")
 
     def _update_course_info(self):
-        course_name = self._course_name_entry.get()
-        course_credit = self._course_credit_entry.get()
-        course_grade = self._course_grade_entry.get()
-        course_status = self._course_status.get()
-        course_url = self._course_url_entry.get()
+        course_name=self._course_name_entry.get()
+        course_credit=self._course_credit_entry.get()
+        course_grade=self._course_grade_entry.get()
+        course_status=self._course_status.get()
+        course_url=self._course_url_entry.get()
 
-        course_id = self._course_id_entry.get()
+        course_id=self._course_id_entry.get()
 
         try:
             if course_service.update_course_info(course_id, course_name, course_credit, course_grade, course_status, course_url) is True:
@@ -96,14 +96,14 @@ class CourseView:
                                 "Course update failed.\nMake sure all inputs have correct values!")
         except InvalidUrlError:
             messagebox.showinfo("Course registration",
-                                f"Course registration failed.\nURL {course_url} does not exist on the Internet!\n\nAdd the URL in its complete from i.e. 'https://www.google.com'.")
+                                f"Something went wrong..\nURL {course_url} is not valid.\n\nMake sure the URL is given in its complete form i.e. 'https://www.google.com'.")
 
         except CourseValueError:
             messagebox.showinfo("Course registration",
                                 "Course registration failed.\nEnter valid input for credits and grade!\n\nCourses marked as 'Completed' must have a valid grade!")
 
     def _remove_one_course(self):
-        course_name = self._course_name_entry.get()
+        course_name=self._course_name_entry.get()
 
         if course_service.remove_one_course(course_name) is True:
             self._course_id.set(OPTIONS[0])
@@ -130,9 +130,9 @@ class CourseView:
         self._course_url_entry.delete(0, constants.END)
 
         # haetaan valitun rivin arvot
-        select = self._current_courses.focus()
+        select=self._current_courses.focus()
 
-        values = self._current_courses.item(select, "values")
+        values=self._current_courses.item(select, "values")
 
         # sisällytetään valitun rivin arvot
         self._course_id.set(values[0])
@@ -143,10 +143,10 @@ class CourseView:
         self._course_url_entry.insert(0, values[6])
 
     def link_tree(self, event):
-        select = self._current_courses.focus()
-        values = self._current_courses.item(select, "values")
+        select=self._current_courses.focus()
+        values=self._current_courses.item(select, "values")
 
-        url = values[6]
+        url=values[6]
 
         import webbrowser
         webbrowser.open('{}'.format(url))
@@ -167,7 +167,7 @@ class CourseView:
         for course in self._current_courses.get_children():
             self._current_courses.delete(course)
 
-        courses = course_service.display_all_courses()
+        courses=course_service.display_all_courses()
 
         if courses is not None:
             for row in courses:
@@ -176,36 +176,36 @@ class CourseView:
         return None
 
     def _display_statistics(self):
-        completed_courses, credit_amount, gpa = course_service.statistics()
+        completed_courses, credit_amount, gpa=course_service.statistics()
 
         if completed_courses == 0:
-            self._completed_courses_label["text"] = "Completed courses: - "
-            self._completed_credits_label["text"] = "Completed credits: - "
-            self._average_gpa_label["text"] = "Weighted GPA: - "
+            self._completed_courses_label["text"]="Completed courses: - "
+            self._completed_credits_label["text"]="Completed credits: - "
+            self._average_gpa_label["text"]="Weighted GPA: - "
 
         else:
-            self._completed_courses_label["text"] = "Completed courses: " + str(
+            self._completed_courses_label["text"]="Completed courses: " + str(
                 completed_courses)
-            self._completed_credits_label["text"] = "Completed credits: " + str(
+            self._completed_credits_label["text"]="Completed credits: " + str(
                 credit_amount)
-            self._average_gpa_label["text"] = "Weighted GPA: " + str(gpa)
+            self._average_gpa_label["text"]="Weighted GPA: " + str(gpa)
 
     def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
+        self._frame=ttk.Frame(master=self._root)
 
         # Heading label, joka kertoo mitä tällä sivulla tehdään
-        heading_label = ttk.Label(
+        heading_label=ttk.Label(
             master=self._frame, text="Add new courses and view all of your existing courses!")
 
-        current_user_label = ttk.Label(
+        current_user_label=ttk.Label(
             master=self._frame, text=f"Logged in as: {self._user}")
 
         # Kurssit lisätään treeview-näkymään
-        current_courses_tree = ttk.Treeview(master=self._frame)
-        self._current_courses = current_courses_tree
+        current_courses_tree=ttk.Treeview(master=self._frame)
+        self._current_courses=current_courses_tree
 
         # Treeview:n muotoilua
-        current_courses_tree["columns"] = (
+        current_courses_tree["columns"]=(
             "ID", "Course Name", "Credits", "Grade", "Status", "Owner", "URL")
         current_courses_tree.column("#0", width=0, stretch=constants.NO)
         current_courses_tree.column("ID", width=30, stretch=constants.NO)
@@ -238,74 +238,74 @@ class CourseView:
             "URL", text="URL", anchor=constants.CENTER)
 
         # Kurssi tiedoille oma LabelFrame
-        self._course_info_labels = ttk.LabelFrame(
+        self._course_info_labels=ttk.LabelFrame(
             master=self._frame, text="Course information")
 
-        course_id_label = ttk.Label(
+        course_id_label=ttk.Label(
             master=self._course_info_labels, text="ID")
-        self._course_id_entry = ttk.Entry(
+        self._course_id_entry=ttk.Entry(
             master=self._course_info_labels, state=constants.DISABLED, textvariable=self._course_id)
 
-        course_name_label = ttk.Label(
+        course_name_label=ttk.Label(
             master=self._course_info_labels, text="Name")
-        self._course_name_entry = ttk.Entry(master=self._course_info_labels)
+        self._course_name_entry=ttk.Entry(master=self._course_info_labels)
 
-        course_credit_label = ttk.Label(
+        course_credit_label=ttk.Label(
             master=self._course_info_labels, text="Credits (0-10)")
-        self._course_credit_entry = ttk.Entry(master=self._course_info_labels)
+        self._course_credit_entry=ttk.Entry(master=self._course_info_labels)
 
-        course_grade_label = ttk.Label(
+        course_grade_label=ttk.Label(
             master=self._course_info_labels, text="Grade (0-5)")
-        self._course_grade_entry = ttk.Entry(master=self._course_info_labels)
+        self._course_grade_entry=ttk.Entry(master=self._course_info_labels)
 
         self._course_status.set(OPTIONS[0])
 
-        course_status_label = ttk.Label(
+        course_status_label=ttk.Label(
             master=self._course_info_labels, text="Status")
 
-        self._course_status_entry = ttk.OptionMenu(
+        self._course_status_entry=ttk.OptionMenu(
             self._course_info_labels, self._course_status, *OPTIONS, command=self.callback)
 
-        course_url_label = ttk.Label(
+        course_url_label=ttk.Label(
             master=self._course_info_labels, text="URL")
 
-        self._course_url_entry = ttk.Entry(master=self._course_info_labels)
+        self._course_url_entry=ttk.Entry(master=self._course_info_labels)
 
         # Kurssien ja näkymän muokkamispainikkeet
 
-        self._update_course_buttons = ttk.LabelFrame(
+        self._update_course_buttons=ttk.LabelFrame(
             master=self._frame, text="Commands")
 
-        update_course_button = ttk.Button(
+        update_course_button=ttk.Button(
             master=self._update_course_buttons, text="Update course", command=self._update_course_info)
 
-        create_new_course_button = ttk.Button(
+        create_new_course_button=ttk.Button(
             master=self._update_course_buttons, text="Add new course", command=self._create_new_course)
 
-        remove_one_course_button = ttk.Button(
+        remove_one_course_button=ttk.Button(
             master=self._update_course_buttons, text="Remove course", command=self._remove_one_course)
 
-        remove_all_courses_button = ttk.Button(
+        remove_all_courses_button=ttk.Button(
             master=self._update_course_buttons, text="Remove all courses", command=self._remove_all_courses)
 
-        clear_entry_button = ttk.Button(
+        clear_entry_button=ttk.Button(
             master=self._update_course_buttons, text="Clear entry inputs", command=self._clear_entry_input)
 
         # Takaisin Login-näkymään
-        back_to_login_view_button = ttk.Button(
+        back_to_login_view_button=ttk.Button(
             master=self._frame, text="Back to Login", command=self._show_login_view)
 
         # Statistics framein lisääminen
-        self._course_statistics_labels = ttk.LabelFrame(
+        self._course_statistics_labels=ttk.LabelFrame(
             master=self._frame, text="Course Statistics for 'Completed' courses:")
 
-        self._completed_courses_label = ttk.Label(
+        self._completed_courses_label=ttk.Label(
             master=self._course_statistics_labels, text="Completed courses: - ", font="bold")
 
-        self._completed_credits_label = ttk.Label(
+        self._completed_credits_label=ttk.Label(
             master=self._course_statistics_labels, text="Completed credits: - ", font="bold")
 
-        self._average_gpa_label = ttk.Label(
+        self._average_gpa_label=ttk.Label(
             master=self._course_statistics_labels, text="Weighted GPA: - ", font="bold")
 
         # Gridin luominen
