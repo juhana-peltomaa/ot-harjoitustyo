@@ -1,9 +1,9 @@
 from entities.course import Course
 from entities.user import User
 
+import re
 from repositories.course_repo import course_repository as c_repo
 from repositories.user_repo import user_repository as u_repo
-import re
 
 
 class ExistingUsernameError(Exception):
@@ -135,8 +135,7 @@ class CourseService:
 
             return course_list
 
-        else:
-            return None
+        return None
 
     # Poistaa tietokannasta kaikki käyttäjälle kuuluvat kurssit
     def remove_all_courses(self):

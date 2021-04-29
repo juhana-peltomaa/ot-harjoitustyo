@@ -1,6 +1,3 @@
-from entities.user import User
-
-
 class Course:
 
     # Huomio - Tässä vaiheessa kurssi instanssiin lisätään pakollisena ainoastaan nimi ja opintopisteiden määrä

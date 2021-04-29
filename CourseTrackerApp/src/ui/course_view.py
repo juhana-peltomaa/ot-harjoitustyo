@@ -1,7 +1,4 @@
 from tkinter import ttk, constants, messagebox, StringVar
-from repositories.course_repo import CourseRepo
-from ui.login_view import LoginView
-from entities.course import Course
 from services.course_service import course_service, ExistingCourseError, CourseEntryError, CourseUpdateError, CourseValueError
 
 OPTIONS = ["          ", "Registered", "On-going", "Completed"]

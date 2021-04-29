@@ -1,4 +1,3 @@
-from entities.course import Course
 from database_connection import get_database_connection
 
 
@@ -42,8 +41,8 @@ class CourseRepo:
 
         if course_info:
             return course_info
-        else:
-            return None
+
+        return None
 
     def find_all_courses(self):
         cursor = self._connection.cursor()
@@ -59,21 +58,21 @@ class CourseRepo:
     def delete_all(self, user):
         cursor = self._connection.cursor()
 
-        course = cursor.execute(DELETE_ALL_COURSES, (user, ))
+        cursor.execute(DELETE_ALL_COURSES, (user, ))
 
         self._connection.commit()
 
     def delete_one_course(self, name, user):
         cursor = self._connection.cursor()
 
-        course = cursor.execute(DELETE_ONE_COURSE, (name, user))
+        cursor.execute(DELETE_ONE_COURSE, (name, user))
 
         self._connection.commit()
 
     def update_course_info(self, id, name, credit, grade, status, user):
         cursor = self._connection.cursor()
 
-        course = cursor.execute(
+        cursor.execute(
             UPDATE_COURSE_INFO, (name, credit, grade, status, id, user))
 
         self._connection.commit()
@@ -81,7 +80,7 @@ class CourseRepo:
     def empty_courses(self):
         cursor = self._connection.cursor()
 
-        course = cursor.execute(EMPTY_COURSES)
+        cursor.execute(EMPTY_COURSES)
 
         self._connection.commit()
 
