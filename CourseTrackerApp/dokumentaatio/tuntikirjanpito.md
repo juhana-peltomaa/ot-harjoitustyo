@@ -15,4 +15,5 @@
 | 19.4  | 1    | testien korjaaminen ja lisääminen courses-repoon |
 | 23.4  | 5    | kurssien lisäykseen ja muokkaukseen lisättyjä toiminnallisuuksia CourseView-näkymässä |
 | 26.4  | 4    | skvenssikaavio toiminnallisuuksista, testikattavuuden laajentamista + deadline valmisteluja |
-| yht   | 36   | | 
+| 29.4  | 3    | käyttäjä voi lisätä kurssiin liittyvän URL:in kurssitietoihin + url:in validointi |
+| yht   | 39   | | 
