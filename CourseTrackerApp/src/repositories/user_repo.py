@@ -13,19 +13,51 @@ FIND_ALL_USERS = "SELECT * FROM users;"
 
 
 class UserRepo:
+    """Luokka, jolla kuvataan käyttäjiä tallentavaa repositoria.
+
+    Attributes:
+        connection: Yhteys alustettuun tietokantaan.
+    """
+
     def __init__(self, connection):
+        """Luokan konstruktori, joka luo uuden käyttäjä repositorin.
+
+        Args:
+            connection: Yhteys alustettuun tietokantaan.
+        """
+
         self._connection = connection
 
     def create_user(self, user):
+        """Lisää uuden käyttäjän tietokantaan.
+
+        Args:
+            user: User-olio, joka kuvaa käyttäjää.
+
+        Returns:
+            user_execution, joka kuvastaa käyttäjän lisäystä tietokantaan.
+        """
+
         cursor = self._connection.cursor()
 
-        user = cursor.execute(CREATE_USER, (user.username, user.password))
+        user_execution = cursor.execute(
+            CREATE_USER, (user.username, user.password))
 
         self._connection.commit()
 
-        return user
+        return user_execution
 
     def find_user(self, username, password):
+        """Hakee tietokannasta käyttäjän tiedot käyttäjän nimen ja salansanan perusteella.
+
+        Args:
+            username: Merkkijonoarvo, joka kuvaa käyttäjätunnusta.
+            password: Merkkijonoarvo, joka kuvaa käyttäjän salasanaa.
+
+        Returns:
+            user_info, joka sisältää käyttäjän tietokantaan tallennetut tiedot, jos käyttäjä on olemassa. 
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(FIND_USER, (username, password))
@@ -37,6 +69,15 @@ class UserRepo:
         return user_info
 
     def find_username(self, username):
+        """Etsii tietokannasta käyttäjää käyttäjä nimen perusteella.
+
+        Args:
+            username: Merkkijonoarvo, joka kuvaa käyttäjätunnusta.
+
+        Returns:
+            True, jos käyttäjä on olemassa, muussa tapauksessa None.
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(FIND_USERNAME, (username,))
@@ -51,6 +92,12 @@ class UserRepo:
         return None
 
     def find_all_users(self):
+        """Hakee kaikkien tietokantaan tallennettujen käyttäjien tiedot.
+
+        Returns:
+            users_info, joka sisältää kaikkien tietokantaan tallennettujen käyttäjien tiedot.
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(FIND_ALL_USERS)
@@ -62,6 +109,10 @@ class UserRepo:
         return users_info
 
     def delete_all(self):
+        """Poistaa kaikki tietokantaan tallennetut käyttäjät.
+
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(DELETE_ALL)
