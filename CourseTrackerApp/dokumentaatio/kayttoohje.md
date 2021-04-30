@@ -32,7 +32,7 @@ Tässä näkymässä voit luoda uuden käyttäjän syöttämällä käyttäjätu
 
 ![Käyttäjän luomisnäkymä](https://user-images.githubusercontent.com/55188494/116752122-54407180-aa05-11eb-8cb0-3a71f438f9cf.png)
 
-Jos käyttäjän luominen onnistuu saat ilmoituksen onnistuneesta tapahtumasta. Tämän jälkeen voit siirtyä takaisin kirjautumisnäkymään painamalla "Back to Login"-painiketta ja kirjatua sisään seuraamalla edellisen kohdan ohjeita.
+Jos käyttäjän luominen onnistuu saat ilmoituksen onnistuneesta tapahtumasta. Tämän jälkeen voit siirtyä takaisin kirjautumisnäkymään painamalla _"Back to Login"_-painiketta ja kirjatua sisään seuraamalla edellisen kohdan ohjeita.
 
 ![Onnistunut rekisteröinti](https://user-images.githubusercontent.com/55188494/116752193-74703080-aa05-11eb-8bf6-bb6a80ba3ba5.png)
 
@@ -42,20 +42,22 @@ Jos käyttäjätunnus on jo olemassa tai annetut syötteet eivät ole valideja s
 
 ## Kurssien hallinnointi
 
-Kirjatuneelle käyttäjä näkee kaikki lisäämänsä kurssit. Näkymässä käyttäjän on myös mahdollista hallinnoida kurssejaan.
+Kirjauduttuaan sovellukseen, käyttäjä näkee kaikki lisäämänsä kurssit. Tässä näkymässä käyttäjän voi lisätä uusia kursseja, muokata kurssien tietoja sekä poistaa yksittäisiä tai kaikki kurssit.
 
 ![Kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752299-ad100a00-aa05-11eb-9e64-7ac43be0bce4.png)
 
 ### Kurssin lisääminen
 
-Uuden kurssin voi lisätä antamalla kurssille nimen, opintopiste määrän, arvosanan, suoritusstatuksen sekä kurssiin liittyvän URL-osoitteen niille varattuihin kenttiin. 
+Uuden kurssin voi lisätä syöttämällä kurssin nimen, opintopiste määrän, arvosanan, suoritusstatuksen sekä kurssiin liittyvän URL-osoitteen niille varattuihin kenttiin. 
 
 ![Kurssin lisäys](https://user-images.githubusercontent.com/55188494/116752583-15f78200-aa06-11eb-8483-a6f3ddde8b6e.png)
 
-Tämän jälkeen klikkaamalla _"Add new course"_ -painiketta, kurssi lisätään tietokantaan ja esitetään taulukossa. 
+Tämän jälkeen klikkaamalla _"Add new course"_ -painiketta, kurssi lisätään tietokantaan ja esitetään taulukossa.
+
 ![Päivitetty kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752986-a8982100-aa06-11eb-86ce-bfa92d900ac3.png)
 
 Huomioitahan, että kurssille on syötettävä minimissään nimi ja opintopiste määrä. Muutoin saat virhe-ilmoituksen:
+
 ![Puuttuvat opintopisteet](https://user-images.githubusercontent.com/55188494/116752760-522ae280-aa06-11eb-8c21-e4dbc0a0da0e.png)
 
 ### Kurssin tietojen muokkaaminen
