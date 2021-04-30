@@ -58,4 +58,4 @@ Tarkistuksien läpäistyä, [CourseService](https://github.com/juhana-peltomaa/o
 
 ### Muut toiminnallisuudet
 
-Sovelluksen muutkin toiminnallisuudet seuraavat läheisesti yllä esitettyjä - käyttäjä kutsuu käyttöliittymän kautta sovelluslogiikassa sijatsevaa metodia tapahtumakäsittelijän avulla. Metodi suoritetaan esim. kurssien tietojen päivittäminen tietokantaan, jonka jälkeen kontrollin palautuessa käyttöliittymään kutsutaan kurssinäkymässä olevien tietojen päivittämistä. 
+Sovelluksen muutkin toiminnallisuudet seuraavat läheisesti yllä esitettyjä. Käyttäjän on mahdollista kutsua sovelluslogiikassa sijaitsevia metodeja käyttöliittymän tapahtumakäsittelijöiden kautta. Esimerkiksi kurssien tietojen päivittämiseksi kutsutaan sovelluslogiikassa sijaitsevaa päivitys-metodia, joka vastaavasti tekee kutsun tietokantaa käyttäviin metodeihin, joka päivittää kurssin tiedot tietokantaan. Kontrollin jälleen palautuessa käyttöliittymään kutsutaan käyttöliittymässä olevien tietojen päivittämistä varten luotua metodia sovelluslogiikasta. 
