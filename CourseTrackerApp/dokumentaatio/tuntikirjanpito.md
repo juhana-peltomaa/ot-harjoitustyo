@@ -17,4 +17,5 @@
 | 26.4  | 4    | skvenssikaavio toiminnallisuuksista, testikattavuuden laajentamista + deadline valmisteluja |
 | 29.4  | 3    | käyttäjä voi lisätä kurssiin liittyvän URL:in kurssitietoihin + url:in validointi |
 |       | 2    | url:ia tuplaklikkaamlla sivusto avautuu selaimella + statseja suoritetuista kursseista lisätty |
-| yht   | 41   | | 
+| 30.4  | 2    | Docstring lisäilyä ja arkkitehtuuri.md:n päivittämistä |
+| yht   | 43   | | 
