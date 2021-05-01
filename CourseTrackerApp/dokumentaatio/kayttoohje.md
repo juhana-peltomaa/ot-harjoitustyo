@@ -22,13 +22,13 @@ Kun sovellus käynnistetään, avautuu kirjautumisnäkymä:
 
 ![Kirjautumisnäkymä](https://user-images.githubusercontent.com/55188494/116752036-3246ef00-aa05-11eb-8d85-e795f9fca38d.png)
 
-Sovellukseen voi kirjatua syöttämällä olemassaoleva käyttäjätunnus sekä salasana niille varattuihin syötekenttiin ja painamalla "Login"-painiketta
+Sovellukseen voi kirjatua syöttämällä olemassaoleva käyttäjätunnus sekä salasana niille varattuihin syötekenttiin ja painamalla _"Login"_-painiketta
 
 ## Uuden käyttäjän luominen
 
-Uuden käyttäjän luomisnäkymään voi siirtä kirjautumisnäkymästä painamalla "Create User" -painiketta.
+Uuden käyttäjän luomisnäkymään voi siirtä kirjautumisnäkymästä painamalla _"Create User"_ -painiketta.
 
-Tässä näkymässä voit luoda uuden käyttäjän syöttämällä käyttäjätunnuksen sekä salasanan niille varattuihin syötekenttiin ja painamalla "Create new user"-painiketta.
+Tässä näkymässä voit luoda uuden käyttäjän syöttämällä käyttäjätunnuksen sekä salasanan niille varattuihin syötekenttiin ja painamalla _"Create"_-painiketta.
 
 ![Käyttäjän luomisnäkymä](https://user-images.githubusercontent.com/55188494/116752122-54407180-aa05-11eb-8cb0-3a71f438f9cf.png)
 
