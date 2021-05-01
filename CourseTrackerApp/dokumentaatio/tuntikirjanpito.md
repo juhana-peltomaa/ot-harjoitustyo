@@ -18,4 +18,5 @@
 | 29.4  | 3    | käyttäjä voi lisätä kurssiin liittyvän URL:in kurssitietoihin + url:in validointi |
 |       | 2    | url:ia tuplaklikkaamlla sivusto avautuu selaimella + statseja suoritetuista kursseista lisätty |
 | 30.4  | 2    | Docstring lisäilyä ja arkkitehtuuri.md:n päivittämistä |
-| yht   | 43   | | 
+| 1.4   | 2    | Testikattavuuden kasvattamista + siivoilua |
+| yht   | 45   | | 
