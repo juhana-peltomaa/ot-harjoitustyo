@@ -104,7 +104,11 @@ class CourseRepo:
 
         cursor.execute(DELETE_ALL_COURSES, (user, ))
 
+        rows_effected = cursor.rowcount
+
         self._connection.commit()
+
+        return rows_effected
 
     def delete_one_course(self, name, user):
         """Poistaa käyttäjän (user) tietokantaan tallentaman kurssin sen nimen perusteella.
@@ -118,14 +122,18 @@ class CourseRepo:
 
         cursor.execute(DELETE_ONE_COURSE, (name, user))
 
+        rows_effected = cursor.rowcount
+
         self._connection.commit()
+
+        return rows_effected
 
     def update_course_info(self, id, name, credit, grade, status, user, url):
         """Päivittää kurssin tietokantaan tallennettuja tietoja syötettyjen arvojen perusteella.
 
         Args:
             id: Numeroarvo, joka on uniikki jokaiselle kurssille.
-            name: Merkkijonoarvo, joka kuvaa kurssin nimejä.    
+            name: Merkkijonoarvo, joka kuvaa kurssin nimejä.
             credit: Numeroarvo, joka kuvaa kurssin opintopiste määrää.
             grade: Numeroarvo, joka kuvaa kurssin arvosanaa.
             status: Boolean-arvo, joka kuvaa kurssin suoritustilaa.

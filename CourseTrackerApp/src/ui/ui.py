@@ -10,7 +10,7 @@ class UI:
         self._current_view = None
 
     def start(self):
-        self._show_login_view()  # erotetiin LoginView omaksi olioksi!
+        self._show_login_view()
 
     # toteutettiin nykyisen näkymän piilottaminen ja "tuhoaminen"
     def _hide_current_view(self):
@@ -20,7 +20,7 @@ class UI:
         self._current_view = None
 
     def _show_login_view(self):    # login-näkymän näyttäminen
-        self._hide_current_view()  # kutsuu hide-metodin kautta yksittäisiä destroy metodeja
+        self._hide_current_view()
 
         self._current_view = LoginView(
             self._root, self._show_course_view, self._show_create_user_view)

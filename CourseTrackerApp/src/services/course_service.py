@@ -331,7 +331,11 @@ class CourseService:
         """
 
         try:
-            self._c_repo.delete_one_course(name, self.current_user())
+            rows_effected = self._c_repo.delete_one_course(
+                name, self.current_user())
+
+            if rows_effected < 1:
+                return False
             return True
         except Exception:
             raise CourseUpdateError()

@@ -17,17 +17,17 @@ class Course:
         Args:
             name: Merkkijonoarvo, joka kuvaa kurssin nimeä.
             credit: Numeroarvo, joka kuvaa kurssin opintopiste määrää.
-            grade: 
+            grade:
                 Vapaaehtoinen, oletusarvoltaan None.
                 Numeroarvo, joka kuvaa kurssin arvosanaa.
             status:
-                Vapaaehtoinen, oletusarvoltaan False. 
+                Vapaaehtoinen, oletusarvoltaan False.
                 Boolean-arvo, joka kuvaa kurssin suoritustilaa.
-            user: 
+            user:
                 Vapaaehtoinen, oletusarvoltaan None.
                 Merkkijonoarvo, jonka arvona uniiki käyttäjänimi.
             url:
-                Vapaaehtoinen, oletusarvoltaan None. 
+                Vapaaehtoinen, oletusarvoltaan None.
                 Merkkijonoarvo, joka kuvastaa kurssiin liittyvää URL-osoitetta.
         """
 
