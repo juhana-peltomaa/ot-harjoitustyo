@@ -66,7 +66,7 @@ Jo tallennettujen kurssien tietoja voi muokata valitsemalla kurssi taulukosta si
 
 ![Update_course_instruct](https://user-images.githubusercontent.com/55188494/116754420-fe6dc880-aa08-11eb-887a-8df45c9e6bd1.gif)
 
-Huom! Yllä päivitetty kurssi sai statukseksi _"Completed"_, jolloin samalla päivittyi _"Course Statistics for 'Completed' courses"_-kentässä olevat tiedot. Tämä kenttä ilmoittaa suoritettujen kurssien lukumäärän, suoritettujen opintopisteiden määrän sekä suoritettujen kurssien painotetun keskiarvon. 
+Huom! Yllä päivitetty kurssi sai statukseksi _"Completed"_, jolloin samalla päivittyi _"Course Statistics for 'Completed' courses"_-kentässä olevat tiedot. Tämä kenttä huomioi ainoastaan kurssit, joiden status on _"Completed"_ ja ilmoittaa näiden kurssien lukumäärän, opintopisteiden yhteismäärän sekä kurssien painotetun keskiarvon. 
 
 Jos annat kurssille statuksen _"Completed"_, täytyy sinun antaa kurssille myös arvosana. Muutoin saat seuraavan virhe ilmoituksen:
 
