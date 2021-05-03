@@ -3,7 +3,7 @@
 Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, kirjautua sovellukseen ja hallinnoida omia kurssejaan mm. lisäämällä, muokkaamalla ja poistamalla niitä. Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan omat kurssinsa.
 
 ## Releases
-[Viikko 6 release]((https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko6)
+[Viikko 6 release](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko6)
 
 [Viikko 5 release](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko5)
 
