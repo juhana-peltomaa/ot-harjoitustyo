@@ -42,7 +42,7 @@ Jos käyttäjätunnus on jo olemassa tai annetut syötteet eivät ole valideja s
 
 ## Kurssien hallinnointi
 
-Kirjauduttuaan sovellukseen, käyttäjä näkee kaikki lisäämänsä kurssit. Tässä näkymässä käyttäjän voi lisätä uusia kursseja, muokata kurssien tietoja sekä poistaa yksittäisiä tai kaikki kurssit.
+Kirjauduttuaan sovellukseen, käyttäjä näkee kaikki lisäämänsä kurssit. Tässä näkymässä käyttäjän voi lisätä uusia kursseja, muokata olemassa olevien kurssien tietoja sekä poistaa yksittäisiä tai kaikki kurssit. Käyttäjä näkee myös statistiikkaa kursseista, jotka on merkinnyt suoritetuiksi antamalla niiden statukseksi _"Completed"_.
 
 ![Kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752299-ad100a00-aa05-11eb-9e64-7ac43be0bce4.png)
 
@@ -62,11 +62,11 @@ Huomioitahan, että kurssille on syötettävä minimissään nimi ja opintopiste
 
 ### Kurssin tietojen muokkaaminen
 
-Jo tallennettujen kurssien tietoja voi muokata valitsemalla kurssi taulukosta sitä klikkaamalla. Tällöin kurssin kaikki tiedot ovat esillä _Course information_ -syötekentissä. Tämän jälkeen voit muuttaa haluamiasi kenttiä ja klikata _"Update course"_ -painiketta, jolloin kurssin tiedot päivittyvät taulukossa. 
+Jo tallennettujen kurssien tietoja voi muokata valitsemalla kurssi taulukosta sitä klikkaamalla. Tällöin kurssin kaikki tiedot ovat latautuvat _Course information_ -syötekenttiin. Tämän jälkeen käyttäjä voi muuttaa haluamiaan kenttiä ja klikata _"Update course"_ -painiketta, jolloin kurssin tiedot päivittyvät taulukossa. 
 
 ![Update_course_instruct](https://user-images.githubusercontent.com/55188494/116754420-fe6dc880-aa08-11eb-887a-8df45c9e6bd1.gif)
 
-Huom! Yllä päivitetty kurssi sai statukseksi _"Completed"_, jolloin samalla päivittyi _"Course Statistics for 'Completed' courses"_-kentässä olevat tiedot. Tämä kenttä huomioi ainoastaan kurssit, joiden status on _"Completed"_ ja ilmoittaa näiden kurssien lukumäärän, opintopisteiden yhteismäärän sekä kurssien painotetun keskiarvon. 
+Huom! Yllä päivitetty kurssi sai statukseksi _"Completed"_, jolloin samalla päivittyi _"Course Statistics for 'Completed' courses"_-kentän tiedot. Tämä kenttä huomioi ainoastaan kurssit, joiden status on _"Completed"_. Näistä kursseista ilmoitetaan niiden lukumäärä, opintopisteiden yhteismäärä sekä kurssien painotettu keskiarvo. 
 
 Jos annat kurssille statuksen _"Completed"_, täytyy sinun antaa kurssille myös arvosana. Muutoin saat seuraavan virhe ilmoituksen:
 
