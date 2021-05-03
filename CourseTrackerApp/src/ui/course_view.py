@@ -135,21 +135,26 @@ class CourseView:
         values = self._current_courses.item(select, "values")
 
         # sisällytetään valitun rivin arvot
-        self._course_id.set(values[0])
-        self._course_name_entry.insert(0, values[1])
-        self._course_credit_entry.insert(0, values[2])
-        self._course_grade_entry.insert(0, values[3])
-        self._course_status.set(values[4])
-        self._course_url_entry.insert(0, values[6])
+        try:
+            self._course_id.set(values[0])
+            self._course_name_entry.insert(0, values[1])
+            self._course_credit_entry.insert(0, values[2])
+            self._course_grade_entry.insert(0, values[3])
+            self._course_status.set(values[4])
+            self._course_url_entry.insert(0, values[6])
+        except:
+            pass
 
     def link_tree(self, event):
         select = self._current_courses.focus()
         values = self._current_courses.item(select, "values")
 
-        url = values[6]
-
-        import webbrowser
-        webbrowser.open('{}'.format(url))
+        try:
+            url = values[6]
+            import webbrowser
+            webbrowser.open('{}'.format(url))
+        except:
+            pass
 
     def _clear_entry_input(self):
         self._course_id.set(OPTIONS[0])
