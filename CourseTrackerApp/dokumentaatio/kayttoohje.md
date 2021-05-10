@@ -20,7 +20,7 @@
 
 Kun sovellus käynnistetään, avautuu kirjautumisnäkymä:
 
-![Kirjautumisnäkymä](https://user-images.githubusercontent.com/55188494/116752036-3246ef00-aa05-11eb-8d85-e795f9fca38d.png)
+![CoursesView](https://user-images.githubusercontent.com/55188494/117687973-a11c0900-b1b8-11eb-9ece-c02f03c5d978.png)
 
 Sovellukseen voi kirjatua syöttämällä olemassaoleva käyttäjätunnus sekä salasana niille varattuihin syötekenttiin ja painamalla _"Login"_-painiketta
 
