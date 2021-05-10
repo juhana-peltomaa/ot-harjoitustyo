@@ -20,4 +20,5 @@
 | 30.4  | 2    | Docstring lisäilyä ja arkkitehtuuri.md:n päivittämistä |
 | 1.5   | 2    | Testikattavuuden kasvattamista + siivoilua |
 | 9.5   | 1    | Testaus dokumentin aloittaminen |
-| yht   | 46   | | 
+| 10.5  | 3    | Käyttäjän poistaminen on mahdollista + CourseView -luokan initilize -metodin pilkkominen + docstring laajennusta |
+| yht   | 49   | | 
