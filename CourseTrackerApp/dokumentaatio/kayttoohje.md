@@ -88,6 +88,8 @@ Käyttäjä voi myös poistaa kaikki tallentamansa kurssit painamalla _"Remove a
 
 ### Käyttäjän poistaminen
 
-Käyttäjä voi poistaa kaikki oman käyttäjänsä painamalla _"Delete User"_ -painiketta. Käyttäjä saa vielä ilmoituksen, jossa varmistetaan, että käyttäjä tietää poistamisen seuraamukset. Jos käyttäjä valitsee ilmoitusnäkymässä _"Yes"_, poistetaan käyttäjän kaikki tiedot ja käyttäjä kirjautuu ulos:
+Käyttäjä voi poistaa kaikki tietonsa painamalla _"Delete User"_ -painiketta. Tämän jälkeen käyttäjä saa ilmoituksen, jossa varmistetaan, että poistamisen seuraamukset ymmärretään.
 
+Jos käyttäjä valitsee ilmoitusnäkymässä _"Yes"_, poistetaan käyttäjän kaikki tiedot tietokannasta ja käyttäjä kirjautuu ulos:
 
+![Delete-user](https://user-images.githubusercontent.com/55188494/117691823-9cf1ea80-b1bc-11eb-8bfd-9e97349bb47b.gif)
