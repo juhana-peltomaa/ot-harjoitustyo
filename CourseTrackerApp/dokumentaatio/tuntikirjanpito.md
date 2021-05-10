@@ -21,4 +21,5 @@
 | 1.5   | 2    | Testikattavuuden kasvattamista + siivoilua |
 | 9.5   | 1    | Testaus dokumentin aloittaminen |
 | 10.5  | 3    | Käyttäjän poistaminen on mahdollista + CourseView -luokan initilize -metodin pilkkominen + docstring laajennusta |
-| yht   | 49   | | 
+|       | 1    | Käyttöohjeiden päivittämistä / laajentamista |
+| yht   | 50   | | 
