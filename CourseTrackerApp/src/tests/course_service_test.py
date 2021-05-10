@@ -21,6 +21,9 @@ class TestCourseService(unittest.TestCase):
         self.course_test3 = Course(
             "Ohjelmistotuotanto", 6, 4, True, self.user_test2.username, "")
 
+        self.course_test4 = Course(
+            "Ohjelmistotekniikka", 6, 5, "Completed", self.user_test2.username, "")
+
     def test_create_new_user(self):
         course_service.create_new_user("test3", "test123")
 
@@ -151,3 +154,17 @@ class TestCourseService(unittest.TestCase):
         course_list = course_service.display_all_courses()
 
         self.assertEqual(course_list, None)
+
+    def test_statistics(self):
+        course_service.create_new_user("test2", "test123")
+        user = course_service.login_user("test2", "test123")
+
+        name = self.course_test4.name
+        credit = self.course_test4.credit
+        grade = self.course_test4.grade
+        status = self.course_test4.status
+        url = self.course_test4.url
+
+        course_service.create_new_course(name, str(credit), grade, status, url)
+
+        self.assertEqual(course_service.statistics(), (1, 6, 5))

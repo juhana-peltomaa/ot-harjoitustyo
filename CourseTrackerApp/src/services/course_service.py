@@ -35,6 +35,10 @@ class InvalidUrlError(Exception):
     pass
 
 
+class DeleteUserError(Exception):
+    pass
+
+
 class CourseService:
     """Sovelluslogiikasta vastaava luokka."""
 
@@ -368,6 +372,25 @@ class CourseService:
         self._c_repo.update_course_info(
             id, name, credit, grade, str(status), self.current_user(), url)
         return True
+
+    def delete_user(self):
+        """Poistaa käyttäjän sekä kaikki käyttäjän kurssit tietokannasta
+
+        Raises:
+            DeleteUserError: Jos käyttäjän tai kurssien poistaminen ei onnistu.
+
+        Returns:
+            True, jos käyttäjän sekä käyttäjän kurssien poistaminen onnistui.
+        """
+        try:
+            self._c_repo.delete_all(self._user["username"])
+
+            self._u_repo.delete_user(self._user["username"])
+
+            return True
+
+        except Exception:
+            raise DeleteUserError()
 
 
 course_service = CourseService()

@@ -9,6 +9,8 @@ FIND_USERNAME = "SELECT * FROM users WHERE username = ?;"
 
 DELETE_ALL = "DELETE FROM users;"
 
+DELETE_USER = "DELETE FROM users WHERE username = ?;"
+
 FIND_ALL_USERS = "SELECT * FROM users;"
 
 
@@ -116,6 +118,16 @@ class UserRepo:
         cursor = self._connection.cursor()
 
         cursor.execute(DELETE_ALL)
+
+        self._connection.commit()
+
+    def delete_user(self, user):
+        """Poistaa valitun käyttäjän (user) tietokannasta
+
+        """
+
+        cursor = self._connection.cursor()
+        cursor.execute(DELETE_USER, (user, ))
 
         self._connection.commit()
 

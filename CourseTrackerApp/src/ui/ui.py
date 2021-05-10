@@ -12,14 +12,15 @@ class UI:
     def start(self):
         self._show_login_view()
 
-    # toteutettiin nykyisen näkymän piilottaminen ja "tuhoaminen"
+    # nykyisen näkymän piilottaminen ja "tuhoaminen"
     def _hide_current_view(self):
         if self._current_view:
             self._current_view.destroy()
 
         self._current_view = None
 
-    def _show_login_view(self):    # login-näkymän näyttäminen
+    # LoginView -luokan kutsuminen
+    def _show_login_view(self): 
         self._hide_current_view()
 
         self._current_view = LoginView(
@@ -27,7 +28,7 @@ class UI:
 
         self._current_view.pack()
 
-    # create user-näkymän näyttäminen/kutsuminen
+    # CreateUserView -luokan kutsuminen
     def _show_create_user_view(self):
         self._hide_current_view()
 
@@ -35,7 +36,8 @@ class UI:
 
         self._current_view.pack()
 
-    def _show_course_view(self):  # courses-näkymän näyttäminen/kutsuminen
+    # CourseView -luokan kutsuminen
+    def _show_course_view(self): 
         self._hide_current_view()
 
         self._current_view = CourseView(self._root, self._show_login_view)
