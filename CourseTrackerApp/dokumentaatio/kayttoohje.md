@@ -20,7 +20,7 @@
 
 Kun sovellus käynnistetään, avautuu kirjautumisnäkymä:
 
-![CoursesView](https://user-images.githubusercontent.com/55188494/117687973-a11c0900-b1b8-11eb-9ece-c02f03c5d978.png)
+![LoginView](https://user-images.githubusercontent.com/55188494/117688190-d6285b80-b1b8-11eb-83c7-7510977b6066.png)
 
 Sovellukseen voi kirjatua syöttämällä olemassaoleva käyttäjätunnus sekä salasana niille varattuihin syötekenttiin ja painamalla _"Login"_-painiketta
 
@@ -44,7 +44,7 @@ Jos käyttäjätunnus on jo olemassa tai annetut syötteet eivät ole valideja s
 
 Kirjauduttuaan sovellukseen, käyttäjä näkee kaikki lisäämänsä kurssit. Tässä näkymässä käyttäjän voi lisätä uusia kursseja, muokata olemassa olevien kurssien tietoja sekä poistaa yksittäisiä tai kaikki kurssit. Käyttäjä näkee myös statistiikkaa kursseista, jotka on merkinnyt suoritetuiksi antamalla niiden statukseksi _"Completed"_.
 
-![Kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752299-ad100a00-aa05-11eb-9e64-7ac43be0bce4.png)
+![CoursesView](https://user-images.githubusercontent.com/55188494/117687973-a11c0900-b1b8-11eb-9ece-c02f03c5d978.png)
 
 ### Kurssin lisääminen
 
