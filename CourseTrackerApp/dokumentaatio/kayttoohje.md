@@ -72,7 +72,22 @@ Jos annat kurssille statuksen _"Completed"_, täytyy sinun antaa kurssille myös
 
 ![Completed_courses_need_Grade](https://user-images.githubusercontent.com/55188494/116788192-92db3800-aaa8-11eb-9cce-53bbb2369781.png)
 
-### Kurssin poistaminen
+### Yksittäisen kurssin poistaminen
 
-TBA
+Käyttäjä voi poistaa yksittäisen kurssin valitsemalla kurssin taulukosta sitä klikkaamalla ja tämän jälkeen painamalla _"Remove course"_ -painiketta: 
+
+![Kurssin-poistaminen](https://user-images.githubusercontent.com/55188494/117690401-1b4d8d00-b1bb-11eb-9ac5-54198e35f499.gif)
+
+Kurssin poistamisen yhteydessä myös kursseihin liittyvä statistiikka päivittyi. 
+
+### Kaikkien kurssien poistaminen 
+
+Käyttäjä voi myös poistaa kaikki tallentamansa kurssit painamalla _"Remove all course"_ -painiketta: 
+
+![DeleteAllCourses](https://user-images.githubusercontent.com/55188494/117691113-d4ac6280-b1bb-11eb-80c1-5f8805cf01d3.gif)
+
+### Käyttäjän poistaminen
+
+Käyttäjä voi poistaa kaikki oman käyttäjänsä painamalla _"Delete User"_ -painiketta. Käyttäjä saa vielä ilmoituksen, jossa varmistetaan, että käyttäjä tietää poistamisen seuraamukset. Jos käyttäjä valitsee ilmoitusnäkymässä _"Yes"_, poistetaan käyttäjän kaikki tiedot ja käyttäjä kirjautuu ulos:
+
 
