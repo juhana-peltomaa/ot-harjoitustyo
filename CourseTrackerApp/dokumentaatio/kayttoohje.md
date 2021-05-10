@@ -64,7 +64,7 @@ Huomioitahan, että kurssille on syötettävä minimissään nimi ja opintopiste
 
 Jo tallennettujen kurssien tietoja voi muokata valitsemalla kurssi taulukosta sitä klikkaamalla. Tällöin kurssin kaikki tiedot ovat latautuvat _Course information_ -syötekenttiin. Tämän jälkeen käyttäjä voi muuttaa haluamiaan kenttiä ja klikata _"Update course"_ -painiketta, jolloin kurssin tiedot päivittyvät taulukossa. 
 
-![Update_course_instruct](https://user-images.githubusercontent.com/55188494/116754420-fe6dc880-aa08-11eb-887a-8df45c9e6bd1.gif)
+![CourseUpdate](https://user-images.githubusercontent.com/55188494/117689354-f1e03180-b1b9-11eb-860b-736242ff0d77.gif)
 
 Huom! Yllä päivitetty kurssi sai statukseksi _"Completed"_, jolloin samalla päivittyi _"Course Statistics for 'Completed' courses"_-kentän tiedot. Tämä kenttä huomioi ainoastaan kurssit, joiden status on _"Completed"_. Näistä kursseista ilmoitetaan niiden lukumäärä, opintopisteiden yhteismäärä sekä kurssien painotettu keskiarvo. 
 
