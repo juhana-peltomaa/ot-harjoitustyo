@@ -54,7 +54,7 @@ Uuden kurssin voi lisätä syöttämällä kurssin nimen, opintopiste määrän,
 
 Tämän jälkeen klikkaamalla _"Add new course"_ -painiketta, kurssi lisätään tietokantaan ja esitetään taulukossa:
 
-![Päivitetty kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752986-a8982100-aa06-11eb-86ce-bfa92d900ac3.png)
+![Päivitetty kurssinäkymä](https://user-images.githubusercontent.com/55188494/117688651-433bf100-b1b9-11eb-9f57-785703648517.png)
 
 Huomioitahan, että kurssille on syötettävä minimissään nimi ja opintopiste määrä. Muutoin saat virhe-ilmoituksen:
 
