@@ -19,8 +19,8 @@ _TBA_
 
 - käyttäjä voi luoda järjestelmään tilin:
   - [x] uniikin käyttäjätunnuksen ja salasanan tallentaminen tietokantaan 
-  - [ ] käyttäjätunnuksen tulee olla 5-15 merkkiä
-  - [ ] salasanan tulee olla vähintään 5 merkkiä 
+  - [x] käyttäjätunnuksen tulee olla vähintään 4 merkkiä
+  - [x] salasanan tulee olla vähintään 4 merkkiä
 
 - käyttäjä voi kirjautua järjestelmään kirjautumislomakkeella, jos:
   - [x] lomakkeelle syötetty käyttäjätunnus sekä salasana löytyvät tietokannasta 
@@ -48,6 +48,8 @@ _TBA_
 
 - [x] käyttäjä voi kirjautua ulos järjestelmästä 
 
+- [x] käyttäjä voi poistaa kaikki tietonsa (käyttäjän poistaminen)
+
 ## Jatkokehitysideoita
 
 Sovellusta voidaan täydennetään mm. seuraavilla toiminnallisuuksilla
@@ -55,4 +57,3 @@ Sovellusta voidaan täydennetään mm. seuraavilla toiminnallisuuksilla
 - kurssinäkymän järjestäminen esim. suoritusstatuksen tai arvosanan perusteella
 - tietojen lisäämisen yksittäisiin kursseihin esim. päiväys, osa-suorituksia, lisätietoa
 - kurssien erittely opinto-kokonaisuukisen mukaan esim. pakolliset, vapaa-valintaiset
-- käyttäjän poistaminen
