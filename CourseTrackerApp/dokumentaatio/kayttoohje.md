@@ -50,9 +50,9 @@ Kirjauduttuaan sovellukseen, käyttäjä näkee kaikki lisäämänsä kurssit. T
 
 Uuden kurssin voi lisätä syöttämällä kurssin nimen, opintopiste määrän, arvosanan, suoritusstatuksen sekä kurssiin liittyvän URL-osoitteen niille varattuihin kenttiin. 
 
-![Kurssin lisäys](https://user-images.githubusercontent.com/55188494/116752583-15f78200-aa06-11eb-8483-a6f3ddde8b6e.png)
+![Kurssin lisäys](https://user-images.githubusercontent.com/55188494/117688528-230c3200-b1b9-11eb-8b38-483f1dc7cadb.png)
 
-Tämän jälkeen klikkaamalla _"Add new course"_ -painiketta, kurssi lisätään tietokantaan ja esitetään taulukossa.
+Tämän jälkeen klikkaamalla _"Add new course"_ -painiketta, kurssi lisätään tietokantaan ja esitetään taulukossa:
 
 ![Päivitetty kurssinäkymä](https://user-images.githubusercontent.com/55188494/116752986-a8982100-aa06-11eb-86ce-bfa92d900ac3.png)
 
