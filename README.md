@@ -11,6 +11,8 @@ Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan o
 Sovellus on testattu Python-versiolla ```3.6.0```. Erityisesti, jos käytössä on vanhempi versio voi sovelluksen käytössä esiintyä ongelmia. 
 
 ## Releases
+[Loppupalautus](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko7)
+
 [Viikko 6 release](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko6)
 
 [Viikko 5 release](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko5)
