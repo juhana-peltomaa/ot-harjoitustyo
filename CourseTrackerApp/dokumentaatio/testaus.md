@@ -22,8 +22,7 @@ Sovelluksen testauksen haarautumakattavuus on 80% - testauksen ulkopuolelle on j
 
 ![Coverage](https://user-images.githubusercontent.com/55188494/118012752-aeb8c680-b351-11eb-8042-923176151734.png)
 
-Testauksen ulkopuolelle jätettiin mm. build.py sekä muutamia osioita config.py ja initialize_database.py	tiedostoista. Sovelluslogiikan osalta testit eivät testaa muun muassa uuden kurssin lisäystä sekä olemassa olevan kurssin päivittämistä virheellisillä syötteillä. Näiden toiminnallisuuksien toiminta on huomioitu kuitenkin kattavilla suorituksen aikaisilla validoinneilla ja virheilmoituksilla käyttäjälle. Testien ulkopuolelle jäi myös tilanteet, joissa käyttäjä poistetaan kokonaan. 
-
+Testauksen ulkopuolelle jätettiin mm. _build.py_ sekä osittain _config.py_ ja _initialize_database.py_. Sovelluslogiikan osalta testit eivät testaa mm. uuden kurssin lisäystä sekä olemassa olevan kurssin päivittämistä virheellisillä syötteillä. Näiden toiminnallisuuksien toiminta on huomioitu kuitenkin kattavilla suorituksen aikaisilla validoinneilla ja virheilmoituksilla käyttäjälle. Testien ulkopuolelle jäi myös tilanteet, joissa käyttäjä poistetaan kokonaan. 
 
 ## Järjestelmätestaus
 
