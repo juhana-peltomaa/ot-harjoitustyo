@@ -1,6 +1,10 @@
 # Course Tracker App
 
-Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, kirjautua sovellukseen ja hallinnoida omia kurssejaan mm. lisäämällä, muokkaamalla ja poistamalla niitä. Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan omat kurssinsa.
+Sovelluksen käyttäjän on mahdollista luoda uusi käyttäjä ja kirjautua sovellukseen. Kirjautunut käyttäjä voi hallinnoida kurssejaan muun muassa lisäämällä uusia tai muokkaamalla olemassa olevia kursseja. Sovellus näyttää käyttäjälle myös statistiikkaa suoritetusta kursseista kuten kurssien lukumäärän, opintopisteiden yhteismäärän sekä painotetun keskiarvon. 
+
+Käyttäjän on myös mahdollista poistaa yksittäisiä tai kaikki tallentamansa kurssit. 
+
+Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan omat kurssinsa. Käyttäjä voi myös halutessaan poistaa kaikki tietonsa sovelluksesta.
 
 # Huomio Python-versiosta
 
