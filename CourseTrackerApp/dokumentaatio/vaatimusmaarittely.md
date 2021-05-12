@@ -53,3 +53,4 @@ Sovellusta voidaan täydennetään mm. seuraavilla toiminnallisuuksilla
 - kurssinäkymän järjestäminen esim. suoritusstatuksen tai arvosanan perusteella
 - tietojen lisäämisen yksittäisiin kursseihin esim. päiväys, osa-suorituksia, lisätietoa
 - kurssien erittely opinto-kokonaisuukisen mukaan esim. pakolliset, vapaa-valintaiset
+- tietojen tuominen / vieminen sovellukseen
