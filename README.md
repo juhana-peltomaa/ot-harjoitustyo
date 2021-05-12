@@ -2,6 +2,10 @@
 
 Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, kirjautua sovellukseen ja hallinnoida omia kurssejaan mm. lisäämällä, muokkaamalla ja poistamalla niitä. Sovellusta voi käyttää useampi käyttäjä, jolloin he näkevät ainoastaan omat kurssinsa.
 
+# Huomio Python-versiosta
+
+Sovellus on testattu Python-versiolla ```3.6.0```. Erityisesti, jos käytössä on vanhempi versio voi sovelluksen käytössä esiintyä ongelmia. 
+
 ## Releases
 [Viikko 6 release](https://github.com/juhana-peltomaa/ot-harjoitustyo/releases/tag/viikko6)
 
@@ -16,6 +20,8 @@ Sovelluksen nykyinen versio mahdollistaa käyttäjän luoda uusi käyttäjä, ki
 [Työaikakirjanpito](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/CourseTrackerApp/dokumentaatio/tuntikirjanpito.md)
 
 [Arkkitehtuurikuvaus](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/CourseTrackerApp/dokumentaatio/arkkitehtuuri.md)
+
+[Testausdokumentti](https://github.com/juhana-peltomaa/ot-harjoitustyo/blob/master/CourseTrackerApp/dokumentaatio/testaus.md)
 
 ## Asennus
 
