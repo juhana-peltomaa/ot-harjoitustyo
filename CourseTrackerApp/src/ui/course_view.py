@@ -1,4 +1,5 @@
 from tkinter import ttk, constants, messagebox, StringVar
+import webbrowser
 from services.course_service import course_service, ExistingCourseError, CourseEntryError, CourseUpdateError, CourseValueError, InvalidUrlError, DeleteUserError
 
 
@@ -6,20 +7,20 @@ OPTIONS = ["          ", "Registered", "On-going", "Completed"]
 
 
 class CourseView:
-    """ Luokka, joka luo näkymän, missä käyttäjä voi lisätä uusia, hallita omia kurssejaan sekä lukea statistiikkaa suoritetusta kursseista. 
+    """ Luokka, joka luo näkymän, missä käyttäjä voi lisätä uusia, hallita omia kurssejaan sekä lukea statistiikkaa suoritetusta kursseista.
         Käyttäjä voi myös poistaa tietonsa sekä kirjautua ulos.
 
     Attributes:
         root: UI:n juuri
         frame: Frame -olio, johon liitetään näkymän komponentteja.
 
-        _course_info_labels = Ensin None, mutta alustamisen jälkeen LabelFrame -olio, johon liitetään kurssien tietoja esittäviä komponenteja.
-        _update_course_buttons = Ensin None, mutta alustamisen jälkeen LabelFrame -olio, johon liitetään sovelluslogiikan mahdollistavat painikkeet.
-        _course_statistics_labels = Ensin None, mutta alustamisen jälkeen LabelFrame -olio, johon liitetään kurssien statisiikkaa esittäviä komponenteja.
+        _course_info_labels = Ensin None, alustamisen jälkeen LabelFrame -olio, johon liitetään kurssien tietoja esittäviä komponenteja.
+        _update_course_buttons = Ensin None, alustamisen jälkeen LabelFrame -olio, johon liitetään sovelluslogiikan mahdollistavat painikkeet.
+        _course_statistics_labels = Ensin None, alustamisen jälkeen LabelFrame -olio, johon liitetään kurssien statisiikkaa esittäviä komponenteja.
 
-        self._current_courses = Ensin None, mutta alustamisen jälkeen Treeview -olio, jossa esitetään käyttäjän nykyisten kurssien tietoja.
+        self._current_courses = Ensin None, alustamisen jälkeen Treeview -olio, jossa esitetään käyttäjän nykyisten kurssien tietoja.
 
-        self._course_id_entry = Ensin None, mutta alustamisen jälkeen Entry -olio, johon voidaan esittää kurssin id.
+        self._course_id_entry = Ensin None,alustamisen jälkeen Entry -olio, joka esittää kurssin id.
         self._course_name_entry = Ensin None, mutta alustamisen jälkeen Entry -olio, johon voidaan esittää yksittäisen kurssin nimi.
         self._course_credit_entry = Ensin " ", mutta alustamisen jälkeen Entry -olio, johon voidaan esittää kurssin opintopistemäärä.
         self._course_grade_entry = Ensin "", mutta alustamisen jälkeen Entry -olio, johon voidaan esittää kurssin arvosana.
@@ -29,21 +30,21 @@ class CourseView:
         self._course_status = StringVar() -olio, joka esittää kurssin statusta
         self._course_id = StringVar() -olio, joka esittää kurssin arvosanaa
 
-        self._completed_courses_label = StringVar() -olio, joka esittää suoritettujen kurssien lukumäärää.
-        self._completed_credits_label = StringVar() -olio, joka esittää suoritettujen kurssien opintopisteitä
-        self._average_gpa_label = StringVar() -olio, joka esittää suoritettujen kurssien painoetettua keskiarvoa
+        self._completed_courses_label = StringVar() -olio, esittää suoritettujen kurssien lukumäärää.
+        self._completed_credits_label = StringVar() -olio, esittää suoritettujen kurssien opintopisteitä
+        self._average_gpa_label = StringVar() -olio, esittää suoritettujen kurssien painoetettua keskiarvoa
 
-        self._show_login_view = show_login_view -metodi, jota kutsuttaessa näytetään LoginView -näkymä
+        self._show_login_view = show_login_view -metodi, kutsuttaessa näyttää LoginView -näkymän
 
         self._user = course_service.current_user(), hakee nykyisen käyttäjän nimen kutsumalla sovelluslogiikan metodia
         self._initialize(), kutsuu luokan metodia, jolla näkymä alustetaan
         self._display_all_courses(), kutsuu luokan metodia, joka näyttää kaikki käyttäjän kurssit
-        self._display_statistics(), kutsuu luokan metodia, joka näyttää käyttäjän kurssien statistiikan
+        self._display_statistics(), kutsuu metodia, joka näyttää käyttäjän kurssien statistiikan
 
     """
 
     def __init__(self, root, show_login_view):
-        """Luokan konstruktori. Alustaa kaikki tarvittavat muuttujat sekä oliot ja luo kurssinäkymästä vastaavan luokan. 
+        """Luokan konstruktori. Alustaa kaikki tarvittavat muuttujat sekä oliot ja luo kurssinäkymästä vastaavan luokan.
 
         """
 
@@ -103,9 +104,6 @@ class CourseView:
             if new_course:
                 self._display_all_courses()
                 self._display_statistics()
-            else:
-                messagebox.showinfo("Course registration",
-                                    f"Something went wrong in adding course {course_name}!")
 
         except ExistingCourseError:
             messagebox.showinfo("Course registration",
@@ -120,8 +118,8 @@ class CourseView:
                                 "Course registration failed.\nEnter valid input for credits and grade!\n\nCourses marked as 'Completed' must have a valid grade!")
 
         except InvalidUrlError:
-            messagebox.showinfo(("Course registration",
-                                 f"Something went wrong..\nURL {course_url} is not valid.\n\nMake sure the URL is given in its complete form i.e. 'https://www.google.com'."))
+            messagebox.showinfo("Course registration",
+                                f"Something went wrong..\nURL {course_url} is not valid.\n\nMake sure the URL is given in its complete form i.e. 'https://www.google.com'.")
 
     def _update_course_info(self):
         """ Päivittää valitun kurssin tiedot kutsumalla sovelluslogiikan metodia update_course_info käyttäjän antamilla syötteillä.
@@ -164,7 +162,7 @@ class CourseView:
             self._display_statistics()
 
     def _remove_all_courses(self):
-        """ Poistaa kaikki käyttäjän kurssit näkymästä sekä tietokannasta hyödyntämällä sovelluslogiikan metodeja.
+        """ Poistaa kaikki kurssit näkymästä ja tietokannasta sovelluslogiikan metodejen kautta.
             Samalla päivitetään näkymän kurssit sekä niihin liittyvän statistiikan esittäminen.
 
         """
@@ -193,8 +191,8 @@ class CourseView:
         self._course_url_entry.insert(0, "")
 
     def _select_course(self, e):
-        """ Hakee käyttäjän näkymässä klikkaaman kurssin kaikki tiedot ja asettaa ne näkyville syötekenttiin. 
-           Syötekentät on tyhjennetty ennen uudelleen täyttämistä kutsumalla _clear_entry_input -metodia.
+        """ Hakee käyttäjän klikkaaman kurssin tiedot ja asettaa ne näkyville syötekenttiin.
+           Syötekentät tyhjennetään ennen tätä kutsumalla _clear_entry_input -metodia.
 
         Args:
             e: bind -metodin mahdollistava parametrisyöte, jotta hiiren klikkaus kutsuu funktiota.
@@ -215,7 +213,7 @@ class CourseView:
             self._course_grade_entry.insert(0, values[3])
             self._course_status.set(values[4])
             self._course_url_entry.insert(0, values[6])
-        except:
+        except Exception:
             pass
 
     def link_tree(self, event):
@@ -229,13 +227,13 @@ class CourseView:
 
         try:
             url = values[6]
-            import webbrowser
             webbrowser.open('{}'.format(url))
-        except:
+        except Exception:
             pass
 
     def _display_all_courses(self):
-        """ Hakee kaikki käyttäjän kurssit hyödyntämällä sovelluslogiikan metodia ja lisää ne _current_courses -olioon.
+        """ Hakee kaikki käyttäjän kurssit hyödyntämällä sovelluslogiikan
+            metodia ja lisää ne _current_courses -olioon.
 
         Returns:
             None, jos kurssien näkymän päivittäminen sovelluslogiikassa ei onnistnut
@@ -254,7 +252,8 @@ class CourseView:
         return None
 
     def _display_statistics(self):
-        """ Hakee käyttäjän suorittamien kurssien statistiikkaa ja asettaa ne näkyvillä niille varattuihin kenttiin
+        """ Hakee käyttäjän suorittamien kurssien statistiikkaa ja
+            asettaa ne näkyvillä niille varattuihin kenttiin
 
         """
 
@@ -273,7 +272,8 @@ class CourseView:
             self._average_gpa_label["text"] = "Weighted GPA: " + str(gpa)
 
     def _delete_user(self):
-        """ Poistaa käyttäjän sekä kaikki käyttäjän kurssit. Metodi varmistaa ennen poistamista käyttäjältä, haluaako tämä todella poistaa tiedot.
+        """ Poistaa käyttäjän sekä kaikki käyttäjän kurssit.
+            Metodi varmistaa ennen poistamista käyttäjältä, haluaako tämä todella poistaa tiedot.
             Jos käyttäjä vastaa myöntävästi, tiedot poistetaan, muuten sovellus jatkaa toimintaa normaalisti.
 
         """

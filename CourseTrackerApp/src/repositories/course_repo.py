@@ -60,7 +60,8 @@ class CourseRepo:
             user: Merkkijonoarvo, jonka arvona uniiki käyttäjänimi.
 
         Returns:
-            course_info, joka sisältää tietokantaan tallennetut tiedot kurssista, jos se on olemassa. Muussa tapauksessa None.
+            course_info, joka sisältää tietokantaan tallennetut tiedot kurssista,
+            jos se on olemassa. Muussa tapauksessa None.
         """
 
         cursor = self._connection.cursor()

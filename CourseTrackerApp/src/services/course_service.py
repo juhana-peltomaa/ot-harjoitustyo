@@ -1,8 +1,9 @@
+import re
+import requests
+
 from entities.course import Course
 from entities.user import User
 
-import re
-import requests
 from repositories.course_repo import course_repository as c_repo
 from repositories.user_repo import user_repository as u_repo
 
@@ -60,7 +61,8 @@ class CourseService:
         self._u_repo = user_repository
 
     def login_user(self, username, password):
-        """Kirjaa käyttäjän sovellukseen sisään, jos käyttäjä on olemassa ja syötteet vastaavat tallennettuja tietoja.
+        """Kirjaa käyttäjän sovellukseen sisään, jos käyttäjä on olemassa
+           ja syötteet vastaavat tallennettuja tietoja.
 
         Args:
             username: Merkkijonoarvo, joka kuvaa käyttäjätunnusta.
@@ -188,7 +190,8 @@ class CourseService:
         return False
 
     def validate_grade(self, grade, status):
-        """Tarkistaa, että arvosana on " " tai väliltä 0-5. Lisäksi, kun status on "Completed" tarkistetaan, että arvosana on annettu.
+        """Tarkistaa, että arvosana on " " tai väliltä 0-5.
+           Kun status on "Completed" tarkistetaan, että arvosana on annettu.
 
         Args:
             grade: Numeroarvo, joka kuvaa kurssin arvosanaa.
@@ -246,7 +249,8 @@ class CourseService:
         """ Hakee tietokannasta kaikki kurssit ja palauttaa käyttäjälle kuuluvat kurssit listana
 
         Returns:
-            course_list, joka sisältää tiedot käyttäjän kursseista listassa. Jos käyttäjällä ei ole kursseja, palautetaan None.
+            course_list, sisältää tiedot käyttäjän kursseista listassa.
+            Jos käyttäjällä ei ole kursseja, palautetaan None.
         """
 
         course_list = []
@@ -274,9 +278,9 @@ class CourseService:
         """Luo statistiikka käyttäjän suorittamista kursseista.
 
         Returns:
-            completed_courses, joka sisältää kurssien lukumäärän, joiden status on "Completed".
-            completed_credits, joka sisältää opintopiste määrän kursseista, joiden status on "Completed".
-            avg_gpa, joka sisältää painotetun keskiarvon kursseista, joiden status on "Completed".
+            completed_courses, sisältää kurssien lukumäärän, joiden status on "Completed".
+            completed_credits, sisältää opintopiste määrän kursseista, joiden status on "Completed".
+            avg_gpa, sisältää painotetun keskiarvon kursseista, joiden status on "Completed".
         """
 
         completed_courses = 0
@@ -361,17 +365,21 @@ class CourseService:
         Returns:
             True, jos kurssin tietojen päivittäminen onnistui.
         """
+        try:
 
-        if self.validate_credit(str(credit)) is not True:
-            raise CourseValueError()
-        if self.validate_grade(str(grade), status) is not True:
-            raise CourseValueError()
-        if self.validate_url(str(url)) is not True:
-            raise InvalidUrlError()
+            if self.validate_credit(str(credit)) is not True:
+                raise CourseValueError()
+            if self.validate_grade(str(grade), status) is not True:
+                raise CourseValueError()
+            if self.validate_url(str(url)) is not True:
+                raise InvalidUrlError()
 
-        self._c_repo.update_course_info(
-            id, name, credit, grade, str(status), self.current_user(), url)
-        return True
+            self._c_repo.update_course_info(
+                id, name, credit, grade, str(status), self.current_user(), url)
+            return True
+
+        except Exception:
+            raise CourseUpdateError()
 
     def delete_user(self):
         """Poistaa käyttäjän sekä kaikki käyttäjän kurssit tietokannasta

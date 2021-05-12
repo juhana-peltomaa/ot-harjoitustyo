@@ -57,7 +57,7 @@ class UserRepo:
             password: Merkkijonoarvo, joka kuvaa käyttäjän salasanaa.
 
         Returns:
-            user_info, joka sisältää käyttäjän tietokantaan tallennetut tiedot, jos käyttäjä on olemassa. 
+            user_info, käyttäjän tiedot tietokannasta, jos käyttäjä on olemassa.
         """
 
         cursor = self._connection.cursor()

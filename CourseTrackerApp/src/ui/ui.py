@@ -20,7 +20,7 @@ class UI:
         self._current_view = None
 
     # LoginView -luokan kutsuminen
-    def _show_login_view(self): 
+    def _show_login_view(self):
         self._hide_current_view()
 
         self._current_view = LoginView(
@@ -37,7 +37,7 @@ class UI:
         self._current_view.pack()
 
     # CourseView -luokan kutsuminen
-    def _show_course_view(self): 
+    def _show_course_view(self):
         self._hide_current_view()
 
         self._current_view = CourseView(self._root, self._show_login_view)
