@@ -9,10 +9,6 @@ kurssin nimi, opintopisteet, arvosanan sekä suoritusstatuksen. Sovellukseen on 
 
 Sovelluksella on ainoastaan yksi käyttäjärooli ns. _normaali käyttäjä_.
 
-## Käyttöliittymäluonnos
-
-_TBA_
-
 ## Perusversion tarjoama toiminnallisuus
 
 ### Ennen kirjautumista
